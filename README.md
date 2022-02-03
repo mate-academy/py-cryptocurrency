@@ -1,4 +1,18 @@
-# Python boilerplate for GitHub tasks
+# Cryptocurrency
 
 - Read [the guideline](https://github.com/mate-academy/py-task-guideline/blob/main/README.md) before start
-- Implement the task described [here](app/main.py)
+
+You have some amount of cryptocurrency "Matecoin" in your online wallet.
+You also bought a program(function `get_exchange_rate_prediction`) that
+can predict exchange rate of you cryptocurrency for the next day.
+
+Write tests for `cryptocurrency_action` function. This function 
+takes `current_rate` - current exchange rate of cryptocurrency. This
+function should return:
+- `"Buy more cryptocurrency"`, if predicted exchange rate is more than 
+5% higher from the current.
+- `"Sell all your cryptocurrency"`, if predicted exchange rate is more than 
+5% lower from the current.
+- `"Do nothing"`, if difference is not that much.
+
+Mock `get_exchange_rate_prediction` function.
