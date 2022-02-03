@@ -3,8 +3,8 @@
 - Read [the guideline](https://github.com/mate-academy/py-task-guideline/blob/main/README.md) before start
 
 You have some amount of cryptocurrency "Matecoin" in your online wallet.
-You also bought a program(function `get_exchange_rate_prediction`) that
-can predict exchange rate of you cryptocurrency for the next day.
+You also bought a program (function `get_exchange_rate_prediction`) that
+can predict the exchange rate of your cryptocurrency for the next day.
 
 Write tests for `cryptocurrency_action` function. This function 
 takes `current_rate` - current exchange rate of cryptocurrency. This
