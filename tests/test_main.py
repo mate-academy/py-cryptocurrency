@@ -54,4 +54,3 @@ def test_prediction_equal_zero(prediction):
 def test_prediction_equal_1_0_6(prediction):
     prediction.return_value = 1.06
     assert cryptocurrency_action(10) == "Sell all your cryptocurrency"
-
