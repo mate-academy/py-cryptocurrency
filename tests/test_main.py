@@ -35,7 +35,12 @@ from app.main import cryptocurrency_action
     ],
 )
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_rate_decrease(mocked_exchange_rate, exchange_rate, current_rate, expected):
+def test_rate_decrease(
+        mocked_exchange_rate,
+        exchange_rate,
+        current_rate,
+        expected
+):
     mocked_exchange_rate.return_value = exchange_rate
 
     assert cryptocurrency_action(current_rate) == expected
