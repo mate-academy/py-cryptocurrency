@@ -1,24 +1,41 @@
 from unittest import mock
 
+import pytest
+
 from app.main import cryptocurrency_action
 
 
+@pytest.mark.parametrize(
+    "exchange_rate,current_rate, expected",
+    [
+        pytest.param(
+            1.41,
+            1.5,
+            "Sell all your cryptocurrency",
+            id="Test prediction rate decrease"
+        ),
+        pytest.param(
+            1.59,
+            1.5,
+            "Buy more cryptocurrency",
+            id="Test prediction rate increase"
+        ),
+        pytest.param(
+            1.47,
+            1.4,
+            "Do nothing",
+            id="Test without changes (test 1.05 bound)"
+        ),
+        pytest.param(
+            1.52,
+            1.6,
+            "Do nothing",
+            id="Test without changes (test 0.95 bound)"
+        ),
+    ],
+)
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_rate_decrease(mocked_exchange_rate):
-    mocked_exchange_rate.return_value = 1.04
+def test_rate_decrease(mocked_exchange_rate, exchange_rate, current_rate, expected):
+    mocked_exchange_rate.return_value = exchange_rate
 
-    assert cryptocurrency_action(1.04) == "Sell all your cryptocurrency"
-
-
-@mock.patch("app.main.get_exchange_rate_prediction")
-def test_rate_increase(mocked_exchange_rate):
-    mocked_exchange_rate.return_value = 1.6
-
-    assert cryptocurrency_action(1.5) == "Buy more cryptocurrency"
-
-
-@mock.patch("app.main.get_exchange_rate_prediction")
-def test_rate_dont_change(mocked_exchange_rate):
-    mocked_exchange_rate.return_value = 2.1
-
-    assert cryptocurrency_action(2) == "Do nothing"
+    assert cryptocurrency_action(current_rate) == expected
