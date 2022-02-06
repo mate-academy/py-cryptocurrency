@@ -25,7 +25,4 @@ from app.main import cryptocurrency_action
 def test_rate_of_100(mocked_get_exchange, initial_value, expected_prediction):
     mocked_get_exchange.return_value = initial_value
 
-    cryptocurrency_action(1000)
-
-    mocked_get_exchange.assert_called_once()
     assert cryptocurrency_action(1000) == expected_prediction
