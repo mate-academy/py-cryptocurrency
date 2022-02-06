@@ -9,7 +9,7 @@ def get_exchange_rate_prediction(exchange_rate):
 
 
 def cryptocurrency_action(current_rate):
-    prediction_rate = 81
+    prediction_rate = get_exchange_rate_prediction(current_rate)
     if prediction_rate / current_rate > 1.05:
         return "Buy more cryptocurrency"
     if prediction_rate / current_rate < 0.95:
