@@ -37,7 +37,19 @@ def mocked_get_exchange_rate_prediction():
             0.97,
             "Do nothing",
             id='Test when next rate in between -0.05 and 0'
-        )
+        ),
+        pytest.param(
+            1.0,
+            0.95,
+            "Do nothing",
+            id='Test for boundary situation of -0.05'
+        ),
+        pytest.param(
+            1.0,
+            1.05,
+            "Do nothing",
+            id='Test for boundary sitiation of +0.05'
+        ),
     ],
 )
 def test_cryptocurrency(
