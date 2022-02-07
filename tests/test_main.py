@@ -30,7 +30,7 @@ def test_do_nothing_when_predicted_rate_is_exactly_5_pct_lower(
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_sell_all_your_cryptocurrency_when_predicted_rate_is_more_than_5_pct_lower(
+def test_sell_all_cryptocurrency_when_predicted_rate_is_more_than_5_pct_lower(
         mocked_get_exchange_rate_prediction
 ):
     mocked_get_exchange_rate_prediction.return_value = 85.6
