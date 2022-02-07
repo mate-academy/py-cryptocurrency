@@ -17,4 +17,3 @@ def test_suggested_actions_in_predicted_exchange_rate_windows(
     assert cryptocurrency_action(90) == "Buy more cryptocurrency"
     assert cryptocurrency_action(75) == "Buy more cryptocurrency"
     assert cryptocurrency_action(23) == "Buy more cryptocurrency"
-
