@@ -4,7 +4,8 @@ from app.main import cryptocurrency_action
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_suggested_actions_in_predicted_exchange_rate_windows(mocked_prediction):
+def test_suggested_actions_in_predicted_exchange_rate_windows(
+        mocked_prediction):
     mocked_prediction.return_value = 100
 
     assert cryptocurrency_action(102) == "Do nothing"
