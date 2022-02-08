@@ -5,11 +5,11 @@ from app.main import cryptocurrency_action
 
 @mock.patch("app.main.get_exchange_rate_prediction")
 def test_prediction_is_not_substantive(mocked_prediction):
-    mocked_prediction.return_value = 3
+    mocked_prediction.return_value = 105
 
-    assert cryptocurrency_action(3) == "Do nothing"
-    assert cryptocurrency_action(3.1546) == "Do nothing"
-    assert cryptocurrency_action(2.8598) == "Do nothing"
+    assert cryptocurrency_action(105) == "Do nothing"
+    assert cryptocurrency_action(100) == "Do nothing"
+    assert cryptocurrency_action(110.5263) == "Do nothing"
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
