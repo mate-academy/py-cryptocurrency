@@ -1,5 +1,7 @@
 from unittest import mock
 
+import pytest
+
 from app.main import cryptocurrency_action
 
 
@@ -23,9 +25,24 @@ def test_prediction_is_more_than_5_percent_lower(
     assert cryptocurrency_action(15) == "Sell all your cryptocurrency"
 
 
-@mock.patch("app.main.get_exchange_rate_prediction")
-def test_if_difference_is_not_that_much(mocked_get_exchange_rate_prediction):
-    mocked_get_exchange_rate_prediction.return_value = 10
+@pytest.mark.parametrize(
+    "exchange_rate,current_rate, expected",
+    [
+        (10.6, 10.1, "Do nothing"),
+        (10.6, 11.1, "Do nothing"),
+        (10.6, 10.7, "Do nothing"),
+        (10.6, 10, "Buy more cryptocurrency"),
+        (10.6, 11.2, "Sell all your cryptocurrency")
 
-    assert cryptocurrency_action(9.6) == "Do nothing"
-    assert cryptocurrency_action(10.4) == "Do nothing"
+    ]
+)
+@mock.patch("app.main.get_exchange_rate_prediction")
+def test_if_difference_is_only_5_percent(
+        mocked_get_exchange_rate_prediction,
+        exchange_rate,
+        current_rate,
+        expected
+):
+    mocked_get_exchange_rate_prediction.return_value = exchange_rate
+
+    assert cryptocurrency_action(current_rate) == expected
