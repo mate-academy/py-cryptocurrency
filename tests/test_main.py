@@ -14,4 +14,9 @@ class TestActionCalls:
 
     def test_call_to_hold_cryptocurrency(self, mock_exchange_rate_prediction):
         mock_exchange_rate_prediction.return_value = 10
+        assert cryptocurrency_action(9.523809523809524) == "Do nothing"
         assert cryptocurrency_action(10) == "Do nothing"
+        assert cryptocurrency_action(10.526315789473685) == "Do nothing"
+
+
+
