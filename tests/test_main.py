@@ -17,12 +17,12 @@ import pytest
             id="test prediction for increasing"
         ),
         pytest.param(
-            1.30, 1.26,
+            1.30, 1.25,
             "Do nothing",
             id="test without changes -5%"
         ),
         pytest.param(
-            1.8, 1.84,
+            1.8, 1.85,
             "Do nothing",
             id="test without changes +5%)"
         ),
