@@ -28,11 +28,11 @@ def test_prediction_is_more_than_5_percent_lower(
 @pytest.mark.parametrize(
     "exchange_rate,current_rate, expected",
     [
-        (10.6, 10.1, "Do nothing"),
-        (10.6, 11.1, "Do nothing"),
-        (10.6, 10.7, "Do nothing"),
-        (10.6, 10, "Buy more cryptocurrency"),
-        (10.6, 11.2, "Sell all your cryptocurrency")
+        (1, 0.953, "Do nothing"),
+        (1, 1.052, "Do nothing"),
+        (1, 1.03, "Do nothing"),
+        (1, 0.952, "Buy more cryptocurrency"),
+        (1, 1.053, "Sell all your cryptocurrency")
 
     ]
 )
