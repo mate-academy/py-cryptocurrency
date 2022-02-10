@@ -28,6 +28,8 @@ def test_prediction_is_more_than_5_percent_lower(
 @pytest.mark.parametrize(
     "exchange_rate,current_rate, expected",
     [
+        (1.05, 1, "Do nothing"),
+        (0.95, 1, "Do nothing"),
         (1, 0.953, "Do nothing"),
         (1, 1.052, "Do nothing"),
         (1, 1.03, "Do nothing"),
