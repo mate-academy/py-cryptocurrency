@@ -21,7 +21,7 @@ def test_by_more_cryptocurrency(mocked_exchange_rate):
 
 @mock.patch("app.main.get_exchange_rate_prediction")
 def test_do_nothing(mocked_exchange_rate):
-    mocked_exchange_rate.return_value = 17.5
-    assert cryptocurrency_action(17) == "Do nothing"
+    mocked_exchange_rate.return_value = 10.5
+    assert cryptocurrency_action(10) == "Do nothing"
     mocked_exchange_rate.return_value = 9.5
     assert cryptocurrency_action(10) == "Do nothing"
