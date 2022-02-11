@@ -18,13 +18,27 @@ def test_prediction_rate_is_less(mocked_rate_prediction):
 
 @mock.patch("app.main.get_exchange_rate_prediction")
 def test_prediction_rate_is_slightly_higher(mocked_rate_prediction):
-    mocked_rate_prediction.return_value = 25.23
+    mocked_rate_prediction.return_value = 105.01
 
-    assert cryptocurrency_action(24.5) == "Do nothing"
+    assert cryptocurrency_action(100) == "Buy more cryptocurrency"
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
 def test_prediction_rate_is_slightly_lower(mocked_rate_prediction):
-    mocked_rate_prediction.return_value = 23.34
+    mocked_rate_prediction.return_value = 94.99
 
-    assert cryptocurrency_action(23.82) == "Do nothing"
+    assert cryptocurrency_action(100) == "Sell all your cryptocurrency"
+
+
+@mock.patch("app.main.get_exchange_rate_prediction")
+def test_upper_limit_indicator(mocked_rate_prediction):
+    mocked_rate_prediction.return_value = 105
+
+    assert cryptocurrency_action(100) == "Do nothing"
+
+
+@mock.patch("app.main.get_exchange_rate_prediction")
+def test_lower_limit_indicator(mocked_rate_prediction):
+    mocked_rate_prediction.return_value = 95
+
+    assert cryptocurrency_action(100) == "Do nothing"
