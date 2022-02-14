@@ -4,14 +4,14 @@ from app.main import cryptocurrency_action
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_prediction_is_higher_exactly_5(mocked_prediction):
+def test_prediction_is_higher_exactly_by_5_percent(mocked_prediction):
     mocked_prediction.return_value = 1.05
 
     assert cryptocurrency_action(1.0) == "Do nothing"
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_prediction_is_lower_exactly_5(mocked_prediction):
+def test_prediction_is_lower_exactly_by_5_percent(mocked_prediction):
     mocked_prediction.return_value = 0.95
 
     assert cryptocurrency_action(1.0) == "Do nothing"
