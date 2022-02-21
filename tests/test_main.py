@@ -21,3 +21,10 @@ def test_if_predicated_exchange_rate_difference_low(mocked_exchange_rate):
     mocked_exchange_rate.return_value = 1.05
 
     assert cryptocurrency_action(1.0) == "Do nothing"
+
+
+@mock.patch("app.main.get_exchange_rate_prediction")
+def test_prediction_is_lower_by_5_percent(mocked_exchange_rate):
+    mocked_exchange_rate.return_value = 0.95
+
+    assert cryptocurrency_action(1.0) == "Sell all your cryptocurrency"
