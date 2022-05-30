@@ -18,8 +18,3 @@ class TestCryptocurrencyAction:
         mock_exchange_rate_prediction.return_value = 100
         assert cryptocurrency_action(100 / 0.95) == "Do nothing"
         assert cryptocurrency_action(100 / 1.05) == "Do nothing"
-
-
-
-
-
