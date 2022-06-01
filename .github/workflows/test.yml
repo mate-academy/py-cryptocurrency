@@ -28,7 +28,7 @@ jobs:
       - name: Run student tests
         run: pytest app/
       - name: Run mentor tests
-        run: pytest tests/
+        run: pytest --numprocesses=auto tests/
       - uses: mate-academy/auto-approve-action@v2
         if: ${{ github.event.pull_request && success() }}
         with:
