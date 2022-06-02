@@ -33,6 +33,9 @@ import pytest
     ]
 )
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_predict_outcome(mocked_prediction, predicted_rate, current_rate, outcome):
+def test_predict_outcome(mocked_prediction,
+                         predicted_rate,
+                         current_rate,
+                         outcome):
     mocked_prediction.return_value = predicted_rate
     assert cryptocurrency_action(current_rate) == outcome
