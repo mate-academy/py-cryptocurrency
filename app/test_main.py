@@ -22,13 +22,13 @@ from app.main import cryptocurrency_action
         ),
         pytest.param(
             10,
-            10.3,
+            10.5,
             "Do nothing",
             id="difference is not than 5% from the current"
         ),
         pytest.param(
             10,
-            9.7,
+            9.5,
             "Do nothing",
             id="difference is not than 5% from the current"
         )
