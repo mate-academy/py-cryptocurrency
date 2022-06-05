@@ -8,14 +8,14 @@ from app.main import cryptocurrency_action
     [
         pytest.param(
             10,
-            12,
+            13,
             "Buy more cryptocurrency",
             id="predicted exchange rate is more than "
                "5% higher from the current"
         ),
         pytest.param(
             10,
-            8,
+            7,
             "Sell all your cryptocurrency",
             id="predicted exchange rate is more than "
                "5% lower from the current"
