@@ -11,9 +11,8 @@ from app.main import cryptocurrency_action
         pytest.param(95, 100, "Do nothing"),
         pytest.param(99.75, 95, "Do nothing")
     ]
-    )
+)
 @mock.patch("app.main.get_exchange_rate_prediction")
 def test_cryptocurrency_action(mocked, exchange_rate, current_rate, result):
     mocked.return_value = exchange_rate
     assert cryptocurrency_action(current_rate) == result
-
