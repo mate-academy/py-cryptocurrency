@@ -18,7 +18,7 @@ from app.main import cryptocurrency_action
             100,
             94,
             "Sell all your cryptocurrency",
-            id="Sell all if the predicted rate falls by more than 5% from the current"
+            id="Sell if predicted rate falls more than 5% from the current"
         ),
         pytest.param(
             100,
