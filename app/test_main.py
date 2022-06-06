@@ -4,6 +4,7 @@ import pytest
 
 from app.main import cryptocurrency_action
 
+
 @pytest.mark.parametrize(
     "current, predicted, result",
     [
