@@ -16,4 +16,5 @@ def cryptocurrency_action(current_rate):
         return "Sell all your cryptocurrency"
     return "Do nothing"
 
+
 print(cryptocurrency_action(10.6))
