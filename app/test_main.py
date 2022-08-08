@@ -1,5 +1,4 @@
 from unittest import mock
-
 from app.main import cryptocurrency_action
 
 
