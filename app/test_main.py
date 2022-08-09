@@ -6,8 +6,8 @@ from app import main
 
 @pytest.fixture()
 def mocked_prediction():
-    with mock.patch("app.main.get_exchange_rate_prediction") as mocked_rate:
-        yield mocked_rate
+    with mock.patch("app.main.get_exchange_rate_prediction") as mocked_rates:
+        yield mocked_rates
 
 
 @pytest.mark.parametrize("current_rate,prediction_rate,expected_result",
