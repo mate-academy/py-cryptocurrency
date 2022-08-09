@@ -20,7 +20,7 @@ from app.main import cryptocurrency_action
                         "from the current."),
     ]
 )
-@mock.patch("app.main.get_exchange_rate_prediction")
+@mock.patch("app.main.get_exchange_rate_prediction")  
 def test_cryptocurrency_action(mocked_func,
                                current_rate,
                                exchange_rate,
