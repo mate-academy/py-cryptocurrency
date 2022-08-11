@@ -47,12 +47,12 @@ class TestCryptocurrencyAction(unittest.TestCase):
 
     @patch("app.main.get_exchange_rate_prediction")
     def test_cryptocurrency_action_if_095(
-            self, mock_get_exchange_rate_prediction):
-        mock_get_exchange_rate_prediction.return_value = 4.75
+            self, moc_get_exchange_rate_prediction):
+        moc_get_exchange_rate_prediction.return_value = 4.75
         assert cryptocurrency_action(5) == "Do nothing"
 
     @patch("app.main.get_exchange_rate_prediction")
     def test_cryptocurrency_action_if_105(
-            self, mock_get_exchange_rate_prediction):
-        mock_get_exchange_rate_prediction.return_value = 5.25
+            self, moc_get_exchange_rate_prediction):
+        moc_get_exchange_rate_prediction.return_value = 5.25
         assert cryptocurrency_action(5) == "Do nothing"
