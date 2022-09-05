@@ -15,4 +15,3 @@ def cryptocurrency_action(current_rate):
     if prediction_rate / current_rate < 0.95:
         return "Sell all your cryptocurrency"
     return "Do nothing"
-
