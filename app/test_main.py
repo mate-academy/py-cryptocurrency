@@ -1,17 +1,28 @@
+import pytest
+
 from unittest import mock
 
 from app.main import cryptocurrency_action
 
 
-def test_return_function_was_called_with_value():
-    prediction_rate = mock.MagicMock()
-    prediction_rate(4)
-    # cryptocurrency_action(4)
-    prediction_rate.assert_called_once_with(4)
+@pytest.fixture()
+def mocked_func():
+    with mock.patch("app.main.get_exchange_rate_prediction") as mocked_func:
+        yield mocked_func
 
 
-def test_return_function_was_called():
-    get_exchange_rate_prediction = mock.MagicMock()
-    get_exchange_rate_prediction()
-    # cryptocurrency_action(3)
-    get_exchange_rate_prediction.assert_called_once()
+@pytest.mark.parametrize("current_rate,prediction_rate,expected",
+                         [
+                             (1, 1, "Do nothing"),
+                             (1, 0.4, "Sell all your cryptocurrency"),
+                             (1, 1.5, "Buy more cryptocurrency"),
+                             (1, 0.95, "Do nothing"),
+                             (1, 1.05, "Do nothing")
+                         ]
+                         )
+def test_cryptocurrency_action(mocked_func,
+                               current_rate,
+                               prediction_rate,
+                               expected):
+    mocked_func.return_value = prediction_rate
+    assert cryptocurrency_action(current_rate) == expected
