@@ -7,7 +7,8 @@ from app.main import cryptocurrency_action  # , get_exchange_rate_prediction
 
 @pytest.fixture()
 def mocked_rate():
-    with mock.patch("app.main.get_exchange_rate_prediction", return_value=20) as f:
+    with mock.patch("app.main.get_exchange_rate_prediction",
+                    return_value=20) as f:
         yield f
 
 
@@ -54,4 +55,3 @@ def test_five_percent_hither(mocked_rate):
 def test_five_percent_lower(mocked_rate):
     mocked_rate.return_value = 95
     assert cryptocurrency_action(100) == "Do nothing"
-
