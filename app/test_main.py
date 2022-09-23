@@ -29,3 +29,8 @@ def test_sell_all_crypo(mocked_crypto_action):
 def test_do_nothing(mocked_crypto_action):
     mocked_crypto_action.return_value = 29
     assert cryptocurrency_action(30) == "Do nothing"
+
+
+def test_95_percent_do_nothing(mocked_crypto_action):
+    mocked_crypto_action.return_value = 20
+    assert cryptocurrency_action(19) == "Do nothing"
