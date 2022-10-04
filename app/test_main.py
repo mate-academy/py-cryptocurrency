@@ -28,10 +28,10 @@ def test_sell_all_crypto(mocked_crypto_rate_prediction):
 
 
 def test_do_not_buy(mocked_crypto_rate_prediction):
-    mocked_crypto_rate_prediction.return_value = 1.05
+    mocked_crypto_rate_prediction.return_value = 0.95
     assert cryptocurrency_action(1) == "Do nothing"
 
 
 def test_do_not_sell(mocked_crypto_rate_prediction):
-    mocked_crypto_rate_prediction.return_value = 1
-    assert cryptocurrency_action(0.95) == "Do nothing"
+    mocked_crypto_rate_prediction.return_value = 1.05
+    assert cryptocurrency_action(1) == "Do nothing"
