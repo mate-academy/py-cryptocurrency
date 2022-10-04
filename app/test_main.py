@@ -6,7 +6,8 @@ from unittest import mock
 
 @pytest.fixture()
 def mocked_exchange_rate():
-    with mock.patch("app.main.get_exchange_rate_prediction") as mocked_exchange_rate:
+    with mock.patch("app.main.get_exchange_rate_prediction") \
+            as mocked_exchange_rate:
         yield mocked_exchange_rate
 
 
