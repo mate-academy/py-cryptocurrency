@@ -1,14 +1,14 @@
 import random
 
 
-def get_exchange_rate_prediction(exchange_rate: int) -> int:
+def get_exchange_rate_prediction(exchange_rate: int) -> float:
     if random.choice(["increase", "decrease"]) == "increase":
         return round(exchange_rate / random.random(), 2)
     else:
         return round(exchange_rate * random.random(), 2)
 
 
-def cryptocurrency_action(current_rate: int) -> int:
+def cryptocurrency_action(current_rate: int) -> str:
     prediction_rate = get_exchange_rate_prediction(current_rate)
     if prediction_rate / current_rate > 1.05:
         return "Buy more cryptocurrency"
