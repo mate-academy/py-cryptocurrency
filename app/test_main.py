@@ -4,6 +4,8 @@ import pytest
 
 from app.main import cryptocurrency_action
 
+# test
+
 
 @pytest.fixture()
 def mocked_cryptocurrency() -> None:
