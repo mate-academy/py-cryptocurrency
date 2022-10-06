@@ -21,6 +21,11 @@ def test_sell_everything(mocked_exchange_rate: mock.Mock) -> None:
     assert cryptocurrency_action(1) == "Sell all your cryptocurrency"
 
 
-def test_do_nothing(mocked_exchange_rate: mock.Mock) -> None:
-    mocked_exchange_rate.return_value = 1.01
+def test_rate_95_percent_do_nothing(mocked_exchange_rate: mock.Mock) -> None:
+    mocked_exchange_rate.return_value = 0.95
+    assert cryptocurrency_action(1) == "Do nothing"
+
+
+def test_rate_105_percent_do_nothing(mocked_exchange_rate: mock.Mock) -> None:
+    mocked_exchange_rate.return_value = 1.05
     assert cryptocurrency_action(1) == "Do nothing"
