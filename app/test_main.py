@@ -21,11 +21,11 @@ def test_sell_all_cryptocurrency(mocked_predict: None) -> None:
     assert cryptocurrency_action(5) == "Sell all your cryptocurrency"
 
 
-def test_do_not_buy_more(mocked_predict: None):
+def test_do_not_buy_more(mocked_predict: None) -> None:
     mocked_predict.return_value = 105
     assert cryptocurrency_action(100) == "Do nothing"
 
 
-def test_do_not_sell(mocked_predict: None):
+def test_do_not_sell(mocked_predict: None) -> None:
     mocked_predict.return_value = 95
     assert cryptocurrency_action(100) == "Do nothing"
