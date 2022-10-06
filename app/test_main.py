@@ -5,7 +5,8 @@ import pytest
 
 @pytest.fixture()
 def mocked_prediction() -> None:
-    with mock.patch("app.main.get_exchange_rate_prediction") as mocked_prediction:
+    with mock.patch("app.main.get_exchange_rate_prediction") \
+            as mocked_prediction:
         yield mocked_prediction
 
 
