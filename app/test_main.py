@@ -1,13 +1,13 @@
-import unittest
+from unittest import mock, TestCase
 
 from app.main import cryptocurrency_action
 
 
-class TestCryptocurrencyAction(unittest.TestCase):
+class TestCryptocurrencyAction(TestCase):
     def setUp(self) -> None:
         self.current_rate = 1
 
-    @unittest.mock.patch(
+    @mock.patch(
         "app.main.get_exchange_rate_prediction",
         side_effect=lambda x: 1.06
     )
@@ -18,7 +18,7 @@ class TestCryptocurrencyAction(unittest.TestCase):
         assert cryptocurrency_action(self.current_rate) \
                == "Buy more cryptocurrency"
 
-    @unittest.mock.patch(
+    @mock.patch(
         "app.main.get_exchange_rate_prediction",
         side_effect=lambda x: 0.94
     )
@@ -31,7 +31,7 @@ class TestCryptocurrencyAction(unittest.TestCase):
             == "Sell all your cryptocurrency"
         )
 
-    @unittest.mock.patch(
+    @mock.patch(
         "app.main.get_exchange_rate_prediction",
         side_effect=lambda x: 1.05
     )
@@ -41,7 +41,7 @@ class TestCryptocurrencyAction(unittest.TestCase):
 
         assert cryptocurrency_action(self.current_rate) == "Do nothing"
 
-    @unittest.mock.patch(
+    @mock.patch(
         "app.main.get_exchange_rate_prediction",
         side_effect=lambda x: 0.95
     )
