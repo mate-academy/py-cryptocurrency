@@ -1,6 +1,8 @@
-import pytest
 from unittest import mock
-from app.main import cryptocurrency_action as ca
+
+import pytest
+
+from app.main import cryptocurrency_action
 
 
 @pytest.fixture()
@@ -12,30 +14,30 @@ def mocked_get_exchange():
 
 def test_should_call_func(mocked_get_exchange):
     mocked_get_exchange.return_value = 0.4818
-    ca(0.5)
+    cryptocurrency_action(0.5)
     mocked_get_exchange.assert_called()
 
 
 def test_return_buy_string(mocked_get_exchange):
     mocked_get_exchange.return_value = 0.4818
-    assert ca(0.35) == "Buy more cryptocurrency"
+    assert cryptocurrency_action(0.35) == "Buy more cryptocurrency"
 
 
 def test_return_sell_string(mocked_get_exchange):
     mocked_get_exchange.return_value = 0.4818
-    assert ca(0.6) == "Sell all your cryptocurrency"
+    assert cryptocurrency_action(0.6) == "Sell all your cryptocurrency"
 
 
 def test_return_do_nothing(mocked_get_exchange):
     mocked_get_exchange.return_value = 0.4818
-    assert ca(0.5) == "Do nothing"
+    assert cryptocurrency_action(0.5) == "Do nothing"
 
 
 def test_should_not_sell(mocked_get_exchange):
     mocked_get_exchange.return_value = 1.05
-    assert ca(1) == "Do nothing"
+    assert cryptocurrency_action(1) == "Do nothing"
 
 
 def test_should_not_buy(mocked_get_exchange):
     mocked_get_exchange.return_value = 0.95
-    assert ca(1) == "Do nothing"
+    assert cryptocurrency_action(1) == "Do nothing"
