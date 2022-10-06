@@ -17,6 +17,13 @@ def test_buy_more_cryptocurrency(mocked_prediction: int | float) -> None:
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
+def test_do_nothing_when_requirements_not_satisfied(
+        mocked_prediction: int | float) -> None:
+    mocked_prediction.return_value = 9.5
+    assert cryptocurrency_action(10) == "Do nothing"
+
+
+@mock.patch("app.main.get_exchange_rate_prediction")
 def test_do_nothing(mocked_prediction: int | float) -> None:
-    mocked_prediction.return_value = 10.2
+    mocked_prediction.return_value = 10.5
     assert cryptocurrency_action(10) == "Do nothing"
