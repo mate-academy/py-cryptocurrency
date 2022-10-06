@@ -26,7 +26,7 @@ def test_call_get_exchange_rate_bit_lower(mocked_cryptocurrency: None) -> None:
     assert cryptocurrency_action(4) == "Do nothing"
 
 
-def test_call_get_exchange_rate_bit_higher(mocked_cryptocurrency: None) -> None:
+def test_call_get_exchange_rate_bit_high(mocked_cryptocurrency: None) -> None:
     mocked_cryptocurrency.return_value = 4.2
     assert cryptocurrency_action(4) == "Do nothing"
 
