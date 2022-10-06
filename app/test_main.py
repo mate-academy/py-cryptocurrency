@@ -22,7 +22,7 @@ def test_get_exchange_rate_lower(mocked_cryptocurrency: None) -> None:
 
 def test_get_exchange_rate_bit_higher(mocked_cryptocurrency: None) -> None:
     mocked_cryptocurrency.return_value = 6
-    assert cryptocurrency_action(6.2) == "Do nothing"
+    assert cryptocurrency_action(6.5) == "Do nothing"
 
 
 def test_get_exchange_rate_bit_lower(mocked_cryptocurrency: None) -> None:
