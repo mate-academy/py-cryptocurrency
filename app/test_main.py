@@ -27,4 +27,3 @@ def test_to_do_nothing(mocked_rate_prediction: float) -> None:
 def test_to_do_nothing_with_lower_value(mocked_rate_prediction: float) -> None:
     mocked_rate_prediction.return_value = 9.5
     assert cryptocurrency_action(10) == "Do nothing"
-
