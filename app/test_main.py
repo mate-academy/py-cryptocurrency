@@ -6,8 +6,10 @@ from app.main import cryptocurrency_action
 
 
 @pytest.fixture()
-def mock_rate_prediction():
-    with mock.patch("app.main.get_exchange_rate_prediction") as mock_prediction:
+def mock_rate_prediction() -> callable:
+    with mock.patch(
+            "app.main.get_exchange_rate_prediction"
+    ) as mock_prediction:
         yield mock_prediction
 
 
