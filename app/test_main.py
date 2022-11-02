@@ -16,7 +16,7 @@ class TestApp(TestCase):
     def test_cryptocurrency_action_sell_all(
             self, random_choice: str,
             random_mock: int, ) -> None:
-        random_choice.return_value = "increase"
+        random_choice.return_value = "decrease"
         random_mock.return_value = 0.95
         assert cryptocurrency_action(90) == "Sell all your cryptocurrency"
 
