@@ -16,7 +16,7 @@ app.main.get_exchange_rate_prediction = Mock()
     ],
 )
 def test_cryptocurrency_action(
-    monkeypatch, test_input, prediction_rate, expected
-):
+    test_input: int | float, prediction_rate: int | float, expected: str
+) -> None:
     app.main.get_exchange_rate_prediction.return_value = prediction_rate
     assert cryptocurrency_action(test_input) == expected
