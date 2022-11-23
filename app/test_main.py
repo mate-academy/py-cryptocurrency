@@ -1,21 +1,20 @@
-import pytest
-from app.main import get_exchange_rate_prediction, cryptocurrency_action
+from app.main import cryptocurrency_action
+from unittest import mock
 
 
-class TestCryptoClass:
-    @pytest.mark.parametrize(
-        "current_rate,prediction_rate,action",
-        [
-            (1.4, 1.2, "Sell all your cryptocurrency"),
-            (1.4, 1.6, "Buy more cryptocurrency"),
-            (1.4, 1.4, "Do nothing"),
-        ],
-    )
-    def test_matecoin(self, current_rate: int,
-                      prediction_rate: int,
-                      action: str) -> None:
-        def mock_rate() -> None:
+@mock.patch("app.main.get_exchange_rate_prediction")
+def test_check_crypto_buy(mock_predict: int) -> None:
+    mock_predict.return_value = 5
+    assert cryptocurrency_action(1) == "Buy more cryptocurrency"
 
-            mock_rate.predict = get_exchange_rate_prediction(prediction_rate)
 
-            assert cryptocurrency_action(mock_rate.predict) == action
+@mock.patch("app.main.get_exchange_rate_prediction")
+def test_check_crypto_sell(mock_predict: int) -> None:
+    mock_predict.return_value = 1
+    assert cryptocurrency_action(5) == "Sell all your cryptocurrency"
+
+
+@mock.patch("app.main.get_exchange_rate_prediction")
+def test_check_crypto_hold(mock_predict: int) -> None:
+    mock_predict.return_value = 5
+    assert cryptocurrency_action(5) == "Do nothing"
