@@ -21,6 +21,6 @@ def test_check_crypto_hold(mock_predict: int) -> None:
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_check_crypto_holdX2(mock_predict: int) -> None:
+def test_check_crypto_holdx2(mock_predict: int) -> None:
     mock_predict.return_value = 95
     assert cryptocurrency_action(100) == "Do nothing"
