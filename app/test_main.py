@@ -12,7 +12,6 @@ def mocked_prediction() -> None:
 
 
 def test_advice_to_buy_more_currency(mocked_prediction: mock) -> None:
-
     mocked_prediction.return_value = 110
     assert cryptocurrency_action(100) == "Buy more cryptocurrency"
 
