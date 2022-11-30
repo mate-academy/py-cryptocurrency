@@ -16,7 +16,7 @@ def test_buy_cryptocurrency(mocked: float) -> None:
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_do_nothing_if_current_rate_is_not_low_enough(mocked: float) -> None:
+def test_do_nothing_when_current_rate_is_not_low_enough(mocked: float) -> None:
     mocked.return_value = 9.5
     assert cryptocurrency_action(10) == "Do nothing"
 
