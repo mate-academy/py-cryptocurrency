@@ -5,24 +5,24 @@ from app.main import cryptocurrency_action
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_cryptocurrency_action_buy_more(
+def test_cryptocurrency_action_do_nothing(
         mocked_rate: Union[int, float]) -> None:
 
-    mocked_rate.return_value = 300
-    assert cryptocurrency_action(200) == "Buy more cryptocurrency"
+    mocked_rate.return_value = 9.5
+    assert cryptocurrency_action(10) == "Do nothing"
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
 def test_cryptocurrency_action_sell_all(
         mocked_rate: Union[int, float]) -> None:
 
-    mocked_rate.return_value = 100
-    assert cryptocurrency_action(200) == "Sell all your cryptocurrency"
+    mocked_rate.return_value = 9
+    assert cryptocurrency_action(10) == "Sell all your cryptocurrency"
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_cryptocurrency_action_do_nothing(
+def test_cryptocurrency_action_buy_more(
         mocked_rate: Union[int, float]) -> None:
 
-    mocked_rate.return_value = 200
-    assert cryptocurrency_action(200) == "Do nothing"
+    mocked_rate.return_value = 11
+    assert cryptocurrency_action(10) == "Buy more cryptocurrency"
