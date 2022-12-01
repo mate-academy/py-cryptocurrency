@@ -8,7 +8,7 @@ from app.main import cryptocurrency_action
 def test_cryptocurrency_action_do_nothing(
         mocked_rate: Union[int, float]) -> None:
 
-    mocked_rate.return_value = 9.5
+    mocked_rate.return_value = 10.5
     assert cryptocurrency_action(10) == "Do nothing"
 
 
