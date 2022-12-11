@@ -1,7 +1,6 @@
 import pytest
 
 from unittest import mock
-from random import uniform
 
 from app.main import cryptocurrency_action
 
