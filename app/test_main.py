@@ -26,5 +26,5 @@ def test_rate_almost_equel_than_current(mocked_rate_predict: str) -> None:
 
 
 def test_rate_almost_equel_than_current_1(mocked_rate_predict: str) -> None:
-    mocked_rate_predict.return_value = 100
-    assert cryptocurrency_action(95) == "Do nothing"
+    mocked_rate_predict.return_value = 95
+    assert cryptocurrency_action(100) == "Do nothing"
