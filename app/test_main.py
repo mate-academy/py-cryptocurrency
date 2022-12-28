@@ -8,10 +8,10 @@ from unittest import mock
     [
         (95, 95, "Do nothing"),
         (100, 120, "Buy more cryptocurrency"),
-        (95, 97, "Do nothing"),
+        (100, 105, "Do nothing"),
         (100, 78, "Sell all your cryptocurrency"),
         (100, 114, "Buy more cryptocurrency"),
-        (99.75, 105, "Do nothing"),
+        (100, 95, "Do nothing"),
         (100, 109, "Buy more cryptocurrency"),
     ]
 )
