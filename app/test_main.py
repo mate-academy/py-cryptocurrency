@@ -6,9 +6,9 @@ from unittest import mock
 @pytest.mark.parametrize(
     "current_rate,percent,expected_value",
     [
-        (100, 105, "Do nothing"),
+        (95, 100, "Do nothing"),
         (100, 120, "Buy more cryptocurrency"),
-        (100, 101, "Do nothing"),
+        (100, 95, "Do nothing"),
         (100, 78, "Sell all your cryptocurrency"),
         (100, 114, "Buy more cryptocurrency"),
         (100, 105, "Do nothing"),
@@ -17,7 +17,7 @@ from unittest import mock
     ]
 )
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_crypto(
+def test_crypto_cryptocurrency(
         mock_function: mock,
         current_rate: int,
         percent: int,
