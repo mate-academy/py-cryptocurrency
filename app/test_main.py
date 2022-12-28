@@ -1,6 +1,7 @@
 import pytest
 from unittest import mock
 from app.main import cryptocurrency_action
+from typing import Callable
 
 
 @pytest.fixture()
@@ -10,16 +11,16 @@ def mocked_predict() -> None:
         yield mocked_prediction
 
 
-def test_cryptocurrency_action_more_than(mocked_prediction: str) -> None:
+def test_cryptocurrency_action_more_than(mocked_predict: Callable) -> None:
     mocked_predict.return_value = 1.08
     assert cryptocurrency_action(1) == "Buy more cryptocurrency"
 
 
-def test_cryptocurrency_action_less_than(mocked_prediction: str) -> None:
+def test_cryptocurrency_action_less_than(mocked_predict: Callable) -> None:
     mocked_predict.return_value = 0.8
     assert cryptocurrency_action(1) == "Sell all your cryptocurrency"
 
 
-def test_cryptocurrency_action_donothing(mocked_prediction: str) -> None:
+def test_cryptocurrency_action_donothing(mocked_predict: Callable) -> None:
     mocked_predict.return_value = 0.95
     assert cryptocurrency_action(1) == "Do nothing"
