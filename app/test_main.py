@@ -21,5 +21,5 @@ def test_cryptocurrency_action_less_than(mocked_prediction: str) -> None:
 
 
 def test_cryptocurrency_action_donothing(mocked_prediction: str) -> None:
-    mocked_prediction.return_value = 1
+    mocked_prediction.return_value = 0.95
     assert mocked_prediction(1) == "Do nothing"
