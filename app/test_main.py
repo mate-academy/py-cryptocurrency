@@ -13,6 +13,7 @@ def mock_get_exchange() -> int:
 
 
 def test_called_get_exchange(mock_get_exchange: callable) -> None:
+    mock_get_exchange.return_value = 100
     cryptocurrency_action(100)
 
 
