@@ -29,4 +29,3 @@ def test_rate_up(mock_get_exchange: callable) -> None:
 def test_rate_lower(mock_get_exchange: callable) -> None:
     mock_get_exchange.return_value = 80
     assert cryptocurrency_action(100) == "Sell all your cryptocurrency"
-
