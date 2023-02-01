@@ -14,8 +14,8 @@ def mocked_rate_prediction() -> None:
 @pytest.mark.parametrize(
     "current_rate, prediction_rate, result",
     [
-        (100, 104, "Do nothing"),
-        (100, 96, "Do nothing"),
+        (100, 105, "Do nothing"),
+        (100, 95, "Do nothing"),
     ]
 )
 def test_cryptocurrency_action_result(
