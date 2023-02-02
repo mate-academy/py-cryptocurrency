@@ -4,18 +4,12 @@ from app.main import cryptocurrency_action
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_main_do_nothing(value: Any) -> None:
-    value.return_value = 10
-    assert cryptocurrency_action(10) == "Do nothing"
+def test_main_do_nothing_1_05(value: Any) -> None:
+    value.return_value = 1.05
+    assert cryptocurrency_action(1) == "Do nothing"
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_main_sell_all(value: Any) -> None:
-    value.return_value = 10
-    assert cryptocurrency_action(0) == "Sell all your cryptocurrency"
-
-
-@mock.patch("app.main.get_exchange_rate_prediction")
-def test_main_bye_more(value: Any) -> None:
-    value.return_value = 20
-    assert cryptocurrency_action(10) == "Buy more cryptocurrency"
+def test_main_do_nothing_0_95(value: Any) -> None:
+    value.return_value = 0.95
+    assert cryptocurrency_action(1) == "Do nothing"
