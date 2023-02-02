@@ -11,7 +11,7 @@ def test_main_do_nothing(value: Any) -> None:
 
 @mock.patch("app.main.get_exchange_rate_prediction")
 def test_main_sell_all(value: Any) -> None:
-    value.return_value = 1
+    value.return_value = 10
     assert cryptocurrency_action(0) == "Sell all your cryptocurrency"
 
 
