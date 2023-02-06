@@ -14,10 +14,11 @@ from app.main import cryptocurrency_action
     ]
 )
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_cryptocurrency_action(mock_function: callable,
-                               current_rate: Union[int, float],
-                               prediction: Union[int, float],
-                               expected_result: str
-                               ) -> None:
+def test_cryptocurrency_action(
+        mock_function: callable,
+        current_rate: Union[int, float],
+        prediction: Union[int, float],
+        expected_result: str
+) -> None:
     mock_function.return_value = prediction
     assert cryptocurrency_action(current_rate) == expected_result
