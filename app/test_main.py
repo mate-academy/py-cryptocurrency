@@ -11,6 +11,14 @@ def test_cryptocurrency_action_buy_more(mocked_rate: Callable) -> None:
 
 @mock.patch("app.main.get_exchange_rate_prediction")
 def test_cryptocurrency_action_do_nothing(mocked_rate: Callable) -> None:
+    mocked_rate.return_value = 9500
+    assert cryptocurrency_action(10000) == "Do nothing"
+
+
+@mock.patch("app.main.get_exchange_rate_prediction")
+def test_cryptocurrency_action_do_nothing_one_more(
+        mocked_rate: Callable
+) -> None:
     mocked_rate.return_value = 10500
     assert cryptocurrency_action(10000) == "Do nothing"
 
