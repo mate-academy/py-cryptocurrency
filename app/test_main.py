@@ -16,7 +16,11 @@ from app.main import cryptocurrency_action
         (50, 47, "Sell all your cryptocurrency")
     ]
 )
-def test_cryptocurrency_action(current_rate: int, prediction_rate: int, result: str) -> None:
+def test_cryptocurrency_action(
+        current_rate: int,
+        prediction_rate: int,
+        result: str
+) -> None:
     with mock.patch("app.main.get_exchange_rate_prediction") as prediction:
         prediction.return_value = prediction_rate
         assert cryptocurrency_action(current_rate) == result
