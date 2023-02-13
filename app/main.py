@@ -4,9 +4,11 @@ from typing import Union
 
 def get_exchange_rate_prediction(exchange_rate: Union[int, float]) -> float:
     if random.choice(["increase", "decrease"]) == "increase":
-        return round(exchange_rate / random.random(), 2)
+        rand = random.random()
+        return round(exchange_rate / rand, 2)
     else:
-        return round(exchange_rate * random.random(), 2)
+        rand = random.random()
+        return round(exchange_rate * rand, 2)
 
 
 def cryptocurrency_action(current_rate: Union[int, float]) -> str:
