@@ -16,3 +16,17 @@ def test_cryptocurrency_action_lower_5(exchange_function: Callable) -> None:
 @mock.patch("app.main.get_exchange_rate_prediction", return_value=5.0)
 def test_cryptocurrency_action_do_nothing(exchange_function: Callable) -> None:
     assert cryptocurrency_action(5) == "Do nothing"
+
+
+@mock.patch("app.main.get_exchange_rate_prediction", return_value=5.25)
+def test_cryptocurrency_action_do_nothing_105(
+        exchange_function: Callable
+) -> None:
+    assert cryptocurrency_action(5) == "Do nothing"
+
+
+@mock.patch("app.main.get_exchange_rate_prediction", return_value=4.75)
+def test_cryptocurrency_action_do_nothing_95(
+        exchange_function: Callable
+) -> None:
+    assert cryptocurrency_action(5) == "Do nothing"
