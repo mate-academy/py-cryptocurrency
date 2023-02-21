@@ -1,12 +1,12 @@
 from unittest import mock
-# from typing import Callable
+
 
 import pytest
 
-# import app.main
-from app.main import get_exchange_rate_prediction, cryptocurrency_action
 
-"""
+from app.main import cryptocurrency_action
+
+
 @pytest.mark.parametrize(
     "prediction,current,result",
     [
@@ -37,28 +37,3 @@ def test_cryptocurrency_action(mock_get_exchange_rate_prediction: mock,
                                result: str) -> None:
     mock_get_exchange_rate_prediction.result_value = prediction
     assert cryptocurrency_action(current) == result
-"""
-
-
-@pytest.fixture()
-def mocked_get_exchange_rate_prediction():
-    with mock.patch("app.main.get_exchange_rate_prediction") as mocked_func:
-        yield mocked_func
-
-
-def test_cryptocurrency_action(mocked_get_exchange_rate_prediction: int | float):
-    current = 10
-    mocked_get_exchange_rate_prediction.result_value = 8
-    assert cryptocurrency_action(current) == "Buy more cryptocurrency"
-
-
-def test_cryptocurrency_action(mocked_get_exchange_rate_prediction: int | float):
-    current = 8
-    mocked_get_exchange_rate_prediction.result_value = 10
-    assert cryptocurrency_action(current) == "Sell all your cryptocurrency"
-
-
-def test_cryptocurrency_action(mocked_get_exchange_rate_prediction: int | float):
-    current = 10
-    mocked_get_exchange_rate_prediction.result_value = 10
-    assert cryptocurrency_action(current) == "Do nothing case"
