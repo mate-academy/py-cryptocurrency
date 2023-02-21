@@ -1,27 +1,33 @@
+import app.main
+import pytest
 from unittest import mock
 
-import pytest
 
-from app.main import cryptocurrency_action
-
-
-@pytest.fixture()
-def get_exchange_rate_prediction() -> object:
-    return mock.MagicMock()
+@mock.patch("app.main.get_exchange_rate_prediction")
+def test_buy_more_crypto(mock_get_exchange_rate_prediction: object) -> None:
+    mock_get_exchange_rate_prediction.return_value = 1.06
+    assert app.main.cryptocurrency_action(1) == "Buy more cryptocurrency"
 
 
-def test_cryptocurrency_buy(get_exchange_rate_prediction: object) -> None:
-    get_exchange_rate_prediction.return_value = 1.5
-    assert cryptocurrency_action(1) == "Buy more cryptocurrency"
+@mock.patch("app.main.get_exchange_rate_prediction")
+def test_buy_sell_crypto(mock_get_exchange_rate_prediction: object) -> None:
+    mock_get_exchange_rate_prediction.return_value = 0.94
+    assert app.main.cryptocurrency_action(1) == "Sell all your cryptocurrency"
 
 
-def test_cryptocurrency_do_nothing(
-        get_exchange_rate_prediction: object
+@pytest.mark.parametrize(
+    "current_rate,predicted_rate",
+    [
+        (1, 1.01),
+        (1, 1.05),
+        (1, 0.95),
+    ]
+)
+@mock.patch("app.main.get_exchange_rate_prediction")
+def test_do_nothing_crypto(
+        mock_get_exchange_rate_prediction: object,
+        current_rate: int,
+        predicted_rate: int
 ) -> None:
-    get_exchange_rate_prediction.return_value = 0.95
-    assert cryptocurrency_action(0.92) == "Do nothing"
-
-
-def test_cryptocurrency_sell(get_exchange_rate_prediction: object) -> None:
-    get_exchange_rate_prediction.return_value = 0.5
-    assert cryptocurrency_action(1) == "Sell all your cryptocurrency"
+    mock_get_exchange_rate_prediction.return_value = predicted_rate
+    assert app.main.cryptocurrency_action(current_rate) == "Do nothing"
