@@ -29,10 +29,10 @@ def mocked_rate_prediction() -> Generator:
     ]
 )
 def test_cryptocurrency_action(
-        mocked_rate_prediction,
-        current_rate,
-        rate_prediction,
-        expected_result
+        mocked_rate_prediction: mock.Mock,
+        current_rate: float,
+        rate_prediction: float,
+        expected_result: float
 ) -> None:
     mocked_rate_prediction.return_value = rate_prediction
     assert cryptocurrency_action(current_rate) == expected_result
