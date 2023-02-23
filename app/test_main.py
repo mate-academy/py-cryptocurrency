@@ -10,12 +10,14 @@ import pytest
     [
         (1, 1.07, "Buy more cryptocurrency"),
         (1, 0.94, "Sell all your cryptocurrency"),
-        (1, 1.01, "Do nothing")
+        (1, 1.05, "Do nothing"),
+        (1, 0.95, "Do nothing")
     ],
     ids=[
         "if rate -> 1.07 <- must return -> 'Buy more cryptocurrency' <-",
         "if rate -> 0.94 <- must return -> 'Sell all your cryptocurrency' <-",
-        "if rate -> 1.01 <- must return -> 'Do nothing' <-"
+        "if rate -> 1.05 <- must return -> 'Do nothing' <-",
+        "if rate -> 0.95 <- must return -> 'Do nothing' <-",
     ]
 )
 @mock.patch("app.main.get_exchange_rate_prediction")
