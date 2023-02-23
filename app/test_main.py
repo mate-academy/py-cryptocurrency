@@ -7,7 +7,7 @@ from app.main import cryptocurrency_action
     "rate, result",
     [
         pytest.param(1.15, "Buy more cryptocurrency", id="rate > 1.05"),
-        pytest.param(0.85, "Sell your cryptocurrency", id="rate less 0.95"),
+        pytest.param(0.85, "Sell all your cryptocurrency", id="rate < 0.95"),
         pytest.param(0.95, "Do nothing", id="should do nothing"),
         pytest.param(1.05, "Do nothing", id="should do nothing")
 
