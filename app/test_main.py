@@ -3,6 +3,7 @@ import pytest
 
 from app.main import cryptocurrency_action
 
+
 @patch('app.main.get_exchange_rate_prediction')
 def test_cryptocurrency_action(mock_get_exchange_rate_prediction):
     mock_get_exchange_rate_prediction.return_value = 110.0
