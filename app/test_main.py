@@ -19,13 +19,13 @@ def test_correct_prediction_sell(monkeypatch: MonkeyPatch) -> None:
 
 def test_correct_prediction_equal(monkeypatch: MonkeyPatch) -> None:
     monkeypatch.setattr(
-        "app.main.get_exchange_rate_prediction", lambda rate: 1.04
+        "app.main.get_exchange_rate_prediction", lambda rate: 1.05
     )
     assert cryptocurrency_action(1) == "Do nothing"
 
 
 def test_correct_prediction_equal_2(monkeypatch: MonkeyPatch) -> None:
     monkeypatch.setattr(
-        "app.main.get_exchange_rate_prediction", lambda rate: 0.96
+        "app.main.get_exchange_rate_prediction", lambda rate: 0.95
     )
     assert cryptocurrency_action(1) == "Do nothing"
