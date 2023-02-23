@@ -4,6 +4,7 @@ from typing import Callable
 
 import pytest
 
+
 @pytest.mark.parametrize(
     "befor_random, res_rate, message",
     [
