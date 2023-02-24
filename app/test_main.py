@@ -17,7 +17,7 @@ from app.main import cryptocurrency_action
 )
 @mock.patch("app.main.get_exchange_rate_prediction")
 def test_buy(
-        mocked_get_exchange_rate_prediction: [int, float],
+        mocked_get_exchange_rate_prediction: int | float,
         current_rate: int,
         predicted_rate: int,
         result: str
