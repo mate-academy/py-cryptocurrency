@@ -2,7 +2,7 @@ import pytest
 
 from unittest import mock
 from app.main import cryptocurrency_action
-from typing import Union
+from typing import Type, Any, Union
 
 
 class TestCryptoCurrencyAction:
@@ -25,6 +25,15 @@ class TestCryptoCurrencyAction:
         mock_get_exchange_rate_prediction.return_value = prediction_rate
         assert cryptocurrency_action(current_rate) == expected_action
 
-    def test_cryptocurrency_action_invalid_rate(self) -> None:
-        with pytest.raises(TypeError):
-            cryptocurrency_action("invalid_rate")
+    @pytest.mark.parametrize(
+        "invalid_rate,error",
+        [("mistake", TypeError)]
+    )
+    def test_cryptocurrency_action_invalid_rate(
+            self,
+            invalid_rate: Any,
+            error: Type[Exception]
+
+    ) -> None:
+        with pytest.raises(error):
+            cryptocurrency_action(invalid_rate)
