@@ -13,4 +13,3 @@ def test_do_nothing(get_exchange_rate_prediction: mock) -> None:
 def test_do_nothing_higher_rate(get_exchange_rate_prediction: mock) -> None:
     get_exchange_rate_prediction.return_value = 2.1
     assert cryptocurrency_action(2) == "Do nothing"
-    
