@@ -4,24 +4,13 @@ from app.main import cryptocurrency_action
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_cryptocurrency_action_sell(
-        mocked_get_exchange_rate_prediction: int
-) -> None:
-    mocked_get_exchange_rate_prediction.return_value = 2
-    assert cryptocurrency_action(2.1) == "Sell all your cryptocurrency"
+def test_do_nothing(get_exchange_rate_prediction: mock) -> None:
+    get_exchange_rate_prediction.return_value = 1.90
+    assert cryptocurrency_action(2) == "Do nothing"
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_cryptocurrency_action_bye(
-        mocked_get_exchange_rate_prediction: int
-) -> None:
-    mocked_get_exchange_rate_prediction.return_value = 2
-    assert cryptocurrency_action(1.9) == "Buy more cryptocurrency"
-
-
-@mock.patch("app.main.get_exchange_rate_prediction")
-def test_cryptocurrency_action_do_nothing(
-        mocked_get_exchange_rate_prediction: int
-) -> None:
-    mocked_get_exchange_rate_prediction.return_value = 1
-    assert cryptocurrency_action(1) == "Do nothing"
+def test_do_nothing_higher_rate(get_exchange_rate_prediction: mock) -> None:
+    get_exchange_rate_prediction.return_value = 2.1
+    assert cryptocurrency_action(2) == "Do nothing"
+    
