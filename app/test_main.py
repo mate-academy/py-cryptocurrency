@@ -9,7 +9,9 @@ from app.main import cryptocurrency_action
     [
         (100, 20, "Sell all your cryptocurrency"),
         (2, 20, "Buy more cryptocurrency"),
-        (2, 2, "Do nothing")
+        (2, 2, "Do nothing"),
+        (20, 19, "Do nothing"),
+        (20, 21, "Do nothing")
     ]
 )
 def test_cryptocurrency_action(current_rate, mocked_rate, result) -> None:
@@ -18,4 +20,3 @@ def test_cryptocurrency_action(current_rate, mocked_rate, result) -> None:
         mocked.return_value = mocked_rate
 
         assert cryptocurrency_action(current_rate) == result
-
