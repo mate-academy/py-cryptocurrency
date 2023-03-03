@@ -14,7 +14,11 @@ from app.main import cryptocurrency_action
         (20, 21, "Do nothing")
     ]
 )
-def test_cryptocurrency_action(current_rate, mocked_rate, result) -> None:
+def test_cryptocurrency_action(
+        current_rate: int,
+        mocked_rate: int,
+        result: str
+) -> None:
 
     with mock.patch("app.main.get_exchange_rate_prediction") as mocked:
         mocked.return_value = mocked_rate
