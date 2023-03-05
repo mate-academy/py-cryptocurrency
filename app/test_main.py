@@ -16,7 +16,7 @@ from app.main import cryptocurrency_action
     ids=[
         "Should return 'Do nothing' if prediction_rate == 0.95",
         "Should return 'Do nothing' if prediction_rate == 1.05",
-        "Should return 'Sell all your cryptocurrency' if prediction_rate == 0.93",
+        "Should return 'Sell all your cryptocurrency'if prediction_rate==0.93",
         "Should return 'Buy more cryptocurrency' if prediction_rate == 1.07",
     ]
 )
