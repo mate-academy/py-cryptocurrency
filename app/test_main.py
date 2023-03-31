@@ -14,7 +14,8 @@ from app.main import cryptocurrency_action
             1060,
             1000,
             "Buy more cryptocurrency"
-        ),        pytest.param(
+        ),
+        pytest.param(
             940,
             1000,
             "Sell all your cryptocurrency"
@@ -33,7 +34,7 @@ from app.main import cryptocurrency_action
 )
 @mock.patch("app.main.get_exchange_rate_prediction")
 def test_cryptocurrency_action_with_lower_rate(
-        mocked_rate_prediction,
+        mocked_rate_prediction: callable,
         prediction_rate: float | int,
         current_rate: float | int,
         exception_message: str
