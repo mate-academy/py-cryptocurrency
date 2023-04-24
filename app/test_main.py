@@ -1,7 +1,6 @@
 from unittest import mock
 
-import app
-from app.main import cryptocurrency_action, get_exchange_rate_prediction
+from app.main import cryptocurrency_action
 
 
 def test_function_was_called() -> None:
