@@ -1,3 +1,5 @@
+import unittest.mock
+
 import pytest
 from unittest.mock import patch
 
@@ -5,7 +7,7 @@ from app.main import cryptocurrency_action
 
 
 @pytest.fixture()
-def mocked_get_exchange_rate_prediction():
+def mocked_get_exchange_rate_prediction() -> unittest.mock.MagicMock:
     with patch("app.main.get_exchange_rate_prediction") as mocked_prediction:
         yield mocked_prediction
 
@@ -53,13 +55,12 @@ def mocked_get_exchange_rate_prediction():
     ]
 )
 def test_cryptocurrency_action(
-        prediction_rate,
-        current_rate,
-        expected_result,
-        mocked_get_exchange_rate_prediction
-):
+        prediction_rate: int,
+        current_rate: int,
+        expected_result: str,
+        mocked_get_exchange_rate_prediction: unittest.mock.MagicMock
+) -> None:
     mocked_get_exchange_rate_prediction.return_value = prediction_rate
     initial_rate = current_rate
     result = cryptocurrency_action(initial_rate)
     assert result == expected_result
-
