@@ -7,9 +7,21 @@ def test_cryptocurrency_action_buy() -> None:
         assert cryptocurrency_action(1) == "Buy more cryptocurrency"
 
 
+def test_cryptocurrency_action_do_not_buy() -> None:
+    with mock.patch("app.main.get_exchange_rate_prediction",
+                    return_value=1.05):
+        assert cryptocurrency_action(1) == "Do nothing"
+
+
 def test_cryptocurrency_action_sell() -> None:
     with mock.patch("app.main.get_exchange_rate_prediction", return_value=0.6):
         assert cryptocurrency_action(1) == "Sell all your cryptocurrency"
+
+
+def test_cryptocurrency_action_do_not_sell() -> None:
+    with mock.patch("app.main.get_exchange_rate_prediction",
+                    return_value=0.95):
+        assert cryptocurrency_action(1) == "Do nothing"
 
 
 def test_cryptocurrency_action_nothing() -> None:
