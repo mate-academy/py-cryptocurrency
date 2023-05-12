@@ -9,6 +9,7 @@ import pytest
     [
         pytest.param(1.06, 1, "Buy more cryptocurrency"),
         pytest.param(0.94, 1, "Sell all your cryptocurrency"),
+        pytest.param(0.95, 1, "Do nothing"),
         pytest.param(1.05, 1, "Do nothing"),
     ],
 )
