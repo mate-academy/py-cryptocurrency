@@ -20,6 +20,11 @@ def test_sell_all(mocked_get_exchange_rate_prediction: Callable) -> None:
     assert cryptocurrency_action(1) == "Sell all your cryptocurrency"
 
 
-def test_do_nothing(mocked_get_exchange_rate_prediction: Callable) -> None:
-    mocked_get_exchange_rate_prediction.return_value = 1
+def test_do_nothing_rate_95(mocked_get_exchange_rate_prediction: Callable) -> None:
+    mocked_get_exchange_rate_prediction.return_value = 0.95
+    assert cryptocurrency_action(1) == "Do nothing"
+
+
+def test_do_nothing_rate_105(mocked_get_exchange_rate_prediction: Callable) -> None:
+    mocked_get_exchange_rate_prediction.return_value = 1.05
     assert cryptocurrency_action(1) == "Do nothing"
