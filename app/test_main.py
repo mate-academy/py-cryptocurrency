@@ -16,12 +16,14 @@ def test_lower_more_than_5_percent(exchange_rate_prediction: object) -> None:
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_difference_less_than_5_percent_1(exchange_rate_prediction: object) -> None:
+def test_difference_less_than_5_percent_1(
+        exchange_rate_prediction: object) -> None:
     exchange_rate_prediction.return_value = 105
     assert cryptocurrency_action(100) == "Do nothing"
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_difference_less_than_5_percent_2(exchange_rate_prediction: object) -> None:
+def test_difference_less_than_5_percent_2(
+        exchange_rate_prediction: object) -> None:
     exchange_rate_prediction.return_value = 95
     assert cryptocurrency_action(100) == "Do nothing"
