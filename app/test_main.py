@@ -18,7 +18,3 @@ def test_function_should_return_sell_all_cryptocurrency(
     with mock.patch("app.main.get_exchange_rate_prediction") as mocked_func:
         mocked_func.return_value = predicted_rate
         assert cryptocurrency_action(current_rate) == expected_action
-
-
-
-
