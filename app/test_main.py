@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch
-from app.test_main import cryptocurrency_action
+from app.main import cryptocurrency_action
 
 
 class CryptocurrencyActionTestCase(unittest.TestCase):
