@@ -23,7 +23,7 @@ def test_exchange_rate_more_five(
 def test_sell_all_your_cryptocurrency(
         mocked_exchange_rate_prediction: Callable
 ) -> None:
-    mocked_exchange_rate_prediction.return_value = 1.15
+    mocked_exchange_rate_prediction.return_value = 0.90
     assert cryptocurrency_action(1) == "Sell all your cryptocurrency"
 
 
