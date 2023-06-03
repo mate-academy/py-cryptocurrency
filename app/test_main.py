@@ -28,5 +28,10 @@ def test_sell_all_your_cryptocurrency(
 
 
 def test_do_nothing(mocked_exchange_rate_prediction: Callable) -> None:
-    mocked_exchange_rate_prediction.return_value = 1.04
+    mocked_exchange_rate_prediction.return_value = 0.95
+    assert cryptocurrency_action(1) == "Do nothing"
+
+
+def test_do_nothing_one_more(mocked_exchange_rate_prediction: Callable) -> None:
+    mocked_exchange_rate_prediction.return_value = 1.05
     assert cryptocurrency_action(1) == "Do nothing"
