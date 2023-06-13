@@ -5,14 +5,15 @@ import pytest
 
 @pytest.fixture
 def mocked_exchange_rate_prediction() -> None:
-    with mock.patch("main.get_exchange_rate_prediction") as mocked_function:
+    with (mock.patch("app.main.get_exchange_rate_prediction")
+          as mocked_function):
         yield mocked_function
 
 
 def test_cryptocurrency_action_buy_more(
         mocked_exchange_rate_prediction: None
 ) -> None:
-    mocked_exchange_rate_prediction.return_value = 1.07
+    mocked_exchange_rate_prediction.return_value = 1.06
     assert cryptocurrency_action(1.0) == "Buy more cryptocurrency"
 
 
@@ -26,5 +27,12 @@ def test_cryptocurrency_action_sell_all(
 def test_cryptocurrency_action_do_nothing(
         mocked_exchange_rate_prediction: None
 ) -> None:
-    mocked_exchange_rate_prediction.return_value = 1.0
+    mocked_exchange_rate_prediction.return_value = 1.05
+    assert cryptocurrency_action(1.0) == "Do nothing"
+
+
+def test_cryptocurrency_action_do_nothing2(
+        mocked_exchange_rate_prediction: None
+) -> None:
+    mocked_exchange_rate_prediction.return_value = 0.95
     assert cryptocurrency_action(1.0) == "Do nothing"
