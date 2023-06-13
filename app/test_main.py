@@ -12,7 +12,7 @@ def mocked_exchange_rate_prediction() -> None:
 def test_cryptocurrency_action_buy_more(
         mocked_exchange_rate_prediction: None
 ) -> None:
-    mocked_exchange_rate_prediction.return_value = 1.06
+    mocked_exchange_rate_prediction.return_value = 1.07
     assert cryptocurrency_action(1.0) == "Buy more cryptocurrency"
 
 
