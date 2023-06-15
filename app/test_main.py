@@ -26,6 +26,18 @@ from app.main import cryptocurrency_action
             202,
             "Do nothing",
             id="when difference rate prediction and current rate is small"
+        ),
+        pytest.param(
+            10.5,
+            10,
+            "Do nothing",
+            id="when prediction rate larger by 5%"
+        ),
+        pytest.param(
+            9.5,
+            10,
+            "Do nothing",
+            id="when current rate larger by 5%"
         )
     ]
 )
