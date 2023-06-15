@@ -24,8 +24,8 @@ def test_return_sell_all_if_bad_prediction(
 def test_return_do_nothing_if_small_difference(
         mocked_exchange_rate_prediction: Callable
 ) -> None:
-    mocked_exchange_rate_prediction.return_value = 1.5
+    mocked_exchange_rate_prediction.return_value = 1.9
     assert cryptocurrency_action(2) == "Do nothing"
 
-    mocked_exchange_rate_prediction.return_value = 2.5
+    mocked_exchange_rate_prediction.return_value = 2.1
     assert cryptocurrency_action(2) == "Do nothing"
