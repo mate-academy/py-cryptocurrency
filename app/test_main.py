@@ -31,7 +31,7 @@ def test_cryptocurrency_action_do_nothing() -> None:
                     return_value=prediction_rate):
         action = cryptocurrency_action(current_rate)
 
-    assert action == "-"
+    assert action == "Do nothing"
 
 
 def test_cryptocurrency_action_do_nothing2() -> None:
