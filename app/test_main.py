@@ -6,7 +6,7 @@ from app.main import cryptocurrency_action
 
 
 @pytest.mark.parametrize(
-    "currentrate, prediction, result",
+    "current_rate, prediction, result",
     [
         (100, 200, "Buy more cryptocurrency"),
         (100, 50, "Sell all your cryptocurrency"),
@@ -16,7 +16,7 @@ from app.main import cryptocurrency_action
 @mock.patch("main.get_exchange_rate_prediction")
 def test_cryptocurrency_action(
         mocked_prediction: Callable,
-        currentrate: int,
+        current_rate: int,
         prediction: int,
         result: str
 ) -> None:
