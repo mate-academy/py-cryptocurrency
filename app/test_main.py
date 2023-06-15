@@ -9,7 +9,6 @@ def test_return_buy_more_if_good_prediction(
         mocked_exchange_rate_prediction: Callable
 ) -> None:
     mocked_exchange_rate_prediction.return_value = 3
-
     assert cryptocurrency_action(1) == "Buy more cryptocurrency"
 
 
@@ -18,7 +17,6 @@ def test_return_sell_all_if_bad_prediction(
         mocked_exchange_rate_prediction: Callable
 ) -> None:
     mocked_exchange_rate_prediction.return_value = 1
-
     assert cryptocurrency_action(2) == "Sell all your cryptocurrency"
 
 
