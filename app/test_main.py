@@ -13,7 +13,7 @@ class TestCryptoCurrency:
             (151.62, "Do nothing")
         ]
     )
-    def test_main(self, prediction_rate: int | float, result: str):
+    def test_main(self, prediction_rate: int | float, result: str) -> None:
         with mock.patch("app.main.get_exchange_rate_prediction") as rate:
             rate.return_value = prediction_rate
             assert cryptocurrency_action(144.4) == result
