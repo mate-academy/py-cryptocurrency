@@ -25,7 +25,17 @@ def test_cryptocurrency_action_sell() -> None:
 
 def test_cryptocurrency_action_do_nothing() -> None:
     current_rate = 50
-    prediction_rate = 50
+    prediction_rate = 53
+    with mock.patch("app.main.get_exchange_rate_prediction",
+                    return_value=prediction_rate):
+        action = cryptocurrency_action(current_rate)
+
+    assert action == "Do nothing"
+
+
+def test_cryptocurrency_action_do_nothing2() -> None:
+    current_rate = 50
+    prediction_rate = 48
     with mock.patch("app.main.get_exchange_rate_prediction",
                     return_value=prediction_rate):
         action = cryptocurrency_action(current_rate)
