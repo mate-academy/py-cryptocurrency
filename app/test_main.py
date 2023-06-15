@@ -1,3 +1,4 @@
+from typing import Callable
 from unittest import mock
 import pytest
 
@@ -13,6 +14,11 @@ from app.main import cryptocurrency_action
     ]
 )
 @mock.patch("main.get_exchange_rate_prediction")
-def test_cryptocurrency_action(mocked_prediction, current_rate, prediction, result):
+def test_cryptocurrency_action(
+        mocked_prediction: Callable,
+        current_rate: int,
+        prediction: int,
+        result: str
+) -> None:
     mocked_prediction.return_value = prediction
     assert cryptocurrency_action(current_rate) == result
