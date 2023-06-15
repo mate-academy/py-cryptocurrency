@@ -1,1 +1,33 @@
-# write your code here
+from unittest import mock
+
+from app.main import cryptocurrency_action
+
+
+def test_cryptocurrency_action_buy() -> None:
+    current_rate = 50
+    prediction_rate = 70
+    with mock.patch("app.main.get_exchange_rate_prediction",
+                    return_value=prediction_rate):
+        action = cryptocurrency_action(current_rate)
+
+    assert action == "Buy more cryptocurrency"
+
+
+def test_cryptocurrency_action_sell() -> None:
+    current_rate = 50
+    prediction_rate = 30
+    with mock.patch("app.main.get_exchange_rate_prediction",
+                    return_value=prediction_rate):
+        action = cryptocurrency_action(current_rate)
+
+    assert action == "Sell all your cryptocurrency"
+
+
+def test_cryptocurrency_action_do_nothing() -> None:
+    current_rate = 50
+    prediction_rate = 50
+    with mock.patch("app.main.get_exchange_rate_prediction",
+                    return_value=prediction_rate):
+        action = cryptocurrency_action(current_rate)
+
+    assert action == "Do nothing"
