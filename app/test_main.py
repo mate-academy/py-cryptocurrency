@@ -33,7 +33,7 @@ def test_cryptocurrency_action_do_nothing() -> None:
     assert action == "Do nothing"
 
 
-def test_cryptocurrency_action_do_nothing2() -> None:
+def test_cryptocurrency_action_do_nothing3() -> None:
     current_rate = 100
     prediction_rate = 95
     with mock.patch("app.main.get_exchange_rate_prediction",
