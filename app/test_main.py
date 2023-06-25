@@ -12,8 +12,10 @@ from app.main import cryptocurrency_action
     "prediction_rate,"
     "expecting_result",
     [
-        (1, 1.05, "Buy more cryptocurrency"),
-        (1, 0.95, "Sell all your cryptocurrency"),
+        (1, 1.06, "Buy more cryptocurrency"),
+        (1, 0.94, "Sell all your cryptocurrency"),
+        (1, 1.05, "Do nothing"),
+        (1, 0.95, "Do nothing"),
         (1, 1, "Do nothing")
     ]
 )
