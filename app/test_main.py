@@ -1,15 +1,33 @@
-from typing import Callable
 from unittest import mock
+
 from .main import cryptocurrency_action
 
 
-@mock.patch("app.main.get_exchange_rate_prediction")
-def test_is_func_do_not_by_crypto_correct(mocked_exchange_rate_prediction: Callable) -> None:
-    mocked_exchange_rate_prediction.return_value = 1.0
-
-    result = cryptocurrency_action(current_rate=1.0)
-
-    assert result is "Do nothing"
-    mocked_exchange_rate_prediction.assert_called_once_with(1.0)
+def test_function_has_called_not_buy_crypto() -> None:
+    with mock.patch("app.main.get_exchange_rate_prediction") as mockexcpredict:
+        mockexcpredict.return_value = 1.01
+        assert cryptocurrency_action(1) == "Do nothing"
 
 
+def test_function_has_called_buy_crypto() -> None:
+    with mock.patch("app.main.get_exchange_rate_prediction") as mockexcpredict:
+        mockexcpredict.return_value = 1.13
+        assert cryptocurrency_action(1) == "Buy more cryptocurrency"
+
+
+def test_function_has_called_sell_crypto() -> None:
+    with mock.patch("app.main.get_exchange_rate_prediction") as mockexcpredict:
+        mockexcpredict.return_value = 0.8
+        assert cryptocurrency_action(1) == "Sell all your cryptocurrency"
+
+
+def test_function_has_called_not_buy_min_level_crypto() -> None:
+    with mock.patch("app.main.get_exchange_rate_prediction") as mockexcpredict:
+        mockexcpredict.return_value = 0.95
+        assert cryptocurrency_action(1) == "Do nothing"
+
+
+def test_function_has_called_not_buy_max_level_crypto() -> None:
+    with mock.patch("app.main.get_exchange_rate_prediction") as mockexcpredict:
+        mockexcpredict.return_value = 1.05
+        assert cryptocurrency_action(1) == "Do nothing"
