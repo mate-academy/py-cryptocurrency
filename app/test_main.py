@@ -13,8 +13,8 @@ from typing import Union
     [
         (1.06, 1.00, "Buy more cryptocurrency"),
         (1.00, 1.06, "Sell all your cryptocurrency"),
-        (1.05, 1.00, "Buy more cryptocurrency"),
-        (1.00, 1.05, "Sell all your cryptocurrency"),
+        (1.05, 1.00, "Do nothing"),
+        (0.95, 1.00, "Do nothing"),
         (1.01, 1.00, "Do nothing"),
     ])
 def test_what_to_do_with_crypto(
