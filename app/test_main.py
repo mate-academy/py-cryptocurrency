@@ -1,17 +1,26 @@
 import pytest
+from unittest import mock
 from app.main import cryptocurrency_action
 
-# Test cases for cryptocurrency_action function
 
-
-@pytest.mark.parametrize("current_rate, expected_action", [
-    (100, "Buy more cryptocurrency"),  # Predicted rate > 5% increase
-    (95, "Sell all your cryptocurrency"),  # Predicted rate > 5% decrease
-    (98, "Do nothing"),  # Predicted rate < 5% decrease
-    (100, "Do nothing"),  # Predicted rate is equal to current rate
+@pytest.mark.parametrize("prediction_rate, current_rate, result", [
+    (1.06, 1, "Buy more cryptocurrency"),
+    (0.94, 1, "Sell all your cryptocurrency"),
+    (1.05, 1, "Do nothing"),
+    (0.95, 1, "Do nothing"),
 ])
-def test_cryptocurrency_action(
-        current_rate: int,
-        expected_action: float
+def test_cryptocurrency_action_return(
+        prediction_rate: int | float,
+        current_rate: int | float,
+        result: str
 ) -> None:
-    assert cryptocurrency_action(current_rate) == expected_action
+
+    with (mock.patch("app.main.get_exchange_rate_prediction")
+          as mocked_get_exchange):
+
+        mocked_get_exchange.return_value = prediction_rate
+
+        cryptocurrency_action_res = cryptocurrency_action(current_rate)
+        mocked_get_exchange.assert_called_once_with(current_rate)
+
+        assert cryptocurrency_action_res == result
