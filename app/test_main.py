@@ -10,12 +10,14 @@ from app.main import cryptocurrency_action
     [
         (100, 100, "Do nothing"),
         (100, 94, "Sell all your cryptocurrency"),
-        (100, 106, "Buy more cryptocurrency")
+        (100, 106, "Buy more cryptocurrency"),
+        (100, 105, "Do nothing"),
+        (100, 95, "Do nothing")
     ]
 )
 @mock.patch("app.main.get_exchange_rate_prediction")
 def test_get_exchange_rate_prediction(
-        moke_get_exchange_rate_prediction: int,
+        moke_get_exchange_rate_prediction: mock,
         current_rate: int,
         predicted_rate: int,
         result: str
