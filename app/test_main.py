@@ -6,9 +6,10 @@ import pytest
 @pytest.mark.parametrize(
     "current_rate, exchange_rate, result",
     [
-        (10, 9.5, "Sell all your cryptocurrency"),
-        (10, 10.5, "Buy more cryptocurrency"),
-        (10, 10, "Do nothing")
+        (10, 10.6, "Buy more cryptocurrency"),
+        (10, 9.4, "Sell all your cryptocurrency"),
+        (10, 10.5, "Do nothing"),
+        (10, 9.5, "Do nothing")
     ]
 )
 def test_cryptocurrency_action(
