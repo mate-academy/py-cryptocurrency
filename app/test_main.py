@@ -2,19 +2,19 @@ import pytest
 from app import main
 
 
-def prediction_rate_1(num) -> float:
+def prediction_rate_1(num: int | float) -> float:
     return 0.95
 
 
-def prediction_rate_2(num) -> float:
+def prediction_rate_2(num: int | float) -> float:
     return 1.05
 
 
-def prediction_rate_3(num) -> float:
+def prediction_rate_3(num: int | float) -> float:
     return 2.3
 
 
-def prediction_rate_4(num) -> float:
+def prediction_rate_4(num: int | float) -> float:
     return 1.7
 
 
