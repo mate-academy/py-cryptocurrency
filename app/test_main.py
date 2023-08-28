@@ -11,12 +11,12 @@ from app.main import cryptocurrency_action
     "mock_get_exchange_rate_prediction, expected_result",
     [
         pytest.param(
-            lambda rate: rate / 0.5,
+            lambda rate: rate / 0.3,
             "Buy more cryptocurrency",
             id="should print Buy more cryptocurrency, if predicted exchange"
         ),
         pytest.param(
-            lambda rate: rate * 0.5,
+            lambda rate: rate * 0.7,
             "Sell all your cryptocurrency",
             id="should print Sell all your cryptocurrency if predicted",
         ),
@@ -40,4 +40,4 @@ def test_cryptocurrency(
     monkeypatch.setattr("app.main.get_exchange_rate_prediction",
                         mock_get_exchange_rate_prediction)
 
-    assert cryptocurrency_action(10) == expected_result
+    assert cryptocurrency_action(25) == expected_result
