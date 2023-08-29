@@ -1,6 +1,7 @@
 import pytest
 
 from unittest import mock
+from typing import Union
 
 from app.main import cryptocurrency_action
 
@@ -15,8 +16,8 @@ from app.main import cryptocurrency_action
     ]
 )
 def test_cryptocurrency_action(
-        current_rate: int,
-        prediction_rate: int,
+        current_rate: Union[int, float],
+        prediction_rate: Union[int, float],
         expected_action: str
 ) -> None:
     with (
