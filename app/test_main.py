@@ -6,10 +6,14 @@ import pytest
 
 @pytest.mark.parametrize("prediction_rate, current_rate, expected",
                          [
-                             pytest.param(1.1, 1, "Buy more cryptocurrency"),
-                             pytest.param(0.9, 1, "Sell all your cryptocurrency"),
-                             pytest.param(1.05, 1, "Do nothing"),
-                             pytest.param(0.95, 1, "Do nothing")
+                             pytest.param(
+                                 1.1, 1, "Buy more cryptocurrency"),
+                             pytest.param(
+                                 0.9, 1, "Sell all your cryptocurrency"),
+                             pytest.param(
+                                 1.05, 1, "Do nothing"),
+                             pytest.param(
+                                 0.95, 1, "Do nothing")
                          ])
 def test_buy_more_cryptocurrency(
         prediction_rate: Union[int, float],
