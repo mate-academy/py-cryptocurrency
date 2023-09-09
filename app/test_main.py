@@ -1,29 +1,32 @@
+from unittest import TestCase
 from unittest import mock
 from app.main import cryptocurrency_action
 
 
-@mock.patch("app.main.get_exchange_rate_prediction")
-def test_funct_value_if_exchange_rate_higher_current_rate(
-    mock_rate: mock.MagicMock
-) -> None:
-    mock_rate.return_value = 1.051
+class TestCryptoCurrency(TestCase):
+    def test_funct_value_if_exchange_rate_higher_current_rate(
+        self
+    ) -> None:
+        with mock.patch("app.main.get_exchange_rate_prediction") as mock_rate:
+            mock_rate.return_value = 1.051
+            res = cryptocurrency_action(1)
 
-    assert cryptocurrency_action(1) == "Buy more cryptocurrency"
+            self.assertEqual(res, "Buy more cryptocurrency")
 
+    def test_funct_value_if_exchange_rate_lower_current_rate(
+        self
+    ) -> None:
+        with mock.patch("app.main.get_exchange_rate_prediction") as mock_rate:
+            mock_rate.return_value = 0.949
+            res = cryptocurrency_action(1)
 
-@mock.patch("app.main.get_exchange_rate_prediction")
-def test_funct_value_if_exchange_rate_lower_current_rate(
-    mock_rate: mock.MagicMock
-) -> None:
-    mock_rate.return_value = 0.949
+            self.assertEqual(res, "Sell all your cryptocurrency")
 
-    assert cryptocurrency_action(1) == "Sell all your cryptocurrency"
+    def test_funct_value_if_difference_not_much(
+        self
+    ) -> None:
+        with mock.patch("app.main.get_exchange_rate_prediction") as mock_rate:
+            mock_rate.return_value = 1
+            res = cryptocurrency_action(1)
 
-
-@mock.patch("app.main.get_exchange_rate_prediction")
-def test_funct_value_if_difference_not_much(
-    mock_rate: mock.MagicMock
-) -> None:
-    mock_rate.return_value = 1
-
-    assert cryptocurrency_action(1) == "Do nothing"
+            self.assertEqual(res, "Do nothing")
