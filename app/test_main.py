@@ -1,32 +1,23 @@
-from unittest import TestCase
+from typing import Union
 from unittest import mock
 from app.main import cryptocurrency_action
+import pytest
 
 
-class TestCryptoCurrency(TestCase):
-    def test_funct_value_if_exchange_rate_higher_current_rate(
-        self
-    ) -> None:
-        with mock.patch("app.main.get_exchange_rate_prediction") as mock_rate:
-            mock_rate.return_value = 1.051
-            res = cryptocurrency_action(1)
+@pytest.mark.parametrize(
+    "prediction_rate, current_rate, result",
+    [
+        (1.051, 1, "Buy more cryptocurrency"),
+        (0.949, 1, "Sell all your cryptocurrency"),
+        (1.01, 1, "Do nothing"),
+    ]
+)
+def test_cripto_currency(
+    prediction_rate: Union[int | float],
+    current_rate: Union[int | float],
+    result: str
+) -> None:
+    with mock.patch("app.main.get_exchange_rate_prediction") as mock_rate:
+        mock_rate.return_value = prediction_rate
 
-            self.assertEqual(res, "Buy more cryptocurrency")
-
-    def test_funct_value_if_exchange_rate_lower_current_rate(
-        self
-    ) -> None:
-        with mock.patch("app.main.get_exchange_rate_prediction") as mock_rate:
-            mock_rate.return_value = 0.949
-            res = cryptocurrency_action(1)
-
-            self.assertEqual(res, "Sell all your cryptocurrency")
-
-    def test_funct_value_if_difference_not_much(
-        self
-    ) -> None:
-        with mock.patch("app.main.get_exchange_rate_prediction") as mock_rate:
-            mock_rate.return_value = 1
-            res = cryptocurrency_action(1)
-
-            self.assertEqual(res, "Do nothing")
+        assert cryptocurrency_action(current_rate) == result
