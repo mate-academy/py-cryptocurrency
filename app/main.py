@@ -1,33 +1,17 @@
-import unittest
-from unittest.mock import Mock
-from app.main import cryptocurrency_action
+import random
+from typing import Union
 
 
-class TestCryptocurrencyAction(unittest.TestCase):
-    def setUp(self):
-        self.mock_get_exchange_rate_prediction = Mock()
-
-    def test_buy_more_cryptocurrency(self) -> None:
-        self.mock_get_exchange_rate_prediction.return_value = 1.1
-
-        action = cryptocurrency_action(1.0)
-
-        self.assertEqual(action, "Buy more cryptocurrency")
-
-    def test_sell_all_cryptocurrency(self) -> None:
-        self.mock_get_exchange_rate_prediction.return_value = 0.9
-
-        action = cryptocurrency_action(1.0)
-
-        self.assertEqual(action, "Sell all your cryptocurrency")
-
-    def test_do_nothing(self) -> None:
-        self.mock_get_exchange_rate_prediction.return_value = 1.03
-
-        action = cryptocurrency_action(1.0)
-
-        self.assertEqual(action, "Do nothing")
+def get_exchange_rate_prediction(exchange_rate: Union[int, float]) -> float:
+    if random.choice(["increase", "decrease"]) == "increase":
+        return round(exchange_rate / random.random(), 2)
+    return round(exchange_rate * random.random(), 2)
 
 
-if __name__ == "__main__":
-    unittest.main()
+def cryptocurrency_action(current_rate: Union[int, float]) -> str:
+    prediction_rate = get_exchange_rate_prediction(current_rate)
+    if prediction_rate / current_rate > 1.05:
+        return "Buy more cryptocurrency"
+    if prediction_rate / current_rate < 0.95:
+        return "Sell all your cryptocurrency"
+    return "Do nothing"
