@@ -4,7 +4,7 @@ from app.main import cryptocurrency_action
 
 
 class TestCryptocurrencyAction(unittest.TestCase):
-    def setUp(self):
+    def setUp(self) -> None:
         self.mock_get_exchange_rate_prediction = Mock()
 
     def test_buy_more_cryptocurrency(self) -> None:
