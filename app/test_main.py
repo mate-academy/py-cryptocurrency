@@ -6,18 +6,19 @@ from app.main import cryptocurrency_action
 
 @patch("app.main.get_exchange_rate_prediction")
 @pytest.mark.parametrize(
-    "mocked_value, expected_result",
+    "mocked_value, current_rate, expected_result",
     [
-        (1.1, "Buy more cryptocurrency"),
-        (0.9, "Sell all your cryptocurrency"),
-        (1.04, "Do nothing"),
+        (1.1, 1.0, "Buy more cryptocurrency"),
+        (0.9, 1.0, "Sell all your cryptocurrency"),
+        (1.04, 1.0, "Do nothing"),
     ],
 )
 def test_cryptocurrency_action(
         mock_get_exchange_rate_prediction: Mock,
         mocked_value: float,
+        current_rate: float,
         expected_result: str
 ) -> None:
     mock_get_exchange_rate_prediction.return_value = mocked_value
 
-    assert cryptocurrency_action(mocked_value) == expected_result
+    assert cryptocurrency_action(current_rate) == expected_result
