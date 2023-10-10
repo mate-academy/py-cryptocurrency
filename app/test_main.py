@@ -8,8 +8,8 @@ from app.main import cryptocurrency_action
 @pytest.mark.parametrize(
     "mocked_value, current_rate, expected_result",
     [
-        (1.1, 1.0, "Buy more cryptocurrency"),
-        (0.9, 1.0, "Sell all your cryptocurrency"),
+        (1.06, 1.0, "Buy more cryptocurrency"),
+        (0.8, 1.0, "Sell all your cryptocurrency"),
         (1.04, 1.0, "Do nothing"),
     ],
 )
