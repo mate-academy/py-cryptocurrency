@@ -11,7 +11,7 @@ from typing import Union
     (-1, -0.94, "Sell all your cryptocurrency"),
     (5, 3.95, "Sell all your cryptocurrency"),
     (350, 243.78, "Sell all your cryptocurrency"),
-    (3.5, 3.33, "Do nothing"),
+    (350, 332.5, "Do nothing"),
     (350, 367.5, "Do nothing"),
 ])
 def test_cryptocurrency_action(
