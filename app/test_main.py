@@ -7,7 +7,7 @@ from app.main import cryptocurrency_action
     "current_rate, prediction_rate, result",
     [
         (1.05, 1.2, "Buy more cryptocurrency"),
-        (1.05, 0.9, "Sell all your cryptocurrency"),
+        (0.95, 1.0, "Sell all your cryptocurrency"),
         (1.05, 1.04, "Do nothing"),
         (1.05, 1.03, "Do nothing")
     ],
