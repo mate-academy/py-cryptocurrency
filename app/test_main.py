@@ -4,7 +4,7 @@ from unittest import mock
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_buy(mocked_exchange):
+def test_buy(mocked_exchange: mock) -> None:
     mocked_exchange.return_value = 1.6
     result = cryptocurrency_action(100)
     mocked_exchange.assert_called_once_with(100)
@@ -13,7 +13,7 @@ def test_buy(mocked_exchange):
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_sell(mocked_exchange):
+def test_sell(mocked_exchange: mock) -> None:
     mocked_exchange.return_value = 0.8
     result = cryptocurrency_action(100)
     mocked_exchange.assert_called_once_with(100)
@@ -22,7 +22,7 @@ def test_sell(mocked_exchange):
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_nothing(mocked_exchange):
+def test_nothing(mocked_exchange: mock) -> None:
     mocked_exchange.return_value = 1.03
     result = cryptocurrency_action(100)
     mocked_exchange.assert_called_once_with(100)
