@@ -22,7 +22,7 @@ def test_if_random_choose_decrease_and_0_dot_8(
 @mock.patch("app.main.random.random", return_value=0.99)
 def test_if_random_choose_increase_and_0_dot_99(
         mocked_rate: float,
-        mocked_choice: str) -> None:
+        mocked_choice: int) -> None:
     assert cryptocurrency_action(5) == "Do nothing"
 
 
