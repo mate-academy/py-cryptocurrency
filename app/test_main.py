@@ -1,4 +1,3 @@
-from typing import Union
 from unittest.mock import patch, MagicMock
 
 from app.main import cryptocurrency_action
@@ -42,5 +41,3 @@ def test_predicted_rate_is_less_then_current(
 ) -> None:
     mocked_exchnage_rate.return_value = 18.9
     assert cryptocurrency_action(20) == "Sell all your cryptocurrency"
-
-
