@@ -1,30 +1,22 @@
-from app.main import cryptocurrency_action
-
+import pytest
 from unittest import mock
 
+from app.main import cryptocurrency_action
 
+
+@pytest.mark.parametrize(
+    "current, predicted, exspected",
+    [
+        (20, 23, "Buy more cryptocurrency"),
+        (800, 759, "Sell all your cryptocurrency"),
+        (50, 52.5, "Do nothing"),
+        (50, 47.5, "Do nothing")
+    ]
+)
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_buy(mocked_exchange: mock) -> None:
-    mocked_exchange.return_value = 1.6
-    result = cryptocurrency_action(100)
-    mocked_exchange.assert_called_once_with(100)
-
-    assert result == "Buy more cryptocurrency"
-
-
-@mock.patch("app.main.get_exchange_rate_prediction")
-def test_sell(mocked_exchange: mock) -> None:
-    mocked_exchange.return_value = 0.8
-    result = cryptocurrency_action(100)
-    mocked_exchange.assert_called_once_with(100)
-
-    assert result == "Sell all your cryptocurrency"
-
-
-@mock.patch("app.main.get_exchange_rate_prediction")
-def test_nothing(mocked_exchange: mock) -> None:
-    mocked_exchange.return_value = 1.03
-    result = cryptocurrency_action(100)
-    mocked_exchange.assert_called_once_with(100)
-
-    assert result == "Do nothing"
+def test_cryptocurrency_action(mocked_get_exchange_rate_prediction: mock.Mock,
+                               current: int | float,
+                               predicted: int | float,
+                               exspected: str) -> None:
+    mocked_get_exchange_rate_prediction.return_value = predicted
+    assert cryptocurrency_action(current) == exspected
