@@ -4,19 +4,29 @@ from app.main import cryptocurrency_action
 from typing import Union
 
 
-@pytest.mark.parametrize(
-    "exchange_rate, current_rate, result",
-    [
-        (0.95, 0.95, "Do nothing"),
-        (0.5, 0.2, "Sell all your cryptocurrency"),
-        (0.2, 0.8, "Buy more cryptocurrency")
-    ]
-)
-def test_cryptocurrency_action(exchange_rate: Union[int, float],
-                               current_rate: Union[int, float],
-                               result: str) -> None:
-    with (mock.patch("app.main.get_exchange_rate_prediction")
-            as mocked_get_exchange_rate_prediction):
+@mock.patch("app.main.get_exchange_rate_prediction")
+def test_cryptocurrency_buy_cryptocurrency_action(mocked_get_exchange_rate_prediction) -> None:
 
-        mocked_get_exchange_rate_prediction.return_value = exchange_rate
-        assert cryptocurrency_action(current_rate) == result
+    mocked_get_exchange_rate_prediction.return_value = 1.15
+    assert cryptocurrency_action(1) == "Buy more cryptocurrency"
+
+
+@mock.patch("app.main.get_exchange_rate_prediction")
+def test_cryptocurrency_sell_cryptocurrency_action(mocked_get_exchange_rate_prediction) -> None:
+
+    mocked_get_exchange_rate_prediction.return_value = 0.94
+    assert cryptocurrency_action(1) == "Sell all your cryptocurrency"
+
+
+@mock.patch("app.main.get_exchange_rate_prediction")
+def test_cryptocurrency_do_nothing_action(mocked_get_exchange_rate_prediction) -> None:
+
+    mocked_get_exchange_rate_prediction.return_value = 0.95
+    assert cryptocurrency_action(1) == "Do nothing"
+
+
+@mock.patch("app.main.get_exchange_rate_prediction")
+def test_cryptocurrency_do_nothing2_action(mocked_get_exchange_rate_prediction) -> None:
+
+    mocked_get_exchange_rate_prediction.return_value = 1.05
+    assert cryptocurrency_action(1) == "Do nothing"
