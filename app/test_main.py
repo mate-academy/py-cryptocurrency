@@ -11,7 +11,7 @@ from app.main import cryptocurrency_action
 ])
 def test_cryptocurrency_action(current_rate: float,
                                prediction_rate: float,
-                               expected_action: str, mocker: None) -> None:
+                               expected_action: str, mocker: callable) -> None:
     mocker.patch("app.main.get_exchange_rate_prediction",
                  return_value=prediction_rate)
     result = cryptocurrency_action(current_rate)
