@@ -15,11 +15,3 @@ def cryptocurrency_action(current_rate: Union[int, float]) -> str:
     if prediction_rate / current_rate < 0.95:
         return "Sell all your cryptocurrency"
     return "Do nothing"
-
-
-print(cryptocurrency_action(-33))
-print(cryptocurrency_action(-1))
-#print(cryptocurrency_action(0))
-print(cryptocurrency_action(42))
-print(cryptocurrency_action(22))
-

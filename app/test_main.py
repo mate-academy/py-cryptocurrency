@@ -15,7 +15,7 @@ from typing import Union
 def test_cryptocurrency_action(exchange_rate: Union[int, float],
                                current_rate: Union[int, float],
                                result: str) -> None:
-    with (mock.patch('app.main.get_exchange_rate_prediction')
+    with (mock.patch("app.main.get_exchange_rate_prediction")
             as mocked_get_exchange_rate_prediction):
 
         mocked_get_exchange_rate_prediction.return_value = exchange_rate
