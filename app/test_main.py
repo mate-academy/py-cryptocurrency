@@ -8,8 +8,8 @@ from typing import Union
     "exchange_rate, current_rate, result",
     [
         (0.95, 0.95, "Do nothing"),
-        (0.2, 0.5, "Sell all your cryptocurrency"),
-        (0.8, 0.2, "Buy more cryptocurrency")
+        (0.5, 0.2, "Sell all your cryptocurrency"),
+        (0.2, 0.8, "Buy more cryptocurrency")
     ]
 )
 def test_cryptocurrency_action(exchange_rate: Union[int, float],
