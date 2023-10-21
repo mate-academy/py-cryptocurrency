@@ -7,9 +7,9 @@ from typing import Union
 @pytest.mark.parametrize(
     "exchange_rate, current_rate, result",
     [
-        (1, 1, "Do nothing"),
-        (-1, 100, "Sell all your cryptocurrency"),
-        (50, 8, "Buy more cryptocurrency")
+        (0.95, 0.95, "Do nothing"),
+        (0.2, 0.5, "Sell all your cryptocurrency"),
+        (0.8, 0.2, "Buy more cryptocurrency")
     ]
 )
 def test_cryptocurrency_action(exchange_rate: Union[int, float],
@@ -20,6 +20,3 @@ def test_cryptocurrency_action(exchange_rate: Union[int, float],
 
         mocked_get_exchange_rate_prediction.return_value = exchange_rate
         assert cryptocurrency_action(current_rate) == result
-
-    with pytest.raises(ZeroDivisionError):
-        raise ZeroDivisionError("current_rate can't be '0'")
