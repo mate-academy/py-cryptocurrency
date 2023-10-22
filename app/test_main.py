@@ -7,10 +7,11 @@ from app.main import cryptocurrency_action
 @pytest.mark.parametrize(
     "prediction_rate, current_rate, expected_result",
     [
-        (0.82, 1.6, "Sell all your cryptocurrency"),
-        (1.75, 1.6, "Buy more cryptocurrency"),
-        (1.55, 1.6, "Do nothing"),
-        (1.68, 1.6, "Do nothing")
+        (0.82, 1, "Sell all your cryptocurrency"),
+        (1.75, 1, "Buy more cryptocurrency"),
+        (1.03, 1, "Do nothing"),
+        (1.05, 1, "Do nothing"),
+        (0.95, 1, "Do nothing")
     ]
 )
 @mock.patch("app.main.get_exchange_rate_prediction")
