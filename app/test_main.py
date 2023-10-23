@@ -1,6 +1,5 @@
 # write your code here
 from unittest import mock
-from unittest.mock import Mock
 
 import pytest
 
@@ -17,7 +16,11 @@ from app.main import cryptocurrency_action
     ]
 )
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_get_exchange_rate_prediction(mock_get_exchange_rate_prediction: mock, current_rate: int | float,
-                                      predict_rate: int | float, result: str) -> None:
+def test_get_exchange_rate_prediction(
+        mock_get_exchange_rate_prediction: mock,
+        current_rate: int | float,
+        predict_rate: int | float,
+        result: str
+) -> None:
     mock_get_exchange_rate_prediction.return_value = predict_rate
     assert cryptocurrency_action(current_rate) == result
