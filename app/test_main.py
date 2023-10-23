@@ -11,6 +11,7 @@ from app.main import cryptocurrency_action
     [
         (1, 1.06, "Buy more cryptocurrency"),
         (1, 0.95, "Do nothing"),
+        (1, 1.05, "Do nothing"),
         (1, 0.9, "Sell all your cryptocurrency")
     ]
 )
