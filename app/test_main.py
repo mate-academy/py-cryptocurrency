@@ -7,6 +7,7 @@ import pytest
 from app.main import cryptocurrency_action
 
 
+@mock.patch("app.main.get_exchange_rate_prediction")
 @pytest.mark.parametrize(
     "current_rate, predict_rate, result",
     [
@@ -16,7 +17,6 @@ from app.main import cryptocurrency_action
         (1, 1.07, "Buy more cryptocurrency")
     ]
 )
-@mock.patch("app.main.get_exchange_rate_prediction")
 def test_cryptocurrency_action(
         mock_get_exchange_rate_prediction: Mock,
         current_rate: int | float,
