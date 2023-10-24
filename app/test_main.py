@@ -1,22 +1,35 @@
 import pytest
 from unittest import mock
 from app.main import cryptocurrency_action
+from typing import Callable
 
 
-@pytest.mark.parametrize(
-    "current_rate, prediction_rate, result",
-    [
-        (1.05, 1.3, "Buy more cryptocurrency"),
-        (1.06, 0.9, "Sell all your cryptocurrency"),
-        (1.05, 1.04, "Do nothing"),
-        (1.05, 1.03, "Do nothing")
-    ],
-)
-def test_cryptocurrency_action(
-        current_rate: float,
-        prediction_rate: float,
-        result: str
-) -> None:
-    with mock.patch("app.main.get_exchange_rate_prediction") as mocked_rate:
-        mocked_rate.return_value = prediction_rate
-        assert cryptocurrency_action(current_rate) == result
+@pytest.fixture()
+def mocked_get_exchange_rate_prediction() -> Callable:
+    with mock.patch("app.main.get_exchange_rate_prediction") \
+            as mock_get_exchange_rate_prediction:
+        yield mock_get_exchange_rate_prediction
+
+
+def test_buy(mocked_get_exchange_rate_prediction: Callable) -> None:
+    mocked_get_exchange_rate_prediction.return_value = 10
+
+    assert cryptocurrency_action(5) == "Buy more cryptocurrency"
+
+
+def test_sell(mocked_get_exchange_rate_prediction: Callable) -> None:
+    mocked_get_exchange_rate_prediction.return_value = 2.5
+
+    assert cryptocurrency_action(5) == "Sell all your cryptocurrency"
+
+
+def test_do_nothing(mocked_get_exchange_rate_prediction: Callable) -> None:
+    mocked_get_exchange_rate_prediction.return_value = 5 * 1.05
+
+    assert cryptocurrency_action(5) == "Do nothing"
+
+
+def test_do_nothing2(mocked_get_exchange_rate_prediction: Callable) -> None:
+    mocked_get_exchange_rate_prediction.return_value = 5 * 0.95
+
+    assert cryptocurrency_action(5) == "Do nothing"
