@@ -5,7 +5,7 @@ import pytest
 
 
 @pytest.mark.parametrize(
-    "current_rate, prediction_rate, expected",
+    "current_rate,prediction_rate,expected",
     [
         (1, 1.05, "Buy more cryptocurrency"),
         (1, 0.95, "Sell all your cryptocurrency"),
