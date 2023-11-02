@@ -1,38 +1,29 @@
-from typing import Any
-from unittest import TestCase, mock
+import pytest
+from unittest import mock
 from app.main import cryptocurrency_action
 
 
-class TestCryptocurrencyAction(TestCase):
+@pytest.mark.parametrize(
+    "current_rate, prediction_rate, expected",
+    [
 
-    @mock.patch("app.main.get_exchange_rate_prediction")
-    def test_cryptocurrency_action(
-            self,
-            mock_get_exchange_rate_prediction: Any
-    ) -> None:
-        test_cases = [
-            {
-                "current_rate": 1,
-                "prediction_rate": 1.06,
-                "expected": "Buy more cryptocurrency",
-            },
-            {
-                "current_rate": 1,
-                "prediction_rate": 0.94,
-                "expected": "Sell all your cryptocurrency",
-            },
-            {
-                "current_rate": 1,
-                "prediction_rate": 1,
-                "expected": "Do nothing",
-            },
-        ]
+        (1, 1.1, "Buy more cryptocurrency"),
+        (1, 0.9, "Sell all your cryptocurrency"),
+        (1, 1.04, "Do nothing"),
+        (1, 1.05, "Do nothing"),
+        (1, 0.95, "Do nothing"),
 
-        for case in test_cases:
-            mock_get_exchange_rate_prediction.return_value = (
-                case.get("prediction_rate")
-            )
-            self.assertEqual(
-                cryptocurrency_action(case.get("current_rate")),
-                case.get("expected")
-            )
+    ]
+)
+def test_cryptocurrency_action(
+        current_rate: int | float,
+        prediction_rate: int | float,
+        expected: str
+) -> None:
+    with (
+        mock.patch("app.main.get_exchange_rate_prediction")
+        as mock_get_exchange_rate_prediction
+    ):
+        mock_get_exchange_rate_prediction.return_value = prediction_rate
+
+        assert cryptocurrency_action(current_rate) == expected
