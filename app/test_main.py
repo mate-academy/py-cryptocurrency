@@ -17,7 +17,7 @@ def test_is_action_correct(
         predicted_rate: float,
         expected_result: str
 ) -> None:
-
-    with patch("app.main.get_exchange_rate_prediction") as mock_exchange_prediction:
+    with (patch("app.main.get_exchange_rate_prediction")
+          as mock_exchange_prediction):
         mock_exchange_prediction.return_value = predicted_rate
         assert cryptocurrency_action(current_rate) == expected_result
