@@ -10,8 +10,8 @@ from app.main import cryptocurrency_action
     "current_rate, percent, expected", [
         (1, 1.06, "Buy more cryptocurrency"),
         (1, 0.94, "Sell all your cryptocurrency"),
-        (1, 1.04, "Do nothing"),
-        (1, 0.96, "Do nothing"),
+        (1, 1.05, "Do nothing"),
+        (1, 0.95, "Do nothing"),
         (1, 1, "Do nothing")
     ]
 )
