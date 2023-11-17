@@ -12,7 +12,7 @@ from app.main import cryptocurrency_action
         (1, 1.0, "Sell all your cryptocurrency"),
     ]
 )
-@mock.patch("get_exchange_rate_prediction")
+@mock.patch("app.main.get_exchange_rate_prediction")
 def test_cryptocurrency_action(
         mock_get_exchange_rate_prediction: mock.MagicMock,
         current_rate: int | float,
