@@ -19,6 +19,9 @@ from app.main import cryptocurrency_action
         pytest.param(
             1, 1.2, "Buy more cryptocurrency",
             id="positive_prediction"
+        ),
+        pytest.param(
+            1, 0.95, "Do nothing", id="positive_prediction"
         )
     ]
 )
@@ -34,7 +37,6 @@ def test_cryptocurrency_action(
     ):
         mocked_prediction.return_value = negative
         result = cryptocurrency_action(current_rate=positive)
-        # expected_result = "Buy more cryptocurrency"
         assert result == solution, (
             f"Expected result to be {solution}, "
             f"But got {result}"
