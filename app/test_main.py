@@ -1,45 +1,23 @@
+from unittest import mock
 import pytest
-from unittest.mock import patch
 from app.main import cryptocurrency_action
 
 
-@pytest.fixture
-def mock_get_exchange_rate_prediction() -> "patch":
-    with patch("app.main.get_exchange_rate_prediction") as mock:
-        yield mock
-
-
-def test_cryptocurrency_action_buy_more(
-        mock_get_exchange_rate_prediction: "patch"
+@pytest.mark.parametrize(
+    "current_rate, future_rate, expected_result",
+    [
+        (100, 95, "Do nothing"),
+        (100, 105, "Do nothing"),
+        (100, 106, "Buy more cryptocurrency"),
+        (100, 94, "Sell all your cryptocurrency"),
+    ]
+)
+@mock.patch("app.main.get_exchange_rate_prediction")
+def test_cryptocurrency_action(
+        mock_get_rate: mock.MagicMock,
+        current_rate: int | float,
+        future_rate: int | float,
+        expected_result: str
 ) -> None:
-    mock_get_exchange_rate_prediction.return_value = 1.1
-    current_rate: float = 1.0
-    result: str = cryptocurrency_action(current_rate)
-    assert result == "Buy more cryptocurrency"
-
-
-def test_cryptocurrency_action_sell_all(
-        mock_get_exchange_rate_prediction: "patch"
-) -> None:
-    mock_get_exchange_rate_prediction.return_value = 0.9
-    current_rate: float = 1.0
-    result: str = cryptocurrency_action(current_rate)
-    assert result == "Sell all your cryptocurrency"
-
-
-def test_cryptocurrency_action_do_nothing(
-        mock_get_exchange_rate_prediction: "patch"
-) -> None:
-    mock_get_exchange_rate_prediction.return_value = 1.02
-    current_rate: float = 1.0
-    result: str = cryptocurrency_action(current_rate)
-    assert result == "Do nothing"
-
-
-def test_cryptocurrency_action_do_nothing_equal_rates(
-        mock_get_exchange_rate_prediction: "patch"
-) -> None:
-    mock_get_exchange_rate_prediction.return_value = 1.0
-    current_rate: float = 1.0
-    result: str = cryptocurrency_action(current_rate)
-    assert result == "Do nothing"
+    mock_get_rate.return_value = future_rate
+    assert cryptocurrency_action(current_rate) == expected_result
