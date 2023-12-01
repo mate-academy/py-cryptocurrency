@@ -7,9 +7,7 @@ from app.main import cryptocurrency_action
 
 
 @pytest.mark.parametrize(
-    "prediction_rate: Union[int, float], "
-    "cryptocurrency_activity: Union[int, float], "
-    "expected_result: str",
+    "prediction_rate, cryptocurrency_activity, expected_result",
     [
         (1.05, 1.0, "Do nothing"),
         (0.95, 1.0, "Do nothing"),
