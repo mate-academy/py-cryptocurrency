@@ -6,11 +6,15 @@ from app.main import cryptocurrency_action
 class TestCryptocurrencyAction:
     @staticmethod
     @pytest.fixture
-    def mocked_get_exchange_rate_prediction():
-        with mock.patch("app.main.get_exchange_rate_prediction") as get_exchange_rate_prediction:
+    def mocked_get_exchange_rate_prediction() -> None:
+        with (mock.patch("app.main.get_exchange_rate_prediction")
+              as get_exchange_rate_prediction):
             yield get_exchange_rate_prediction
 
-    def test_get_exchange_rate_prediction_called_with(self, mocked_get_exchange_rate_prediction):
+    def test_get_exchange_rate_prediction_called_with(
+            self,
+            mocked_get_exchange_rate_prediction: mock.MagicMock
+    ) -> None:
         mocked_get_exchange_rate_prediction.return_value = 74
         cryptocurrency_action(52)
         mocked_get_exchange_rate_prediction.assert_called_once_with(52)
@@ -27,10 +31,10 @@ class TestCryptocurrencyAction:
     )
     def test_cryptocurrency_action(
             self,
-            predictable_rate,
-            current_rate,
-            result,
-            mocked_get_exchange_rate_prediction
-            ):
+            predictable_rate: float,
+            current_rate: int | float,
+            result: str,
+            mocked_get_exchange_rate_prediction: mock.MagicMock
+    ) -> None:
         mocked_get_exchange_rate_prediction.return_value = predictable_rate
         assert cryptocurrency_action(current_rate) == result
