@@ -9,7 +9,8 @@ import pytest
     [
         (1.1, 1, "Buy more cryptocurrency"),
         (0.9, 1, "Sell all your cryptocurrency"),
-        (1.05, 1, "Do nothing")
+        (1.05, 1, "Do nothing"),
+        (0.95, 1, "Do nothing"),
     ]
 )
 @mock.patch("app.main.get_exchange_rate_prediction")
