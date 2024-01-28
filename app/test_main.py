@@ -1,5 +1,5 @@
 import pytest
-from app import cryptocurrency_action
+from app.main import cryptocurrency_action
 from _pytest.monkeypatch import MonkeyPatch
 
 
