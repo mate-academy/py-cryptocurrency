@@ -1,5 +1,5 @@
 import pytest
-from app.main import cryptocurrency_action, get_exchange_rate_prediction
+from app.main import cryptocurrency_action
 from _pytest.monkeypatch import MonkeyPatch
 
 
