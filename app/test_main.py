@@ -16,7 +16,8 @@ from app.main import cryptocurrency_action
     ],
     ids=[
         "should return 'Buy more cryptocurrency' with current=1, expected=2",
-        "should return 'Sell all your cryptocurrency' with current=2, expected=1",
+        "should return 'Sell all your cryptocurrency' "
+        "with current=2, expected=1",
         "should return 'Do nothing' with current=1, expected=1",
         "should return 'Do nothing' with current=1, expected=1.05",
         "should return 'Do nothing' with current=1, expected=0.95",
