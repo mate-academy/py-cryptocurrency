@@ -9,9 +9,9 @@ from app.main import cryptocurrency_action
     "current_rate,exchange_rate,result",
     [
         (1.5, 3.2, "Buy more cryptocurrency"),
-        (1.5, 2.3, "Buy more cryptocurrency"),
+        (1.5, 4, "Buy more cryptocurrency"),
         (2, 2, "Do nothing"),
-        (2.4, 2.6, "Do nothing"),
+        (2.4, 2.6, "Buy more cryptocurrency"),
         (1, 0.5, "Sell all your cryptocurrency"),
     ]
 )
