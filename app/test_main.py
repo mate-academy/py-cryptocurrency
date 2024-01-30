@@ -49,6 +49,7 @@ def test_crypto_action_should_work_correctly_if_predicted_bigger_but_close(
 
 # WATERMARK, DONT STILL MY SOLUTION BIM BIM BAM BAM
 
+
 def test_crypto_action_should_work_correctly_if_predicted_less_but_close(
         mocked_prediction: Callable
 ) -> None:
