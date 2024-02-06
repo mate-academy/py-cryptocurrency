@@ -16,4 +16,4 @@ def test_cryptocurrency_action(mocked_func: mock,
                                value: float,
                                result: str) -> None:
     mocked_func.return_value = value
-    assert cryptocurrency_action(1.4) == result
+    assert cryptocurrency_action(1) == result
