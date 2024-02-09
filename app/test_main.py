@@ -10,6 +10,8 @@ import pytest
         (1, 1.06, "Buy more cryptocurrency"),
         (1, 0.94, "Sell all your cryptocurrency"),
         (1, 1.01, "Do nothing"),
+        (1, 0.95, "Do nothing"),
+        (1, 1.05, "Do nothing"),
     ]
 )
 def test_cannot_access_if_only_valid_url(mocked_func: mock,
