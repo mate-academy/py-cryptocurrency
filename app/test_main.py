@@ -5,15 +5,15 @@ from app.main import cryptocurrency_action
 
 
 @pytest.mark.parametrize(
-    "curr_rate", "prediction", "result",
+    ("curr_rate", "prediction", "result"),
     [
-        pytest.param(1, 1.06, "Buy more cryptocurrency"),
-        pytest.param(2, 1, "Sell all your cryptocurrency"),
-        pytest.param(4, 4, "Do nothing"),
-        pytest.param(100, 96, "Do nothing"),
-        pytest.param(100, 94, "Do nothing"),
-        pytest.param(1, 0.95, "Do nothing"),
-        pytest.param(1, 1.05,  "Do nothing")
+        (1, 1.06, "Buy more cryptocurrency"),
+        (2, 1, "Sell all your cryptocurrency"),
+        (4, 4, "Do nothing"),
+        (100, 96, "Do nothing"),
+        (100, 94, "Sell all your cryptocurrency"),
+        (1, 0.95, "Do nothing"),
+        (1, 1.05,  "Do nothing")
     ]
 )
 @mock.patch("app.main.get_exchange_rate_prediction")
