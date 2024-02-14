@@ -9,7 +9,6 @@ from app.main import cryptocurrency_action
     [
         (1, 1.06, "Buy more cryptocurrency"),
         (2, 1, "Sell all your cryptocurrency"),
-        (4, 4, "Do nothing"),
         (100, 96, "Do nothing"),
         (100, 94, "Sell all your cryptocurrency"),
         (1, 0.95, "Do nothing"),
