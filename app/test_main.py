@@ -12,7 +12,7 @@ from app.main import cryptocurrency_action
         (100, 96, "Do nothing"),
         (100, 94, "Sell all your cryptocurrency"),
         (1, 0.95, "Do nothing"),
-        (1, 1.05,  "Do nothing")
+        (1, 1.05, "Do nothing")
     ]
 )
 @mock.patch("app.main.get_exchange_rate_prediction")
