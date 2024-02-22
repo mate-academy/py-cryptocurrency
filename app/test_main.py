@@ -6,14 +6,14 @@ from unittest.mock import MagicMock
 # Test when the predicted exchange rate is more than 5% higher
 @patch("app.main.get_exchange_rate_prediction")
 def test_buy(mock_get_exchange_rate_prediction: MagicMock) -> None:
-    mock_get_exchange_rate_prediction.return_value = 105
+    mock_get_exchange_rate_prediction.return_value = 106
     assert cryptocurrency_action(100) == "Buy more cryptocurrency"
 
 
 # Test when the predicted exchange rate is more than 5% lower
 @patch("app.main.get_exchange_rate_prediction")
 def test_sell(mock_get_exchange_rate_prediction: MagicMock) -> None:
-    mock_get_exchange_rate_prediction.return_value = 95
+    mock_get_exchange_rate_prediction.return_value = 94
     assert cryptocurrency_action(100) == "Sell all your cryptocurrency"
 
 
