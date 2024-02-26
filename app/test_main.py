@@ -31,6 +31,6 @@ def test_should_do_nothing_with_rate_105() -> None:
 def test_should_do_nothing_with_rate_95() -> None:
     with (mock.patch("app.main.get_exchange_rate_prediction")
           as mocked_get_exchange_rate_prediction):
-        mocked_get_exchange_rate_prediction.return_value = 1
+        mocked_get_exchange_rate_prediction.return_value = 1.9
 
-        assert cryptocurrency_action(0.95) == "Do nothing"
+        assert cryptocurrency_action(2) == "Do nothing"
