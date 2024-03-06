@@ -23,5 +23,6 @@ def test_crypto_currency(
         current_value: float,
         expected_result: str
 ) -> None:
-    with patch("app.main.get_exchange_rate_prediction", MagicMock(return_value=predicted_value)):
+    with patch("app.main.get_exchange_rate_prediction",
+               MagicMock(return_value=predicted_value)):
         assert cryptocurrency_action(current_value) == expected_result
