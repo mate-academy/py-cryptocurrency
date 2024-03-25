@@ -17,10 +17,10 @@ from app.main import cryptocurrency_action
 )
 @mock.patch("app.main.get_exchange_rate_prediction")
 def test_cryptocurrency_action(
-        mocked_get_exchange_rate_prediction,
-        predicted_rate,
-        current_rate,
-        expected_res,
-):
+        mocked_get_exchange_rate_prediction: mock.MagicMock,
+        predicted_rate: float,
+        current_rate: float | int,
+        expected_res: bool,
+) -> None:
     mocked_get_exchange_rate_prediction.return_value = predicted_rate
     assert cryptocurrency_action(current_rate) == expected_res
