@@ -11,11 +11,11 @@ from app.main import cryptocurrency_action
      (85, 85.6, "Do nothing")]
 )
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_exchange(
-        mock_get_exchange: pytest.param,
-        exchange_rate: int,
-        current_rate: int,
-        expected_result: int
+def test_exchange_rate(
+        mock_get_exchange_rate_prediction: pytest.param,
+        exchange_rate: int | float,
+        current_rate: int | float,
+        expected_result: str
 ) -> None:
-    mock_get_exchange.return_value = exchange_rate
+    mock_get_exchange_rate_prediction.return_value = exchange_rate
     assert cryptocurrency_action(current_rate) == expected_result
