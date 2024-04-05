@@ -3,7 +3,7 @@ import pytest
 from unittest import TestCase, mock
 from random import random
 
-from app.main import get_exchange_rate_prediction, cryptocurrency_action
+from app.main import get_exchange_rate_prediction
 
 
 class TestCrypto(TestCase):
