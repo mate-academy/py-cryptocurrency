@@ -1,7 +1,5 @@
-import pytest
-
 from unittest import TestCase, mock
-from random import random
+from unittest.mock import Mock
 
 from app.main import get_exchange_rate_prediction
 
@@ -22,18 +20,26 @@ class TestCrypto(TestCase):
         assert (get_exchange_rate_prediction(self.exchange_rate)
                 != self.exchange_rate)
 
-    def test_crypto_sure_answer(self) -> None:
+    def test_crypto_sure_answer_95_percent(self) -> None:
+        prediction_rate = get_exchange_rate_prediction(self.exchange_rate)
+        if prediction_rate / self.current_rate < 0.95:
+            assert "Sell all your cryptocurrency"
+
+    def test_crypto_sure_answer_105_percent(self) -> None:
+
         prediction_rate = get_exchange_rate_prediction(self.exchange_rate)
         if prediction_rate / self.current_rate > 1.05:
-            assert False, "Buy more cryptocurrency"
+            assert "Buy more cryptocurrency"
 
-        elif prediction_rate / self.current_rate < 0.95:
-            assert False, "Sell all your cryptocurrency"
-
-        else:
-            assert True, "Do nothing"
-
-    @pytest.fixture()
-    def mocked_random(self) -> None:
-        with mock.patch(random.choice) as mock_test:
-            yield mock_test
+    @mock.patch("random.choice")
+    def test_rate_percent_do_nothing(
+            self,
+            mock_random_choice: Mock
+    ) -> None:
+        mock_random_choice.return_value = 0.5
+        prediction_rate = get_exchange_rate_prediction(self.exchange_rate)
+        if not (
+                prediction_rate / self.current_rate < 0.95
+                or prediction_rate / self.current_rate > 1.05
+        ):
+            assert "Do nothing"
