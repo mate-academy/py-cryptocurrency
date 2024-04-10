@@ -22,5 +22,6 @@ def test_should_return_proper_respond(
         current_rate: float,
         future_rate: float,
         expected_result: str) -> None:
+
     mock_get_exchange_rate_prediction.return_value = future_rate
     assert cryptocurrency_action(current_rate) == expected_result
