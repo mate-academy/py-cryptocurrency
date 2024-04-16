@@ -19,4 +19,3 @@ def test_main(mocked_exchange_rate_prediction: None,
               ) -> None:
     mocked_exchange_rate_prediction.return_value = prediction
     assert cryptocurrency_action(current_rate) == expected
-
