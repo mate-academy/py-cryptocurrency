@@ -1,7 +1,7 @@
 import pytest
 from unittest import mock
 
-from app.main import get_exchange_rate_prediction, cryptocurrency_action
+from app.main import cryptocurrency_action
 
 
 @pytest.mark.parametrize(
