@@ -7,12 +7,12 @@ from app.main import cryptocurrency_action, get_exchange_rate_prediction
 
 class TestGetExchangeRatePrediction:
     @pytest.fixture()
-    def mock_random(self):
+    def mock_random(self) -> object:
         with mock.patch("random.random") as mock_random:
             yield mock_random
 
     @pytest.fixture()
-    def mock_choice(self):
+    def mock_choice(self) -> object:
         with mock.patch("random.choice") as mock_choice:
             yield mock_choice
 
@@ -35,18 +35,52 @@ class TestCryptoCurrencyAction:
         with mock.patch("app.main.get_exchange_rate_prediction") as mock_rate:
             yield mock_rate
 
-    def test_buy_more(self, mock_rate_prediction):
-        mock_rate_prediction.return_value = 106
-        assert cryptocurrency_action(100) == "Buy more cryptocurrency"
+    @pytest.mark.parametrize(
+        "init_prediction, init_rate, error_str",
+        [
+            pytest.param(
+                106,
+                100,
+                "Buy more cryptocurrency",
+                id="test_buy_more"
 
-    def test_sell_all(self, mock_rate_prediction):
-        mock_rate_prediction.return_value = 100
-        assert cryptocurrency_action(106) == "Sell all your cryptocurrency"
+            ),
+            pytest.param(
+                105,
+                100,
+                "Do nothing",
+                id="test_not_buy_more"
 
-    def test_do_nothing(self, mock_rate_prediction):
-        mock_rate_prediction.return_value = 100
-        assert cryptocurrency_action(100) == "Do nothing"
+            ),
+            pytest.param(
+                100,
+                106,
+                "Sell all your cryptocurrency",
+                id="def test_sell_all"
 
+            ),
+            pytest.param(
+                95,
+                100,
+                "Do nothing",
+                id="test_no_sell_all"
 
+            ),
+            pytest.param(
+                100,
+                100,
+                "Do nothing",
+                id="test_do_nothing"
+
+            ),
+        ]
+    )
+    def test_crypto_currency_action(self,
+                                    init_prediction,
+                                    init_rate,
+                                    error_str,
+                                    mock_rate_prediction):
+        mock_rate_prediction.return_value = init_prediction
+        assert cryptocurrency_action(init_rate) == error_str
 
 
