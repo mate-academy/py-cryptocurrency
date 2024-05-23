@@ -16,13 +16,21 @@ class TestGetExchangeRatePrediction:
         with mock.patch("random.choice") as mock_choice:
             yield mock_choice
 
-    def test_get_exchange_rate_prediction_increase(self, mock_random, mock_choice):
+    def test_get_exchange_rate_prediction_increase(
+            self,
+            mock_random: object,
+            mock_choice: object
+    ) -> None:
         mock_random.return_value = 0.1
         mock_choice.return_value = "increase"
 
         assert get_exchange_rate_prediction(10) == 100
 
-    def test_get_exchange_rate_prediction_decrease(self, mock_random, mock_choice):
+    def test_get_exchange_rate_prediction_decrease(
+            self,
+            mock_random: object,
+            mock_choice: object
+    ) -> None:
         mock_random.return_value = 0.1
         mock_choice.return_value = "decrease"
 
@@ -31,7 +39,7 @@ class TestGetExchangeRatePrediction:
 
 class TestCryptoCurrencyAction:
     @pytest.fixture()
-    def mock_rate_prediction(self):
+    def mock_rate_prediction(self) -> object:
         with mock.patch("app.main.get_exchange_rate_prediction") as mock_rate:
             yield mock_rate
 
@@ -56,7 +64,7 @@ class TestCryptoCurrencyAction:
                 100,
                 106,
                 "Sell all your cryptocurrency",
-                id="def test_sell_all"
+                id="test_sell_all"
 
             ),
             pytest.param(
@@ -76,11 +84,9 @@ class TestCryptoCurrencyAction:
         ]
     )
     def test_crypto_currency_action(self,
-                                    init_prediction,
-                                    init_rate,
-                                    error_str,
-                                    mock_rate_prediction):
+                                    init_prediction: int,
+                                    init_rate: int,
+                                    error_str: str,
+                                    mock_rate_prediction: object) -> None:
         mock_rate_prediction.return_value = init_prediction
         assert cryptocurrency_action(init_rate) == error_str
-
-
