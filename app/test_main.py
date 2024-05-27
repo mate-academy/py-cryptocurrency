@@ -1,14 +1,18 @@
 from unittest import mock
+
 import pytest
+
 from app.main import cryptocurrency_action
 
 
 @pytest.mark.parametrize(
     "current,predicted,expected",
     [
-        (10, 16, "Buy more cryptocurrency"),
-        (10, 8, "Sell all your cryptocurrency"),
-        (10, 10, "Do nothing")
+        (100, 106, "Buy more cryptocurrency"),
+        (100, 94, "Sell all your cryptocurrency"),
+        (100, 100, "Do nothing"),
+        (100, 95, "Do nothing"),
+        (100, 105, "Do nothing")
     ]
 )
 def test_cryptocurrency_action(
