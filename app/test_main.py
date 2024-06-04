@@ -38,7 +38,19 @@ class TestCryptocurrencyAction(unittest.TestCase):
 
         mock_get_exchange_rate_prediction.return_value = 1.05
 
-        current_rate = 0.95
+        current_rate = 1.0
+        result = cryptocurrency_action(current_rate)
+
+        self.assertEqual(result, "Do nothing")
+
+    @patch("app.main.get_exchange_rate_prediction")
+    def test_do_nothing_min(
+            self,
+            mock_get_exchange_rate_prediction: float | int
+    ) -> None:
+        mock_get_exchange_rate_prediction.return_value = 0.95
+
+        current_rate = 1.0
         result = cryptocurrency_action(current_rate)
 
         self.assertEqual(result, "Do nothing")
