@@ -6,9 +6,10 @@ from unittest import mock
 @pytest.mark.parametrize(
     "random_choice,result",
     [
-        (1.05, "Buy more cryptocurrency"),
-        (0.95, "Sell all your cryptocurrency"),
-        (1.01, "Do nothing")
+        (1.06, "Buy more cryptocurrency"),
+        (0.94, "Sell all your cryptocurrency"),
+        (1.05, "Do nothing"),
+        (0.95, "Do nothing")
     ]
 )
 def test_cryptocurrency_action(
