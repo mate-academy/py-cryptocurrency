@@ -18,6 +18,10 @@ import pytest
         pytest.param(
             49.99, 52, "Do nothing",
             id="Close values"
+        ),
+        pytest.param(
+            52, 49.99, "Do nothing",
+            id="Close values"
         )
     ]
 )
