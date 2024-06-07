@@ -22,6 +22,7 @@ import pytest
     ]
 )
 @mock.patch("app.main.get_exchange_rate_prediction")
+@mock.patch("app.main.cryptocurrency_action")
 def test_cryptocurrency_action(
         mocked_rate_prediction: mock.MagicMock,
         prediction_rate: int | float,
