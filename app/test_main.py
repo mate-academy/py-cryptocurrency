@@ -5,18 +5,20 @@ from app.main import cryptocurrency_action
 
 
 @pytest.mark.parametrize(
-    "current,predicted,expected",
+    "current_rate,rate_prediction,expected_action",
     [
-        (1.1, 2.8, "Buy more cryptocurrency"),
-        (3.6, 2.1, "Sell all your cryptocurrency"),
-        (2.1, 2.2, "Do nothing"),
+        (1, 2.2, "Buy more cryptocurrency"),
+        (2.2, 1, "Sell all your cryptocurrency"),
+        (2.2, 2.1, "Do nothing"),
+        (2.1, 2, "Do nothing"),
     ]
 )
+@mock.patch("app.main.get_exchange_rate_prediction")
 def test_cryptocurrency_action(
-        current: int | float,
-        predicted: int | float,
-        expected: str
+        mocked_exchange_rate_prediction: mock.MagicMock,
+        current_rate: int | float,
+        rate_prediction: int | float,
+        expected_action: str
 ) -> None:
-    with mock.patch("app.main.get_exchange_rate_prediction") as exchange:
-        exchange.return_value = predicted
-        assert cryptocurrency_action(current) == expected
+    mocked_exchange_rate_prediction.return_value = rate_prediction
+    assert cryptocurrency_action(current_rate) == expected_action
