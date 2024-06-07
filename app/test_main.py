@@ -20,8 +20,8 @@ def test_cryptocurrency_action_sell(mock_get_exchange_rate_prediction: object
 
 
 @patch("app.main.get_exchange_rate_prediction")
-def test_cryptocurrency_action_do_nothing(mock_get_exchange_rate_prediction: object
-                                          ) -> None:
+def test_cryptocurrency_action_do_nothing(
+        mock_get_exchange_rate_prediction: object) -> None:
     current_rate = 100
     mock_get_exchange_rate_prediction.return_value = 95
     assert cryptocurrency_action(current_rate) == "Do nothing"
