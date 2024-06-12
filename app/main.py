@@ -17,4 +17,3 @@ def cryptocurrency_action(current_rate: Union[int, float]) -> str:
         print(prediction_rate / current_rate)
         return "Sell all your cryptocurrency"
     return "Do nothing"
-
