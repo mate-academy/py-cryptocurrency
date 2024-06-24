@@ -22,4 +22,4 @@ def test_cryptocurrency_action(
         result: str
 ) -> None:
     mocked_get_exchange_rate_prediction.return_value = cost_change
-    assert  cryptocurrency_action(current_rate) == result
+    assert cryptocurrency_action(current_rate) == result
