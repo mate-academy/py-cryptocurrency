@@ -16,7 +16,7 @@ from typing import Any
 @mock.patch("app.main.get_exchange_rate_prediction")
 def test_cryptocurrency_action(
         get_exchange_rate_prediction: Any,
-        possible_rate: int|float,
+        possible_rate: int,
         expected_result: str
 ) -> None:
     get_exchange_rate_prediction.return_value = possible_rate
