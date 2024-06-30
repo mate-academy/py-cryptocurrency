@@ -16,8 +16,10 @@ class TestCryptocurrencyAction(unittest.TestCase):
         (1, 0.95, "Do nothing")
     ])
     @mock.patch("app.main.get_exchange_rate_prediction")
-    def test_cryptocurrency_action(self, current_rate, predicted_rate, expected_action,
-                                   mock_get_exchange_rate_prediction):
+    def test_cryptocurrency_action(self, current_rate: None,
+                                   predicted_rate: None, expected_action: None,
+                                   mock_get_exchange_rate_prediction:
+                                   None) -> None:
         mock_get_exchange_rate_prediction.return_value = predicted_rate
 
         result = app.main.cryptocurrency_action(current_rate)
