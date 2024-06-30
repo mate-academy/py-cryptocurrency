@@ -1,21 +1,28 @@
+import unittest
 from unittest import mock
-
-from app.main import cryptocurrency_action
-
-
-def test_crypto_currency_good_prediction() -> None:
-    with mock.patch("app.main.get_exchange_ra"
-                    "te_prediction", return_value=5):
-        assert cryptocurrency_action(2) == "Buy more cryptocurrency"
+from parameterized import parameterized
+import app.main
 
 
-def test_crypto_currency_bad_prediction() -> None:
-    with mock.patch("app.main.get_exchange_"
-                    "rate_prediction", return_value=5):
-        assert cryptocurrency_action(6) == "Sell all your cryptocurrency"
+class TestCryptocurrencyAction(unittest.TestCase):
+
+    @parameterized.expand([
+        (100, 106, "Buy more cryptocurrency"),
+        (100, 94, "Sell all your cryptocurrency"),
+        (100, 100, "Do nothing"),
+        (100, 104.99, "Do nothing"),
+        (100, 95.01, "Do nothing"),
+        (3, 3.15, "Do nothing"),
+        (1, 0.95, "Do nothing")
+    ])
+    @mock.patch("app.main.get_exchange_rate_prediction")
+    def test_cryptocurrency_action(self, current_rate, predicted_rate, expected_action,
+                                   mock_get_exchange_rate_prediction):
+        mock_get_exchange_rate_prediction.return_value = predicted_rate
+
+        result = app.main.cryptocurrency_action(current_rate)
+        self.assertEqual(result, expected_action)
 
 
-def test_crypto_currency_do_nothing() -> None:
-    with mock.patch("app.main.get_exchange"
-                    "_rate_prediction", return_value=5):
-        assert cryptocurrency_action(5) == "Do nothing"
+if __name__ == "__main__":
+    unittest.main()
