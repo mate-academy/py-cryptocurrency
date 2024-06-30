@@ -1,8 +1,8 @@
-from decimal import Decimal
+from unittest import mock
 
 import pytest
-from unittest import mock
-from app.main import cryptocurrency_action, get_exchange_rate_prediction
+
+from app.main import cryptocurrency_action
 
 
 @pytest.mark.parametrize(
@@ -15,16 +15,20 @@ from app.main import cryptocurrency_action, get_exchange_rate_prediction
         (3.15, 3, "Do nothing"),
     ]
 )
-def test_cryptocurrency_action_works_ok(predicted: int, current: int, expected: str):
-    with mock.patch("app.main.get_exchange_rate_prediction", return_value=predicted):
+def test_cryptocurrency_action_works_ok(predicted: int,
+                                        current: int, expected: str) -> None:
+    with mock.patch("app.main.get_exchange_ra"
+                    "te_prediction", return_value=predicted):
         assert cryptocurrency_action(current) == expected
 
 
-def test_rate_95_percent_do_nothing():
-    with mock.patch("app.main.get_exchange_rate_prediction", return_value=0.95):
+def test_rate_95_percent_do_nothing() -> None:
+    with mock.patch("app.main.get_exchange_r"
+                    "ate_prediction", return_value=0.95):
         assert cryptocurrency_action(1) == "Do nothing"
 
 
-def test_rate_105_percent_do_nothing():
-    with mock.patch("app.main.get_exchange_rate_prediction", return_value=1.05):
+def test_rate_105_percent_do_nothing() -> None:
+    with mock.patch("app.main.get_exchange_rate"
+                    "_prediction", return_value=1.05):
         assert cryptocurrency_action(1) == "Do nothing"
