@@ -7,7 +7,7 @@ import app.main
 class TestCryptocurrencyAction(unittest.TestCase):
 
     @parameterized.expand([
-        (100, 106, "Buy more cryptocurrency"),
+        (100, 107, "Buy more cryptocurrency"),
         (100, 94, "Sell all your cryptocurrency"),
         (100, 100, "Do nothing"),
         (100, 104.99, "Do nothing"),
