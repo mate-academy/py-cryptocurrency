@@ -13,11 +13,11 @@ from app.main import cryptocurrency_action
             id="Should return buy more then predicted increase more than 5%"
         ),
         pytest.param(
-            0.97, "Do nothing",
+            0.95, "Do nothing",
             id="Should return do nothing if difference is less than 5%"
         ),
         pytest.param(
-            1.0, "Do nothing",
+            1.05, "Do nothing",
             id="Should return do nothing if difference is less than 5%"
         ),
         pytest.param(
