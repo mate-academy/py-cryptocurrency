@@ -6,12 +6,13 @@ from app.main import cryptocurrency_action
 @pytest.mark.parametrize(
     "current_rate,prediction,rate",
     [
-        (100, 104, "Do nothing"),
+        (100, 100, "Do nothing"),
         (100, 96, "Do nothing"),
-        (100, 106, "Buy more cryptocurrency"),
-        (100, 105.9, "Buy more cryptocurrency"),
-        (100, 94, "Sell all your cryptocurrency"),
-        (100, 94.5, "Sell all your cryptocurrency"),
+        (10000, 9500, "Do nothing"),
+        (1000, 900, "Sell all your cryptocurrency"),
+        (100, 103, "Do nothing"),
+        (10, 10.5, "Do nothing"),
+        (1000, 1120, "Buy more cryptocurrency"),
     ]
 )
 def test_cryptocurrency_action(
