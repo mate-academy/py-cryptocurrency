@@ -19,7 +19,7 @@ def test_sell_crypto(
 
 
 @patch("app.main.get_exchange_rate_prediction")
-def test_do_nothing(
+def test_do_nothing_low(
 mock_get_rate: MagicMock
 ) -> None:
     mock_get_rate.return_value = 95.0
@@ -27,7 +27,7 @@ mock_get_rate: MagicMock
 
 
 @patch("app.main.get_exchange_rate_prediction")
-def test_do_nothing(
+def test_do_nothing_high(
 mock_get_rate: MagicMock
 ) -> None:
     mock_get_rate.return_value = 105.0
