@@ -24,6 +24,7 @@ def test_advice_do_nothing(
     mocked_get_exchange_rate_prediction.return_value = 1.05 * 85
     assert cryptocurrency_action(85) == "Do nothing"
 
+
 @mock.patch("app.main.random.choice")
 @mock.patch("app.main.get_exchange_rate_prediction")
 def test_do_nothing(
