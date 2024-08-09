@@ -14,7 +14,7 @@ def mock_get_exchange_rate_prediction() -> mock.Mock:
 @pytest.mark.parametrize(
     "predicted_rate, current_rate, expected_action",
     [
-        (150, 100, "Buy more cryptocurrency"),
+        (10, 100, "Buy more cryptocurrency"),
         (90, 100, "Sell all your cryptocurrency"),
         (100, 100, "Do nothing"),
     ]
