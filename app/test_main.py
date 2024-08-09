@@ -15,7 +15,7 @@ def test_sell_all_cryptocurrency() -> None:
     prediction_rate = 94
     with mock.patch("app.main.get_exchange_rate_prediction",
                     return_value=prediction_rate):
-        assert cryptocurrency_action(current_rate) == prediction_rate
+        assert cryptocurrency_action(current_rate) == "Sell all your cryptocurrency"
 
 
 def test_do_nothing() -> None:
@@ -23,4 +23,4 @@ def test_do_nothing() -> None:
     prediction_rate = 96
     with mock.patch("app.main.get_exchange_rate_prediction",
                     return_value=prediction_rate):
-        assert cryptocurrency_action(current_rate) == prediction_rate
+        assert cryptocurrency_action(current_rate) == "Do nothing"
