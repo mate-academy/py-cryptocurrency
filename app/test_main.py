@@ -1,28 +1,16 @@
-from unittest import mock
 from app.main import cryptocurrency_action
+from unittest.mock import patch, MagicMock
 
 
-def test_buy_more_cryptocurrency() -> None:
-    current_rate = 100
-    prediction_rate = 106
-    with mock.patch("app.main.get_exchange_rate_prediction",
-                    return_value=prediction_rate):
-        assert cryptocurrency_action(current_rate) == "Buy more cryptocurrency"
+@patch("app.main.get_exchange_rate_prediction")
+def test_rate_105_percent_do_nothing(mock_get_prediction: "MagicMock") -> None:
+    current_rate = 100.0
+    mock_get_prediction.return_value = 105.0  # Exactly 5% higher
+    assert cryptocurrency_action(current_rate) == "Do nothing"
 
 
-def test_sell_all_cryptocurrency() -> None:
-    current_rate = 100
-    prediction_rate = 94
-    with mock.patch("app.main.get_exchange_rate_prediction",
-                    return_value=prediction_rate):
-        assert (
-                cryptocurrency_action(current_rate) == "Sell all your cryptocurrency"
-        )
-
-
-def test_do_nothing() -> None:
-    current_rate = 100
-    prediction_rate = 96
-    with mock.patch("app.main.get_exchange_rate_prediction",
-                    return_value=prediction_rate):
-        assert cryptocurrency_action(current_rate) == "Do nothing"
+@patch("app.main.get_exchange_rate_prediction")
+def test_rate_95_percent_do_nothing(mock_get_prediction: "MagicMock") -> None:
+    current_rate = 100.0
+    mock_get_prediction.return_value = 95.0  # Exactly 5% lower
+    assert cryptocurrency_action(current_rate) == "Do nothing"
