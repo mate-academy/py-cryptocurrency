@@ -16,10 +16,11 @@ from app.main import cryptocurrency_action
     ]
 )
 @patch("app.main.get_exchange_rate_prediction")
-def test_can_exchange_rate_prediction(mock_get_exchange_rate: MagicMock,
+def test_can_exchange_rate_prediction(mock_get_exchange_rate_prediction:
+MagicMock,
                                       current_rate: float,
                                       predicted_rate: float,
                                       expected_action: str) -> None:
-    mock_get_exchange_rate.return_value = predicted_rate
+    mock_get_exchange_rate_prediction.return_value = predicted_rate
     result: str = cryptocurrency_action(current_rate)
     assert result == expected_action
