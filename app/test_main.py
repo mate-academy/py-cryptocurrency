@@ -6,7 +6,7 @@ from app.main import cryptocurrency_action
 
 
 @pytest.mark.parametrize(
-    "current_rate: float, predicted_rate: float, expected_action: str",
+    "predicted_rate: float, current_rate: float, expected_action: str",
     [
         (100.0, 106.0, "Buy more cryptocurrency"),
         (100.0, 94.0, "Sell all your cryptocurrency"),
