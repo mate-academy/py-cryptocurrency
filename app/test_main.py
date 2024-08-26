@@ -1,4 +1,3 @@
-import pytest
 from app import main
 from _pytest.monkeypatch import MonkeyPatch
 
