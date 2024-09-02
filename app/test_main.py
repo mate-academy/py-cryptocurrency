@@ -14,7 +14,11 @@ from app.main import cryptocurrency_action
         (100, 95, "Do nothing"),
     ],
 )
-def test_cryptocurrency_action(current_rate, predicted_rate, expected):
+def test_cryptocurrency_action(
+    current_rate: int | float,
+    predicted_rate: int | float,
+    expected: int | float
+) -> None:
     with mock.patch(
         "app.main.get_exchange_rate_prediction", return_value=predicted_rate
     ):
