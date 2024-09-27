@@ -10,8 +10,10 @@ from app.main import cryptocurrency_action
     [
         (100, 106, "Buy more cryptocurrency"),
         (100, 94, "Sell all your cryptocurrency"),
-        (100, 102, "Do nothing"),  # Різниця менше 5%
-        (100, 99.5, "Do nothing"),  # Різниця менше 5%
+        (100, 105, "Do nothing"),
+        (100, 95, "Do nothing"),
+        (100, 102, "Do nothing"),
+        (100, 99.5, "Do nothing"),
     ]
 )
 @patch("app.main.get_exchange_rate_prediction")
