@@ -1,26 +1,36 @@
-import pytest
-from unittest.mock import patch
+from unittest import mock
+
 from app.main import cryptocurrency_action
 
 
-class TestCryptocurrencyAction:
+def test_should_by_more() -> None:
+    with (mock.patch("app.main.get_exchange_rate_prediction")
+          as mocked_get_exchange_rate_prediction):
+        mocked_get_exchange_rate_prediction.return_value = 54600.48
 
-    @pytest.mark.parametrize(
-        "current_rate, predicted_rate, expected_action",
-        [
-            (1.00, 1.10, "Buy more cryptocurrency"),
-            (1.00, 0.90, "Sell all your cryptocurrency"),
-            (1.00, 1.02, "Do nothing"),
-        ]
-    )
-    @patch('app.main.get_exchange_rate_prediction')
-    def test_cryptocurrency_action(
-            self,
-            mock_get_prediction,
-            current_rate: float,
-            predicted_rate: float,
-            expected_action: str
-    ) -> None:
-        mock_get_prediction.return_value = predicted_rate
+        assert cryptocurrency_action(51938.40) == "Buy more cryptocurrency"
 
-        assert cryptocurrency_action(current_rate) == expected_action
+
+def test_should_sell() -> None:
+    with (mock.patch("app.main.get_exchange_rate_prediction")
+          as mocked_get_exchange_rate_prediction):
+        mocked_get_exchange_rate_prediction.return_value = 41550.72
+
+        assert cryptocurrency_action(51938.40) == ("Sell "
+                                                   "all your cryptocurrency")
+
+
+def test_should_do_nothing_with_rate_105() -> None:
+    with (mock.patch("app.main.get_exchange_rate_prediction")
+          as mocked_get_exchange_rate_prediction):
+        mocked_get_exchange_rate_prediction.return_value = 54535.32
+
+        assert cryptocurrency_action(51938.40) == "Do nothing"
+
+
+def test_should_do_nothing_with_rate_95() -> None:
+    with (mock.patch("app.main.get_exchange_rate_prediction")
+          as mocked_get_exchange_rate_prediction):
+        mocked_get_exchange_rate_prediction.return_value = 1.9
+
+        assert cryptocurrency_action(2) == "Do nothing"
