@@ -1,5 +1,5 @@
 import pytest
-from unittest.mock import patch
+from unittest.mock import patch, MagicMock
 from app.main import cryptocurrency_action
 
 
@@ -16,7 +16,7 @@ from app.main import cryptocurrency_action
 )
 @patch("app.main.get_exchange_rate_prediction")
 def test_cryptocurrency_action(
-    mock_get_exchange_rate_prediction: callable,
+    mock_get_exchange_rate_prediction: MagicMock,
     mock_prediction_rate: float,
     current_rate: float,
     expected: str
