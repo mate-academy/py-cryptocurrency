@@ -31,7 +31,7 @@ class TestCryptocurrencyAction(unittest.TestCase):
             self,
             mock_get_exchange_rate_prediction: MagicMock
     ) -> None:
-        current_rate = 100.0
+        current_rate = 1.0
         mock_get_exchange_rate_prediction.return_value = 1.02
         action = cryptocurrency_action(current_rate)
         self.assertEqual(action, "Do nothing")
@@ -41,7 +41,7 @@ class TestCryptocurrencyAction(unittest.TestCase):
             self,
             mock_get_exchange_rate_prediction: MagicMock
     ) -> None:
-        current_rate = 100.0
+        current_rate = 1.0
         mock_get_exchange_rate_prediction.return_value = 1.05
         action = cryptocurrency_action(current_rate)
         self.assertEqual(action, "Do nothing")
@@ -51,7 +51,7 @@ class TestCryptocurrencyAction(unittest.TestCase):
             self,
             mock_get_exchange_rate_prediction: MagicMock
     ) -> None:
-        current_rate = 100.0
+        current_rate = 1.0
         mock_get_exchange_rate_prediction.return_value = 0.95
         action = cryptocurrency_action(current_rate)
         self.assertEqual(action, "Do nothing")
