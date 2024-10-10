@@ -14,7 +14,7 @@ class TestCryptocurrencyAction(unittest.TestCase):
         current_rate = 1.0
         mock_get_exchange_rate_prediction.return_value = 1.10
         action = cryptocurrency_action(current_rate)
-        self.assertEquals(action, "Buy more cryptocurrency")
+        self.assertEqual(action, "Buy more cryptocurrency")
 
     @patch("app.main.get_exchange_rate_prediction")
     def test_sell_all_cryptocurrency(
@@ -24,7 +24,7 @@ class TestCryptocurrencyAction(unittest.TestCase):
         current_rate = 1.0
         mock_get_exchange_rate_prediction.return_value = 0.9
         action = cryptocurrency_action(current_rate)
-        self.assertEquals(action, "Sell all your cryptocurrency")
+        self.assertEqual(action, "Sell all your cryptocurrency")
 
     @patch("app.main.get_exchange_rate_prediction")
     def test_do_nothing(
@@ -34,7 +34,7 @@ class TestCryptocurrencyAction(unittest.TestCase):
         current_rate = 100.0
         mock_get_exchange_rate_prediction.return_value = 1.02
         action = cryptocurrency_action(current_rate)
-        self.assertEquals(action, "Do nothing")
+        self.assertEqual(action, "Do nothing")
 
     @patch("app.main.get_exchange_rate_prediction")
     def test_rate_105_percent_do_nothing(
@@ -44,7 +44,7 @@ class TestCryptocurrencyAction(unittest.TestCase):
         current_rate = 100.0
         mock_get_exchange_rate_prediction.return_value = 1.05
         action = cryptocurrency_action(current_rate)
-        self.assertEquals(action, "Do nothing")
+        self.assertEqual(action, "Do nothing")
 
     @patch("app.main.get_exchange_rate_prediction")
     def test_rate_95_percent_do_nothing(
@@ -54,4 +54,4 @@ class TestCryptocurrencyAction(unittest.TestCase):
         current_rate = 100.0
         mock_get_exchange_rate_prediction.return_value = 0.95
         action = cryptocurrency_action(current_rate)
-        self.assertEquals(action, "Do nothing")
+        self.assertEqual(action, "Do nothing")
