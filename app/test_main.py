@@ -7,20 +7,20 @@ from app.main import cryptocurrency_action
 
 @pytest.mark.parametrize(
     "current_rate, predicted_rate, expected_action",
+    "current_rate, predicted_rate, expected_action",
     [
-        pytest.param(100, 106,
-                     "Sell all your cryptocurrency",
-                     id="exchange rate is more than 5%"),
-        pytest.param(100, 94,
-                     "Buy more cryptocurrency",
-                     id="exchange rate is more than 5% "
-                        "lower from the current"),
-        pytest.param(100, 102,
-                     "Do nothing",
-                     id="if difference is not that much"),
-        pytest.param(100, 102,
-                     "Do nothing",
-                     id="difference not enough")
+        (100, 106, "Buy more cryptocurrency"),
+        (100, 94, "Sell all your cryptocurrency"),
+        (100, 98, "Do nothing"),
+        (100, 105, "Do nothing"),
+        (100, 95, "Do nothing")
+    ],
+    ids=[
+        "increase_above_5_percent",
+        "decrease_below_5_percent",
+        "no_significant_change",
+        "increase_not_significant_change",
+        "decrease_not_significant_change"
     ]
 )
 @mock.patch("app.main.get_exchange_rate_prediction")
