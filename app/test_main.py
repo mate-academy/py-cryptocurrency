@@ -1,4 +1,4 @@
-from unittest import mock
+from unittest.mock import patch
 
 import pytest
 
@@ -6,7 +6,6 @@ from app.main import cryptocurrency_action
 
 
 @pytest.mark.parametrize(
-    "current_rate, predicted_rate, expected_action",
     "current_rate, predicted_rate, expected_action",
     [
         (100, 106, "Buy more cryptocurrency"),
@@ -23,9 +22,9 @@ from app.main import cryptocurrency_action
         "decrease_not_significant_change"
     ]
 )
-@mock.patch("app.main.get_exchange_rate_prediction")
+@patch("app.main.get_exchange_rate_prediction")
 def test_cryptocurrency_action(
-    mocked_get_exchange_rate_prediction: mock,
+    mocked_get_exchange_rate_prediction: patch,
     current_rate: float,
     predicted_rate: float,
     expected_action: str
