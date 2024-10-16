@@ -2,7 +2,7 @@ from app.main import cryptocurrency_action
 from unittest import mock
 
 
-CURRENT_RATE = 1.01
+CURRENT_RATE = 1.2
 
 
 def test_cryptocurrency_action_buy_more() -> None:
@@ -28,5 +28,5 @@ def test_cryptocurrency_action_do_nothing() -> None:
     with mock.patch(
         "app.main.get_exchange_rate_prediction"
     ) as mocked_prediction:
-        mocked_prediction.return_value = 1.01
+        mocked_prediction.return_value = 0.9
         assert cryptocurrency_action(CURRENT_RATE) == "Do nothing"
