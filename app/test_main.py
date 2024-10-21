@@ -5,7 +5,7 @@ from app.main import cryptocurrency_action
 @patch("app.main.get_exchange_rate_prediction")
 def test_buy_more(mock_get_prediction: Mock) -> None:
     current_rate = 100
-    mock_get_prediction.return_value = 106
+    mock_get_prediction.return_value = 105
     res = cryptocurrency_action(current_rate)
     assert res == "Buy more cryptocurrency"
 
@@ -13,7 +13,7 @@ def test_buy_more(mock_get_prediction: Mock) -> None:
 @patch("app.main.get_exchange_rate_prediction")
 def test_sell_all(mock_get_prediction: Mock) -> None:
     current_rate = 100
-    mock_get_prediction.return_value = 92
+    mock_get_prediction.return_value = 95
     res = cryptocurrency_action(current_rate)
     assert res == "Sell all your cryptocurrency"
 
