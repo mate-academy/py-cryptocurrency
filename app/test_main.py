@@ -21,7 +21,7 @@ def test_get_exchange_rate_prediction(
         mock.patch("app.main.get_exchange_rate_prediction")
         as mocked_get_exchange_rate_prediction
     ):
-        # mocked_get_exchange_rate_prediction.return_value = current_rate
+        mocked_get_exchange_rate_prediction.return_value = current_rate
         assert cryptocurrency_action(current_rate) == expected_result
         mocked_get_exchange_rate_prediction.assert_called_once_with(
             current_rate
