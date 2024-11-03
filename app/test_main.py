@@ -10,5 +10,4 @@ def test_get_exchange_rate_prediction(
 ) -> None:
     mocked_get_exchange_rate_prediction.return_value = 10.0
     cryptocurrency_action(5.5)
-    mocked_get_exchange_rate_prediction.assert_called_once()
-    pass
+    mocked_get_exchange_rate_prediction.assert_called_once_with(5.5)
