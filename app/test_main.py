@@ -1,44 +1,24 @@
 import pytest
+from unittest import mock
+from typing import Union
 from app.main import cryptocurrency_action
 
 
-def mock_get_exchange_rate_prediction(current_rate: float) -> callable:
-    def mock() -> float:
-        return current_rate
-    return mock
+@pytest.mark.parametrize(
+    "current_rate, prediction_rate, expected_result",
+    [
+        (1.0, 1.06, "Buy more cryptocurrency"),
+        (1.06, 1.0, "Sell all your cryptocurrency"),
+        (1.06, 1.06, "Do nothing"),
+        (1.0, 0.95, "Do nothing")
+    ]
+)
+def test_buy_cryptocurrency(current_rate: Union[int, float],
+                            prediction_rate: Union[int, float],
+                            expected_result: str) -> None:
 
-
-def test_buy_more_cryptocurrency(monkeypatch: pytest.MonkeyPatch
-                                 ) -> None:
-    current_rate = 100
-    monkeypatch.setattr("app.get_exchange_rate_prediction",
-                        mock_get_exchange_rate_prediction(current_rate))
-    result = cryptocurrency_action(current_rate)
-    assert result == "Buy more cryptocurrency"
-
-
-def test_buy_sell_cryptocurrency(monkeypatch: pytest.MonkeyPatch
-                                 ) -> None:
-    current_rate = 100
-    monkeypatch.setattr("app.get_exchange_rate_prediction",
-                        mock_get_exchange_rate_prediction(current_rate))
-    result = cryptocurrency_action(current_rate)
-    assert result == "Sell all your cryptocurrency"
-
-
-def test_buy_difference_cryptocurrency1(monkeypatch: pytest.MonkeyPatch
-                                        ) -> None:
-    current_rate = 100
-    monkeypatch.setattr("app.get_exchange_rate_prediction",
-                        mock_get_exchange_rate_prediction(current_rate))
-    result = cryptocurrency_action(current_rate)
-    assert result == "Do nothing"
-
-
-def test_buy_difference_cryptocurrency2(monkeypatch: pytest.MonkeyPatch
-                                        ) -> None:
-    current_rate = 100
-    monkeypatch.setattr("app.get_exchange_rate_prediction",
-                        mock_get_exchange_rate_prediction(current_rate))
-    result = cryptocurrency_action(current_rate)
-    assert result == "Do nothing"
+    with (mock.patch("app.main_get_exchange_rate_prediction")
+          as mock_exchange_rate):
+        mock_exchange_rate.return_value = prediction_rate
+        result = cryptocurrency_action(current_rate)
+        assert result == expected_result
