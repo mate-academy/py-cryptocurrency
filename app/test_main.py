@@ -1,5 +1,5 @@
 import pytest
-from app.main import get_exchange_rate_prediction, cryptocurrency_action
+from app.main import cryptocurrency_action
 
 
 def mock_get_exchange_rate_prediction(current_rate: float) -> callable:
