@@ -1,6 +1,5 @@
 import unittest
 from unittest.mock import patch, MagicMock
-
 from app.main import cryptocurrency_action
 
 
@@ -14,7 +13,6 @@ class TestCryptocurrencyAction(unittest.TestCase):
         current_rate = 100
         result = cryptocurrency_action(current_rate)
         self.assertEqual(result, "Buy more cryptocurrency")
-
 
     @patch("app.main.get_exchange_rate_prediction")
     def test_sell_all_cryptocurrency(
