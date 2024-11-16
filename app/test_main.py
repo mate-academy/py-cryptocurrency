@@ -22,4 +22,3 @@ def test_buy_cryptocurrency(current_rate: Union[int, float],
         mock_get_exchange_rate.return_value = prediction_rate
         result = cryptocurrency_action(current_rate)
         assert result == expected_result
-
