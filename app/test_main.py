@@ -1,29 +1,28 @@
-import pytest
-from unittest.mock import patch
+from unittest import mock
 from app.main import cryptocurrency_action
 
 
-@pytest.mark.parametrize(
-    "current_rate, predicted_rate, expected",
-    [
-        (100, 106, "Buy more cryptocurrency"),
-        (100, 94, "Sell all your cryptocurrency"),
-        (100, 104, "Do nothing"),
-        (100, 96, "Do nothing"),
-        (100, 100, "Do nothing"),
-    ]
-)
-@patch("app.main.get_exchange_rate_prediction")
-def test_cryptocurrency_action(
-    mock_prediction: patch,
-    current_rate: float,
-    predicted_rate: float,
-    expected: str
-) -> None:
-    mock_prediction.return_value = predicted_rate
+def test_rate_105_percent_do_nothing() -> None:
+    with mock.patch("app.main.get_exchange_rate_prediction", return_value=105):
+        assert cryptocurrency_action(100) == "Do nothing", (
+            "You should not buy cryptocurrency when "
+            "prediction_rate / current_rate == 1.05"
+        )
 
-    result = cryptocurrency_action(current_rate)
-    assert result == expected, (
-        f"Помилка при перевірці current_rate={current_rate}, "
-        f"predicted_rate={predicted_rate}, отримано {result}"
-    )
+
+def test_rate_95_percent_do_nothing() -> None:
+    with mock.patch("app.main.get_exchange_rate_prediction", return_value=95):
+        assert cryptocurrency_action(100) == "Do nothing", (
+            "You should not sell cryptocurrency when "
+            "prediction_rate / current_rate == 0.95"
+        )
+
+
+def test_buy_more_cryptocurrency() -> None:
+    with mock.patch("app.main.get_exchange_rate_prediction", return_value=106):
+        assert cryptocurrency_action(100) == "Buy more cryptocurrency"
+
+
+def test_sell_all_cryptocurrency() -> None:
+    with mock.patch("app.main.get_exchange_rate_prediction", return_value=90):
+        assert cryptocurrency_action(100) == "Sell all your cryptocurrency"
