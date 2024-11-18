@@ -20,7 +20,6 @@ def test_cryptocurrency_action(
     predicted_rate: float,
     expected: str
 ) -> None:
-    # Mocking the return value of get_exchange_rate_prediction
     mock_prediction.return_value = predicted_rate
 
     result = cryptocurrency_action(current_rate)
