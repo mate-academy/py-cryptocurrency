@@ -13,7 +13,7 @@ def test_cryptocurrency_action_return_correct_result_buy(
 
 
 @patch("app.main.get_exchange_rate_prediction")
-def test_cryptocurrency_action_return_correct_result_buy(
+def test_cryptocurrency_action_return_correct_result_do_nothing(
         mock_exchange: Callable) -> None:
     mock_exchange.return_value = 105
     current_rate = 100
