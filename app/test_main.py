@@ -7,16 +7,16 @@ from app.main import cryptocurrency_action
 def test_cryptocurrency_action_return_correct_result_buy(
         mock_exchange: Callable) -> None:
     mock_exchange.return_value = 100
-    current_rate = 80
+    current_rate = 95
     result = cryptocurrency_action(current_rate)
     assert result == "Buy more cryptocurrency"
 
 
 @patch("app.main.get_exchange_rate_prediction")
-def test_cryptocurrency_action_return_correct_result_сheck_nothing(
+def test_cryptocurrency_action_return_correct_result_buy(
         mock_exchange: Callable) -> None:
-    mock_exchange.return_value = 100
-    current_rate = 95
+    mock_exchange.return_value = 105
+    current_rate = 100
     result = cryptocurrency_action(current_rate)
     assert result == "Do nothing"
 
