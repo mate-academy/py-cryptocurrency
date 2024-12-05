@@ -16,6 +16,6 @@ from app.main import cryptocurrency_action
 def test_buy_more_crypto(mock_value: int,
                          expected_value: int,
                          message: str) -> None:
-    with patch('app.main.get_exchange_rate_prediction') as rate:
+    with patch("app.main.get_exchange_rate_prediction") as rate:
         rate.return_value = mock_value
         assert cryptocurrency_action(expected_value) == message
