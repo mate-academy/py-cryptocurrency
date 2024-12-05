@@ -21,11 +21,11 @@ def test_buy_more_crypto(mock_value: int,
         assert cryptocurrency_action(expected_value) == message
 
 
-def test_rate_95_percent_do_nothing():
-    with patch('app.main.get_exchange_rate_prediction', return_value=95):  # Пример значения для 0.95 границы
+def test_rate_95_percent_do_nothing() -> None:
+    with patch("app.main.get_exchange_rate_prediction", return_value=95):
         assert cryptocurrency_action(100) == "Do nothing"
 
 
-def test_rate_105_percent_do_nothing():
-    with patch('app.main.get_exchange_rate_prediction', return_value=105):  # Пример значения для 1.05 границы
+def test_rate_105_percent_do_nothing() -> None:
+    with patch("app.main.get_exchange_rate_prediction", return_value=105):
         assert cryptocurrency_action(100) == "Do nothing"
