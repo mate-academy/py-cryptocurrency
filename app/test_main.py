@@ -1,38 +1,27 @@
 import pytest
-from unittest.mock import patch
+from unittest import mock
 from app.main import cryptocurrency_action
 
 
-def test_buy_more_cryptocurrency():
-    with patch('app.main.get_exchange_rate_prediction',
-               return_value=105.0):
-        result = cryptocurrency_action(100.0)
-        assert result == "Buy more cryptocurrency"
+@pytest.mark.parametrize(
+    "current_rate,"
+    "prediction_rate,"
+    "expecting_result",
+    [
+        (1, 1.06, "Buy more cryptocurrency"),
+        (1, 0.94, "Sell all your cryptocurrency"),
+        (1, 1.05, "Do nothing"),
+        (1, 0.95, "Do nothing"),
+        (1, 1, "Do nothing")
+    ]
+)
+@mock.patch("app.main.get_exchange_rate_prediction")
+def test_cryptocurrency_action(
+        mock_get_exchange_rate_prediction: mock.Mock,
+        prediction_rate: int | float,
+        current_rate: int | float,
+        expecting_result: str
+) -> None:
+    mock_get_exchange_rate_prediction.return_value = prediction_rate
 
-
-def test_sell_all_cryptocurrency():
-    with patch('app.main.get_exchange_rate_prediction',
-               return_value=94.0):
-        result = cryptocurrency_action(100.0)
-        assert result == "Sell all your cryptocurrency"
-
-
-def test_do_nothing():
-    with patch('app.main.get_exchange_rate_prediction',
-               return_value=100.0):
-        result = cryptocurrency_action(100.0)
-        assert result == "Do nothing"
-
-
-def test_boundary_buy():
-    with patch('app.main.get_exchange_rate_prediction',
-               return_value=105.0):
-        result = cryptocurrency_action(100.0)
-        assert result == "Do nothing"  # Exactly 5% increase
-
-
-def test_boundary_sell():
-    with patch('app.main.get_exchange_rate_prediction',
-               return_value=95.0):
-        result = cryptocurrency_action(100.0)
-        assert result == "Do nothing"  # Exactly 5% decrease
+    assert cryptocurrency_action(current_rate) == expecting_result
