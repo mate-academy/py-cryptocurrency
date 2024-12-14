@@ -14,6 +14,7 @@ def test_cryptocurrency_action_buy_more(
     result = cryptocurrency_action(current_rate)
     assert result == "Do nothing"
 
+
 @mock.patch("app.main.get_exchange_rate_prediction")
 def test_cryptocurrency_action_sell_all(
         mock_get_exchange_rate_prediction: mock.MagicMock) -> None:
