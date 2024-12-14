@@ -10,6 +10,9 @@ def test_cryptocurrency_action_buy_more(
     result = cryptocurrency_action(current_rate)
     assert result == "Buy more cryptocurrency"
 
+    mock_get_exchange_rate_prediction.return_value = current_rate * 1.05
+    result = cryptocurrency_action(current_rate)
+    assert result == "Do nothing"
 
 @mock.patch("app.main.get_exchange_rate_prediction")
 def test_cryptocurrency_action_sell_all(
@@ -18,6 +21,10 @@ def test_cryptocurrency_action_sell_all(
     mock_get_exchange_rate_prediction.return_value = 84
     result = cryptocurrency_action(current_rate)
     assert result == "Sell all your cryptocurrency"
+
+    mock_get_exchange_rate_prediction.return_value = current_rate * 0.95
+    result = cryptocurrency_action(current_rate)
+    assert result == "Do nothing"
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
