@@ -1,39 +1,38 @@
-from typing import Union
-import pytest
-from unittest.mock import patch
+from unittest import mock
+from typing import Generator
 
+import pytest
 
 from app.main import cryptocurrency_action
 
 
+@pytest.fixture()
+def mocked_exchange_rate_prediction() -> Generator[mock.MagicMock, None, None]:
+    with (mock.patch("app.main.get_exchange_rate_prediction")
+          as mock_rate_prediction):
+        yield mock_rate_prediction
+
+
 @pytest.mark.parametrize(
-    "current_rate, predicted_rate, expected_action",
+    "current_rate,prediction_rate,expected",
     [
-        pytest.param(10, 9, "Sell all your cryptocurrency",
-                     id="should return 'Sell all' for rate less "
-                        "than 0.95 and integer values entered"),
+        pytest.param(1, 1.06, "Buy more cryptocurrency",
+                     id="prediction_rate / current_rate > 1.05"),
         pytest.param(1, 0.94, "Sell all your cryptocurrency",
-                     id="should return 'Sell all' for rate less "
-                        "than 0.95 and float values entered"),
-        pytest.param(1000, 1050, "Do nothing",
-                     id="should return 'Do nothing' for rate less 1.05 and "
-                        "more than 0.95 and integer values entered"),
+                     id="prediction_rate / current_rate < 0.95"),
+        pytest.param(1, 1.02, "Do nothing",
+                     id="0.95 < prediction_rate / current_rate < 1.05"),
+        pytest.param(1, 1.05, "Do nothing",
+                     id="prediction_rate / current_rate == 1.05"),
         pytest.param(1, 0.95, "Do nothing",
-                     id="should return 'Do nothing' for rate less 1.05 and "
-                        "more than 0.95 and float values entered"),
-        pytest.param(100, 106, "Buy more cryptocurrency",
-                     id="should return 'Buy more' for rate > 1.05 "
-                        "and integer values entered"),
-        pytest.param(0.99, 1.06, "Buy more cryptocurrency",
-                     id="should return 'Buy more' for rate > 1.05 "
-                        "and float values entered"),
-    ],
+                     id="prediction_rate / current_rate == 0.95")
+    ]
 )
-@patch("app.main.get_exchange_rate_prediction")
 def test_cryptocurrency_action(
-        mock_get_exchange_rate_prediction: Union[int, float],
-        current_rate: Union[int, float],
-        predicted_rate: Union[int, float],
-        expected_action: str
+        mocked_exchange_rate_prediction: mock.MagicMock,
+        current_rate: int | float,
+        prediction_rate: int | float,
+        expected: str
 ) -> None:
-    mock_get_exchange_rate_prediction.return_value = predicted_rate
+    mocked_exchange_rate_prediction.return_value = prediction_rate
+    assert cryptocurrency_action(current_rate) == expected
