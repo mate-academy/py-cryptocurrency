@@ -1,5 +1,4 @@
 from unittest import mock
-from app.main import get_exchange_rate_prediction
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
