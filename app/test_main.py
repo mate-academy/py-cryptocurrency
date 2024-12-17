@@ -1,24 +1,37 @@
+from app.main import cryptocurrency_action
 from unittest import mock
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_get_exchange_rate_prediction_to_buy_more(
+def test_cryptocurrency_action_buy_more(
         mock_get_exchange_rate_prediction: mock.MagicMock) -> None:
-    mock_get_exchange_rate_prediction.return_value = 150
-    mock_get_exchange_rate_prediction.assert_called_with(50)
-    assert mock_get_exchange_rate_prediction.return_value == 150
-
-
-@mock.patch("app.main.get_exchange_rate_prediction")
-def test_get_exchange_rate_prediction_to_sell(
-        mock_get_exchange_rate_prediction: mock.MagicMock) -> None:
-    mock_get_exchange_rate_prediction.assert_called_with(200)
-    assert mock_get_exchange_rate_prediction.return_value == 80
-
-
-@mock.patch("app.main.get_exchange_rate_prediction")
-def test_get_exchange_rate_prediction_to_do_nothing(
-        mock_get_exchange_rate_prediction: mock.MagicMock) -> None:
+    current_rate = 90
     mock_get_exchange_rate_prediction.return_value = 105
-    mock_get_exchange_rate_prediction.assert_called_with(100)
-    assert mock_get_exchange_rate_prediction.return_value == 105
+    result = cryptocurrency_action(current_rate)
+    assert result == "Buy more cryptocurrency"
+
+    mock_get_exchange_rate_prediction.return_value = current_rate * 1.05
+    result = cryptocurrency_action(current_rate)
+    assert result == "Do nothing"
+
+
+@mock.patch("app.main.get_exchange_rate_prediction")
+def test_cryptocurrency_action_sell_all(
+        mock_get_exchange_rate_prediction: mock.MagicMock) -> None:
+    current_rate = 90
+    mock_get_exchange_rate_prediction.return_value = 84
+    result = cryptocurrency_action(current_rate)
+    assert result == "Sell all your cryptocurrency"
+
+    mock_get_exchange_rate_prediction.return_value = current_rate * 0.95
+    result = cryptocurrency_action(current_rate)
+    assert result == "Do nothing"
+
+
+@mock.patch("app.main.get_exchange_rate_prediction")
+def test_cryptocurrency_action_do_nothing(
+        mock_get_exchange_rate_prediction: mock.MagicMock) -> None:
+    current_rate = 90
+    mock_get_exchange_rate_prediction.return_value = 92
+    result = cryptocurrency_action(current_rate)
+    assert result == "Do nothing"
