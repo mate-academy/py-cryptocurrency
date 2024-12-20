@@ -3,6 +3,8 @@ from unittest import mock
 
 import pytest
 
+from app.main import cryptocurrency_action
+
 
 @pytest.mark.parametrize(
     "current_rate,random_prediction,expected_action",
@@ -20,4 +22,4 @@ def test_cryptocurrency_action(
         expected_action: str
 ) -> None:
     mocked_prediction.return_value = random_prediction
-    assert test_cryptocurrency_action(current_rate) == expected_action
+    assert cryptocurrency_action(current_rate) == expected_action
