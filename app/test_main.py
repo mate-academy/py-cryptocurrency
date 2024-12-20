@@ -4,7 +4,6 @@ import pytest
 from app.main import cryptocurrency_action
 
 
-
 def test_cryptocurrency_action() -> None:
     with (mock.patch("app.main.get_exchange_rate_prediction")
           as mock_get_exchange_rate_prediction):
@@ -26,5 +25,7 @@ def test_cryptocurrency_action() -> None:
 
         mock_get_exchange_rate_prediction.return_value = 95.1
         assert cryptocurrency_action(100) == "Do nothing"
+
+
 if __name__ == "__main__":
     pytest.main()
