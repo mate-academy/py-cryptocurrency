@@ -20,4 +20,4 @@ def test_cryptocurrency_action(
         expected_action: str
 ) -> None:
     mocked_prediction.return_value = random_prediction
-    assert test_cryptocurrency_action == expected_action
+    assert test_cryptocurrency_action(current_rate) == expected_action
