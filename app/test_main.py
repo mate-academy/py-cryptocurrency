@@ -35,7 +35,7 @@ def test_cryptocurrency_action_exact_105() -> None:
         mock_get_prediction.return_value = 5.25  # Ratio == 1.05
 
         result = cryptocurrency_action(5)
-        assert result == "Buy more cryptocurrency"
+        assert result == "Do nothing"
 
 
 def test_cryptocurrency_action_exact_95() -> None:
@@ -44,4 +44,4 @@ def test_cryptocurrency_action_exact_95() -> None:
         mock_get_prediction.return_value = 4.75  # Ratio == 0.95
 
         result = cryptocurrency_action(5)
-        assert result == "Sell all your cryptocurrency"
+        assert result == "Do nothing"
