@@ -6,9 +6,11 @@ from unittest.mock import patch
 @pytest.mark.parametrize(
     "current_rate, prediction_rate, expected",
     [
-        (2, 1, "Buy more cryptocurrency"),
-        (1, 2, "Sell all your cryptocurrency"),
+        (1, 2, "Buy more cryptocurrency"),
+        (2, 1, "Sell all your cryptocurrency"),
         (1, 1, "Do nothing"),
+        (9.5, 10, "Do nothing"),
+        (10.5, 10, "Do nothing"),
     ],
 )
 @patch("app.main.get_exchange_rate_prediction")
