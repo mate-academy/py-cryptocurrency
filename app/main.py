@@ -1,16 +1,17 @@
-def get_exchange_rate_prediction() -> float:
-    pass
+import random
+from typing import Union
 
 
-def cryptocurrency_action(current_rate: float) -> str:
-    predicted_rate = get_exchange_rate_prediction()
-    increase_threshold = current_rate * 1.05
-    decrease_threshold = current_rate * 0.95
+def get_exchange_rate_prediction(exchange_rate: Union[int, float]) -> float:
+    if random.choice(["increase", "decrease"]) == "increase":
+        return round(exchange_rate / random.random(), 2)
+    return round(exchange_rate * random.random(), 2)
 
-    if predicted_rate > increase_threshold:
+
+def cryptocurrency_action(current_rate: Union[int, float]) -> str:
+    prediction_rate = get_exchange_rate_prediction(current_rate)
+    if prediction_rate / current_rate > 1.05:
         return "Buy more cryptocurrency"
-    elif predicted_rate < decrease_threshold:
+    if prediction_rate / current_rate < 0.95:
         return "Sell all your cryptocurrency"
-    else:
-        return "Do nothing"
-
+    return "Do nothing"
