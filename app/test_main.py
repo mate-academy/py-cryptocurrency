@@ -31,5 +31,23 @@ def test_do_nothing(
     assert result == "Do nothing"
 
 
+@patch("app.main.get_exchange_rate_prediction")
+def test_rate_95_percent_do_nothing(
+    mock_get_exchange_rate_prediction: Callable
+) -> None:
+    mock_get_exchange_rate_prediction.return_value = 95
+    result = cryptocurrency_action(100)
+    assert result == "Do nothing"
+
+
+@patch("app.main.get_exchange_rate_prediction")
+def test_rate_105_percent_do_nothing(
+    mock_get_exchange_rate_prediction: Callable
+) -> None:
+    mock_get_exchange_rate_prediction.return_value = 105
+    result = cryptocurrency_action(100)
+    assert result == "Do nothing"
+
+
 if __name__ == "__main__":
     pytest.main()
