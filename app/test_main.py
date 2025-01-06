@@ -26,7 +26,7 @@ def test_cryptocurrency_action(
         mocked_prediction_rate: Union[int, float],
         current_rate: Union[int, float],
         expected_action: str,
-):
+) -> None:
     mock_get_exchange_rate_prediction.return_value = mocked_prediction_rate
     result = cryptocurrency_action(current_rate)
     assert result == expected_action
