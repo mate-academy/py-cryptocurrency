@@ -24,7 +24,7 @@ def test_if_more_than_5_lower_than_the_current(mock_exchange_rate: bool)\
 
 @patch("app.main.get_exchange_rate_prediction")
 def test_if_the_difference_is_small(mock_exchange_rate: bool) -> None:
-    mock_exchange_rate.return_value = 10
+    mock_exchange_rate.return_value = 10.5
 
     result = cryptocurrency_action(10)
     assert result == "Do nothing"
