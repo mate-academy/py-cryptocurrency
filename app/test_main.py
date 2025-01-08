@@ -15,7 +15,6 @@ from app.main import cryptocurrency_action
         (1, 1.05, "Do nothing"),
     ]
 )
-
 @patch("app.main.get_exchange_rate_prediction")
 def test_cryptocurrency_action(
         mocked_get_exchange_rate_prediction: MagicMock,
