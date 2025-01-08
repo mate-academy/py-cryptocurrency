@@ -5,7 +5,7 @@ from app.main import cryptocurrency_action
 
 class TestCryptoCurrencyAction:
     @patch("app.main.get_exchange_rate_prediction")
-    def test_cryptocurrency_action(self, mock_get_rate):
+    def test_cryptocurrency_action(self, mock_get_rate: str) -> None:
         test_cases = [
             (105, "Do nothing"),
             (110, "Buy more cryptocurrency"),
@@ -17,5 +17,6 @@ class TestCryptoCurrencyAction:
             mock_get_rate.return_value = predicted_rate
             result = cryptocurrency_action(100)
             assert result == expected_result
+
 
 pytest.main()
