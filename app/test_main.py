@@ -1,6 +1,7 @@
 from app.main import cryptocurrency_action
 from unittest.mock import patch
 
+
 def test_cryptocurrency_action_high() -> None:
     with patch("app.main.get_exchange_rate_prediction") as mocked_prediction:
         mocked_prediction.return_value = 25
