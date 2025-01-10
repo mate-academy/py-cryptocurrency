@@ -1,7 +1,6 @@
 import pytest
-from pytest_mock import MockerFixture
+from unittest.mock import patch
 from app.main import cryptocurrency_action
-
 
 @pytest.mark.parametrize(
     "current_rate, projected_course, expected_result",
@@ -14,10 +13,10 @@ from app.main import cryptocurrency_action
                      id="nothing"),
     ]
 )
-def test_cryptocurrency_action(mocker: MockerFixture, current_rate: int,
+def test_cryptocurrency_action(current_rate: int,
                                projected_course: int,
                                expected_result: str) -> None:
-    mocker.patch("app.main.get_exchange_rate_prediction",
-                 return_value=projected_course)
-    result = cryptocurrency_action(current_rate)
-    assert result == expected_result
+    with patch("app.main.get_exchange_rate_prediction",
+               return_value=projected_course):
+        result = cryptocurrency_action(current_rate)
+        assert result == expected_result
