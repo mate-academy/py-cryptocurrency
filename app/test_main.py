@@ -1,7 +1,5 @@
-# write your code here
 import pytest
-
-
+from pytest_mock import MockerFixture
 from app.main import cryptocurrency_action
 
 
@@ -16,7 +14,7 @@ from app.main import cryptocurrency_action
                      id="nothing"),
     ]
 )
-def test_cryptocurrency_action(mocker, current_rate: int,
+def test_cryptocurrency_action(mocker: MockerFixture, current_rate: int,
                                projected_course: int,
                                expected_result: str) -> None:
     mocker.patch("app.main.get_exchange_rate_prediction",
