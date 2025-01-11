@@ -12,6 +12,10 @@ from app.main import cryptocurrency_action
                      id="The rate fell by more than 5%"),
         pytest.param(40, 41, "Do nothing",
                      id="nothing"),
+        pytest.param(1, 0.95, "Do nothing",
+                     id="nothing1"),
+        pytest.param(1, 1.05, "Do nothing",
+                     id="nothing2"),
     ]
 )
 def test_cryptocurrency_action(current_rate: int,
