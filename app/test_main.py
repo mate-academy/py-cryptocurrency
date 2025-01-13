@@ -15,13 +15,13 @@ from app.main import cryptocurrency_action
     ]
 )
 def test_cryptocurrency_action(
-    mock_prediction_value: float, current_rate: float, exp_res: str
+    mock_prediction_value: float, current_rate: float, expected_result: str
 ) -> None:
     with patch("app.main.get_exchange_rate_prediction") as mock_prediction:
         mock_prediction.return_value = mock_prediction_value
         result = cryptocurrency_action(current_rate)
-        assert result == exp_res, (
-            f"Expected '{exp_res}' but got '{result}' for "
+        assert result == expected_result, (
+            f"Expected '{expected_result}' but got '{result}' for "
             f"prediction {mock_prediction_value} \
                 and current rate {current_rate}."
         )
