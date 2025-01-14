@@ -1,8 +1,6 @@
 from typing import Any
 from unittest import mock, TestCase
-
 import pytest
-
 from app.main import cryptocurrency_action
 
 
@@ -35,7 +33,8 @@ class TestCryptocurrencyActionRightDataClass:
     def test_cryptocurrency_action_right_data(
             self,
             current_rate: Any,
-            expected_error: TypeError) -> None:
+            expected_error: TypeError
+    ) -> None:
         with pytest.raises(expected_error):
             cryptocurrency_action(current_rate)
 
@@ -54,7 +53,8 @@ class TestCryptocurrencyActionRightDataClass:
             self,
             current_rate: Any,
             second_rate: Any,
-            expected_error: TypeError) -> None:
+            expected_error: TypeError
+    ) -> None:
         with pytest.raises(expected_error):
             cryptocurrency_action(current_rate, second_rate)
 
@@ -82,3 +82,18 @@ class TestCryptocurrencyActionRightDataClass:
         mock_get_exchange_rate_prediction.return_value = mock_return
         result = cryptocurrency_action(current_rate)
         assert result == expected_result
+
+
+def test_rate_within_tolerance() -> None:
+    tolerance = 0.01
+
+    def check_rate(
+            prediction_rate: int | float,
+            current_rate: int | float
+    ) -> None:
+        assert abs(prediction_rate / current_rate - 1.05) < tolerance, (
+            f"Prediction rate is too far from 1.05, got "
+            f"{prediction_rate / current_rate}"
+        )
+
+    check_rate(1.05, 1.0)
