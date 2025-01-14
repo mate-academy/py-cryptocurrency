@@ -2,6 +2,7 @@ from typing import Any
 from unittest import mock, TestCase
 import pytest
 from app.main import cryptocurrency_action
+from pytest import MonkeyPatch
 
 
 class TestCryptocurrencyActionDependenciesClass(TestCase):
@@ -97,3 +98,27 @@ def test_rate_within_tolerance() -> None:
         )
 
     check_rate(1.05, 1.0)
+
+
+def test_rate_95_percent_do_nothing(monkeypatch: MonkeyPatch) -> None:
+    def mock_get_exchange_rate_prediction(current_rate: float) -> float:
+        return current_rate * 0.95
+
+    monkeypatch.setattr("app.main.get_exchange_rate_prediction",
+                        mock_get_exchange_rate_prediction)
+
+    result: str = cryptocurrency_action(1.0)
+
+    assert result == "Do nothing"
+
+
+def test_rate_105_percent_do_nothing(monkeypatch: MonkeyPatch) -> None:
+    def mock_get_exchange_rate_prediction(current_rate: float) -> float:
+        return current_rate * 1.05
+
+    monkeypatch.setattr("app.main.get_exchange_rate_prediction",
+                        mock_get_exchange_rate_prediction)
+
+    result: str = cryptocurrency_action(1.0)
+
+    assert result == "Do nothing"
