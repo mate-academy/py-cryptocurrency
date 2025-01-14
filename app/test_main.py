@@ -9,7 +9,9 @@ from app.main import cryptocurrency_action
 @pytest.mark.parametrize("current_rate, exchange_rate, result", [
     (100, 106, "Buy more cryptocurrency"),
     (100, 94, "Sell all your cryptocurrency"),
+    (100, 105, "Do nothing"),
     (100, 104.5, "Do nothing"),
+    (100, 95, "Do nothing"),
     (100, 95.5, "Do nothing"),
     (100, 100, "Do nothing"),
 ])
