@@ -9,7 +9,7 @@ class TestCryptocurrencyAction(unittest.TestCase):
             self,
             mock_exchange: int | float
     ) -> None:
-        mock_exchange.return_value = 1.05
+        mock_exchange.return_value = 1.06
         current_rate = 1
         self.assertEqual(
             cryptocurrency_action(current_rate), "Buy more cryptocurrency"
@@ -20,7 +20,7 @@ class TestCryptocurrencyAction(unittest.TestCase):
             self,
             mock_exchange: int | float
     ) -> None:
-        mock_exchange.return_value = 0.95
+        mock_exchange.return_value = 0.94
         current_rate = 1
         self.assertEqual(
             cryptocurrency_action(current_rate), "Sell all your cryptocurrency"
