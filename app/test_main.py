@@ -39,5 +39,19 @@ class TestCryptocurrencyAction(unittest.TestCase):
         )
 
 
+    @patch("app.main.get_exchange_rate_prediction")
+    def test_prediction_rate_equals_0_95(self, mock_exchange) -> None:
+        mock_exchange.return_value = 0.95
+        current_rate = 1
+        self.assertEqual(cryptocurrency_action(current_rate), "Do nothing")
+
+
+    @patch("app.main.get_exchange_rate_prediction")
+    def test_prediction_rate_equals_1_05(self, mock_exchange) -> None:
+        mock_exchange.return_value = 1.05
+        current_rate = 1
+        self.assertEqual(cryptocurrency_action(current_rate), "Do nothing")
+
+
 if __name__ == "__main__":
     unittest.main()
