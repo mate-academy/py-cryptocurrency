@@ -1,5 +1,4 @@
 from app.main import cryptocurrency_action
-from app.main import get_exchange_rate_prediction
 import pytest
 from unittest.mock import patch
 
@@ -13,7 +12,6 @@ from unittest.mock import patch
     (200, 210, "Do nothing"),
     (200, 189, "Sell all your cryptocurrency"),
 ])
-
 def test_cryptocurrency_action(current_rate: int,
                                predicted_rate: int,
                                expected: str) -> None:
