@@ -14,7 +14,7 @@ from unittest.mock import patch
 ])
 def test_cryptocurrency_action(current_rate: int,
                                predicted_rate: int,
-                               expected: str
-                               ) -> None:
-    with patch("app.main.get_exchange_rate_prediction", return_value=predicted_rate):
+                               expected: str) -> None:
+    with patch("app.main.get_exchange_rate_prediction",
+               return_value=predicted_rate):
         assert cryptocurrency_action(current_rate) == expected
