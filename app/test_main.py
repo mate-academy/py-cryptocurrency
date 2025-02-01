@@ -2,10 +2,11 @@ from app.main import cryptocurrency_action
 import unittest
 from unittest import mock
 
+
 class TestCryptocurrencyAction(unittest.TestCase):
 
     @mock.patch("app.main.get_exchange_rate_prediction")
-    def test_cryptocurrency_action(self, mock_prediction):
+    def test_cryptocurrency_action(self, mock_prediction: mock.MagicMock) -> None:
         test_cases = [
             (100, 105.01, "Buy more cryptocurrency"),
             (100, 94.99, "Sell all your cryptocurrency"),
@@ -20,3 +21,4 @@ class TestCryptocurrencyAction(unittest.TestCase):
             mock_prediction.return_value = predicted_rate
             result = cryptocurrency_action(current_rate)
             self.assertEqual(result, expected)
+
