@@ -2,7 +2,6 @@ from app.main import cryptocurrency_action
 import unittest
 from unittest import mock
 
-
 class TestCryptocurrencyAction(unittest.TestCase):
 
     @mock.patch("app.main.get_exchange_rate_prediction")
