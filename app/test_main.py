@@ -21,4 +21,3 @@ class TestCryptocurrencyAction(unittest.TestCase):
             mock_prediction.return_value = predicted_rate
             result = cryptocurrency_action(current_rate)
             self.assertEqual(result, expected)
-
