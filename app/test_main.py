@@ -4,7 +4,7 @@ from app.main import cryptocurrency_action
 
 
 @pytest.fixture()
-def mock_get_exchange_rate_prediction():
+def mock_get_exchange_rate_prediction() -> mock.Mock:
     with mock.patch("app.main.get_exchange_rate_prediction") as mock_exchange:
         yield mock_exchange
 
@@ -25,7 +25,7 @@ def test_cryptocurrency_action(current_rate: int,
                                mock_exchange: int,
                                expected: str,
                                mock_get_exchange_rate_prediction: mock.Mock
-) -> None:
+                               ) -> None:
     mock_get_exchange_rate_prediction.return_value = mock_exchange
     result = cryptocurrency_action(current_rate)
     assert result == expected
