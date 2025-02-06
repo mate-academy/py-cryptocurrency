@@ -1,9 +1,6 @@
 name: Test
 
-on:
-  pull_request:
-    branches:
-      - "master"
+on: [push, pull_request_target]
 
 jobs:
   test:
@@ -12,11 +9,14 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
+        with:
+          ref: ${{github.event.pull_request.head.ref}}
+          repository: ${{github.event.pull_request.head.repo.full_name}}
 
-      - name: Set Up Python 3.8
+      - name: Set Up Python 3.10
         uses: actions/setup-python@v2
         with:
-          python-version: 3.8
+          python-version: "3.10"
 
       - name: Install pytest and flake8
         run: |
@@ -24,7 +24,18 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run flake8
-        run: flake8 tests/
-      - name: Run tests
-        run: pytest tests/
-
+        run: flake8 app/
+      - name: Run student tests
+        timeout-minutes: 5
+        run: pytest app/
+      - name: Run mentor tests
+        timeout-minutes: 5
+        run: pytest --numprocesses=auto tests/
+      - uses: mate-academy/auto-approve-action@v2
+        if: ${{ github.event.pull_request && success() }}
+        with:
+          github-token: ${{ github.token }}
+      - uses: mate-academy/auto-reject-action@v2
+        if: ${{ github.event.pull_request && failure() }}
+        with:
+          github-token: ${{ github.token }}
