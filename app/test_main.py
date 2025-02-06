@@ -36,6 +36,5 @@ def test_cryptocurrency_action(
 
 ) -> None:
     mocket_get_exchange_rate_prediction.return_value = prediction
-    print(cryptocurrency_action(current_rate))
     assert cryptocurrency_action(current_rate) == expected_value
     mocket_get_exchange_rate_prediction.assert_called_once_with(current_rate)
