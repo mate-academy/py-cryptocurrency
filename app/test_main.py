@@ -8,9 +8,9 @@ from app.main import cryptocurrency_action
     "current_rate,predicted_rate,expected",
     [
         (1.0, 1.06, "Buy more cryptocurrency"),
-        (1.06, 1.0, "Sell all your cryptocurrency"),
-        (1.06, 1.06, "Do nothing"),
-        (0.95, 1.0, "Do nothing"),
+        (1.0, 0.94, "Sell all your cryptocurrency"),
+        (1.0, 0.95, "Do nothing"),
+        (1.0, 1.05, "Do nothing"),
     ]
 )
 def test_cryptocurrency_action(
