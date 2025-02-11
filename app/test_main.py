@@ -1,21 +1,17 @@
-from unittest.mock import patch
 from app.main import cryptocurrency_action
+from unittest.mock import patch
+import pytest
 
 
-def test_buy_more_cryptocurrency() -> None:
-    with patch("app.main.get_exchange_rate_prediction", return_value=105.1):
-        assert cryptocurrency_action(100) == "Buy more cryptocurrency"
-
-
-def test_sell_all_cryptocurrency() -> None:
-    with patch("app.main.get_exchange_rate_prediction", return_value=94.9):
-        assert cryptocurrency_action(100) == "Sell all your cryptocurrency"
-
-
-def test_do_nothing() -> None:
-    with patch("app.main.get_exchange_rate_prediction", return_value=100):
-        assert cryptocurrency_action(100) == "Do nothing"
-    with patch("app.main.get_exchange_rate_prediction", return_value=104.9):
-        assert cryptocurrency_action(100) == "Do nothing"
-    with patch("app.main.get_exchange_rate_prediction", return_value=95.1):
-        assert cryptocurrency_action(100) == "Do nothing"
+@pytest.mark.parametrize("current_rate, predicted_rate, expected", [
+    (100, 105.1, "Buy more cryptocurrency"),
+    (100, 94.9, "Sell all your cryptocurrency"),
+    (100, 100, "Do nothing"),
+    (100, 104.9, "Do nothing"),
+    (100, 95.1, "Do nothing"),
+    (100, 95.0, "Do nothing"),
+    (100, 105.0, "Do nothing"),
+])
+def test_cryptocurrency_action(current_rate, predicted_rate, expected):
+    with patch("app.main.get_exchange_rate_prediction", return_value=predicted_rate):
+        assert cryptocurrency_action(current_rate) == expected
