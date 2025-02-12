@@ -13,9 +13,9 @@ from .main import cryptocurrency_action
         (0.95, 1, "Do nothing")
     ]
 )
-def test_cryptocurrency_action_return_correct_answer(prediction_rate,
-                                                     current_rate,
-                                                     result) -> None:
+def test_cryptocurrency_action_return_correct_answer(prediction_rate: float,
+                                                     current_rate: float,
+                                                     result: str) -> None:
     with patch("app.main.get_exchange_rate_prediction",
                return_value=prediction_rate):
         assert cryptocurrency_action(current_rate) == result
