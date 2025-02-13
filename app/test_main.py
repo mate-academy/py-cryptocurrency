@@ -4,7 +4,7 @@ from unittest.mock import patch
 
 
 @pytest.fixture
-def mock_predicion_high() -> None:
+def mock_prediction_high() -> None:
     with patch("app.main.get_exchange_rate_prediction", return_value=106):
         yield
 
