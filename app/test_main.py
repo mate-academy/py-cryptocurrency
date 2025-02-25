@@ -1,5 +1,4 @@
 from unittest.mock import patch
-from typing import Union
 
 from app.main import cryptocurrency_action
 
@@ -12,7 +11,7 @@ def test_buy_more() -> None:
         ))
     ):
         assert (
-            cryptocurrency_action(Union[10])
+            cryptocurrency_action(10)
             == "Buy more cryptocurrency"
         )
 
@@ -25,7 +24,7 @@ def test_sell_all() -> None:
         )
     ):
         assert (
-            cryptocurrency_action(Union[10])
+            cryptocurrency_action(10)
             == "Sell all your cryptocurrency"
         )
 
@@ -38,7 +37,7 @@ def test_do_nothing_if_0_95() -> None:
         ))
     ):
         assert (
-            cryptocurrency_action(Union[10])
+            cryptocurrency_action(10)
             == "Do nothing"
         )
 
@@ -51,6 +50,6 @@ def test_do_nothing_if_1_05() -> None:
         ))
     ):
         assert (
-            cryptocurrency_action(Union[10])
+            cryptocurrency_action(10)
             == "Do nothing"
         )
