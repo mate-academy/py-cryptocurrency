@@ -1,25 +1,38 @@
 import pytest
-from unittest.mock import patch
+from unittest import mock
 from app.main import cryptocurrency_action
 
 
 @pytest.mark.parametrize(
-    "current_rate, prediction_rate, expected",
+    "prediction, current_rate, expected_value",
     [
-        (100, 106, "Buy more cryptocurrency"),
-        (100, 94, "Sell all your cryptocurrency"),
-        (100, 104, "Do nothing"),
-        (100, 96, "Do nothing"),
+        (1, 0.9, "Buy more cryptocurrency"),
+        (104.9, 100, "Do nothing"),
+        (90, 100, "Sell all your cryptocurrency"),
+        (200, 205, "Do nothing"),
+        (110, 100.2, "Buy more cryptocurrency"),
+        (95, 100, "Do nothing"),
+        (105, 100, "Do nothing")
+    ],
+    ids=[
+        "tiny value increase: Buy",
+        "change within 5 percent: Do nothing",
+        "decrease more than 5 percent: Sell",
+        "small change within 5 percent: Do nothing",
+        "Increase more than 5 percent: Buy",
+        "do nothing when equal to 0.95 percent",
+        "do nothing when equal to 1.05 percent"
+
     ]
 )
-def test_control_signals_for_buy_and_sell(
+@mock.patch("app.main.get_exchange_rate_prediction")
+def test_cryptocurrency_action(
+        mocket_get_exchange_rate_prediction: mock.Mock,
+        prediction: int | float,
         current_rate: int | float,
-        prediction_rate: int | float,
-        expected: str
+        expected_value: str,
+
 ) -> None:
-    with patch(
-            "app.main.get_exchange_rate_prediction",
-            return_value=prediction_rate
-    ):
-        result = cryptocurrency_action(current_rate)
-        assert result == expected
+    mocket_get_exchange_rate_prediction.return_value = prediction
+    assert cryptocurrency_action(current_rate) == expected_value
+    mocket_get_exchange_rate_prediction.assert_called_once_with(current_rate)
