@@ -1,36 +1,28 @@
-from pytest import fixture, mark
-from unittest.mock import patch, MagicMock
-
+import pytest
+from unittest.mock import patch
 from app.main import cryptocurrency_action
 
-
-@fixture
-def mocked_exchange_rate_prediction() -> None:
-    with patch("app.main.get_exchange_rate_prediction") as exchange_rate:
-        yield exchange_rate
-
-
-@mark.parametrize(
-    "current_rate, rate_prediction, action",
+@pytest.mark.parametrize(
+    "current_rate, predicted_rate, expected_action",
     [
-        (100, 120.00, "Buy more cryptocurrency"),
-        (100, 60.00, "Sell all your cryptocurrency"),
-        (100, 102.00, "Do nothing"),
-        (115.04, 250.09, "Buy more cryptocurrency"),
+        (100, 110, "Buy more cryptocurrency"),
+        (100, 90, "Sell all your cryptocurrency"),
+        (100, 104, "Do nothing"),
+        (100, 96, "Do nothing"),
+        (100, 105, "Do nothing"),
+        (100, 95, "Do nothing"),
     ],
     ids=[
-        "rate increases - buy",
-        "rate drops - sell",
-        "rate increases by 2% - do nothing",
-        "significant rate surge - buy",
+        "increase_10_percent",
+        "decrease_10_percent",
+        "increase_4_percent",
+        "decrease_4_percent",
+        "increase_5_percent",
+        "decrease_5_percent",
     ]
 )
-def test_cryptocurrency_action(
-        mocked_exchange_rate_prediction: MagicMock,
-        rate_prediction: int | float,
-        current_rate: int | float,
-        action: str,
-) -> None:
-    mocked_exchange_rate_prediction.return_value = rate_prediction
+def test_cryptocurrency_action(current_rate, predicted_rate, expected_action):
+    with patch("app.main.get_exchange_rate_prediction", return_value=predicted_rate):
+        action = cryptocurrency_action(current_rate)
 
-    assert cryptocurrency_action(current_rate) == action
+    assert action == expected_action
