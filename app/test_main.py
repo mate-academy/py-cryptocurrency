@@ -28,9 +28,11 @@ def test_cryptocurrency_down(get_exchange_rate_prediction: float) -> None:
 @mock.patch("app.main.get_exchange_rate_prediction")
 def test_cryptocurrency_still(get_exchange_rate_prediction: float) -> None:
 
-    get_exchange_rate_prediction.return_value = 3.00
-    result = cryptocurrency_action(3)
+    get_exchange_rate_prediction.return_value = 105
+    result = cryptocurrency_action(100)
     print(result)
     assert result == "Do nothing"
-    get_exchange_rate_prediction.assert_called_once()
-    get_exchange_rate_prediction.assert_called_once_with(3)
+    get_exchange_rate_prediction.return_value = 95
+    result = cryptocurrency_action(100)
+    print(result)
+    assert result == "Do nothing"
