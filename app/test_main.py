@@ -4,7 +4,7 @@ from app.main import cryptocurrency_action
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_cryptocurrency_action_up(get_exchange_rate_prediction: float) -> None:
+def test_cryptocurrency_up(get_exchange_rate_prediction: float) -> None:
 
     get_exchange_rate_prediction.return_value = 1.1
     result = cryptocurrency_action(1)
@@ -15,7 +15,7 @@ def test_cryptocurrency_action_up(get_exchange_rate_prediction: float) -> None:
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_cryptocurrency_action_down(get_exchange_rate_prediction: float) -> None:
+def test_cryptocurrency_down(get_exchange_rate_prediction: float) -> None:
 
     get_exchange_rate_prediction.return_value = 1.88
     result = cryptocurrency_action(2)
@@ -26,7 +26,7 @@ def test_cryptocurrency_action_down(get_exchange_rate_prediction: float) -> None
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_cryptocurrency_action_still(get_exchange_rate_prediction: float) -> None:
+def test_cryptocurrency_still(get_exchange_rate_prediction: float) -> None:
 
     get_exchange_rate_prediction.return_value = 3.00
     result = cryptocurrency_action(3)
