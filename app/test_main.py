@@ -1,9 +1,9 @@
-from unittest.mock import patch
 from app import main
+from unittest.mock import patch
 
 
-@patch('app.main.get_exchange_rate_prediction')
-def test_rate_95_percent_do_nothing(mock_get_prediction: patch):
+@patch("app.main.get_exchange_rate_prediction")
+def test_rate_95_percent_do_nothing(mock_get_prediction: patch) -> None:
     mock_get_prediction.return_value = 95
     current_rate = 100
 
@@ -12,8 +12,8 @@ def test_rate_95_percent_do_nothing(mock_get_prediction: patch):
     assert result == "Do nothing", f"Expected \"Do nothing\" but got {result}"
 
 
-@patch('app.main.get_exchange_rate_prediction')
-def test_rate_105_percent_do_nothing(mock_get_prediction: patch):
+@patch("app.main.get_exchange_rate_prediction")
+def test_rate_105_percent_do_nothing(mock_get_prediction: patch) -> None:
     mock_get_prediction.return_value = 105
     current_rate = 100
 
