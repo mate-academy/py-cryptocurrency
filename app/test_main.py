@@ -1,5 +1,4 @@
 from pytest_mock import MockerFixture
-
 from app.main import cryptocurrency_action
 
 
