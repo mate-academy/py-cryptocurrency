@@ -10,10 +10,13 @@ from app.main import cryptocurrency_action
         (100, 94, "Sell all your cryptocurrency"),  # Курс уменьшится на 6%
         (100, 104, "Do nothing"),  # Курс увеличится на 4%
         (100, 96, "Do nothing"),  # Курс уменьшится на 4%
+        (100, 95, "Do nothing"),  # Ровно 95% - не продаём
     ],
 )
 def test_cryptocurrency_action(
-    current_rate: int, predicted_rate: float, expected_action: str
+    current_rate: int,
+    predicted_rate: float,
+    expected_action: str,
 ) -> None:
     """
     Тестирует функцию cryptocurrency_action на различных сценариях.
@@ -22,5 +25,8 @@ def test_cryptocurrency_action(
     :param predicted_rate: Прогнозируемый курс криптовалюты.
     :param expected_action: Ожидаемое действие.
     """
-    with patch("app.main.get_exchange_rate_prediction", return_value=predicted_rate):
+    with patch(
+        "app.main.get_exchange_rate_prediction",
+        return_value=predicted_rate,
+    ):
         assert cryptocurrency_action(current_rate) == expected_action
