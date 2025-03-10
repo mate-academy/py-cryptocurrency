@@ -12,6 +12,8 @@ from app.main import cryptocurrency_action
         (100, 91.0, "Sell all your cryptocurrency"),
         (100, 103.0, "Do nothing"),
         (100, 97.5, "Do nothing"),
+        (100, 105.0, "Do nothing"),
+        (100, 95.0, "Do nothing")
     ]
 )
 def test_cryptocurrency_action(
