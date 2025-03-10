@@ -1,3 +1,5 @@
+from unittest.mock import MagicMock
+
 import pytest
 from app.main import cryptocurrency_action
 from unittest import mock
@@ -13,7 +15,13 @@ from unittest import mock
         (100, 95, "Do nothing"),
     ])
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_cryptocurrency_action(mock_get, current_rate, predicted_rate, expected) -> None:
+def test_cryptocurrency_action(
+        mock_get: MagicMock,
+        current_rate: int,
+        predicted_rate: int,
+        expected: str
+) -> None:
+
     mock_get.return_value = predicted_rate
     result = cryptocurrency_action(current_rate)
     assert result == expected
