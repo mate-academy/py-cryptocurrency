@@ -1,33 +1,14 @@
-import random
-from typing import Union
+def get_exchange_rate_prediction() -> float:
+    return 100.0  # Пример значения
 
 
-def get_exchange_rate_prediction(exchange_rate: Union[int, float]) -> float:
-    """
-    Прогнозирует курс криптовалюты на основе текущего курса.
+def cryptocurrency_action(current_rate: float) -> str:
+    predicted_rate = get_exchange_rate_prediction()
+    difference = (predicted_rate - current_rate) / current_rate * 100
 
-    :param exchange_rate: Текущий курс криптовалюты.
-    :return: Прогнозируемый курс криптовалюты.
-    """
-    if random.choice(["increase", "decrease"]) == "increase":
-        return round(exchange_rate / random.uniform(1.01, 2.0), 2)
-
-    return round(exchange_rate * random.uniform(0.5, 0.99), 2)
-
-
-def cryptocurrency_action(current_rate: Union[int, float]) -> str:
-    """
-    Определяет действие по отношению к криптовалюте на основе текущего курса и прогноза.
-
-    :param current_rate: Текущий курс криптовалюты.
-    :return: Рекомендация (купить, продать, ничего не делать).
-    """
-    prediction_rate = get_exchange_rate_prediction(current_rate)
-
-    if prediction_rate / current_rate > 1.05:
+    if difference > 5:
         return "Buy more cryptocurrency"
-
-    if prediction_rate / current_rate < 0.95:  # Теперь строго меньше
+    elif difference < -5:
         return "Sell all your cryptocurrency"
-
-    return "Do nothing"
+    else:
+        return "Do nothing"
