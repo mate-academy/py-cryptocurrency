@@ -3,7 +3,7 @@ from app.main import cryptocurrency_action
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_cryptocurrency_action(mock_prediction):
+def test_cryptocurrency_action(mock_prediction: int) -> None:
     mock_prediction.return_value = 106
     assert cryptocurrency_action(100) == "Buy more cryptocurrency"
 
