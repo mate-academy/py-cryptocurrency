@@ -1,24 +1,25 @@
-import unittest
-
-from unittest.mock import patch
+import pytest
+from unittest import mock
 
 from app.main import cryptocurrency_action
 
 
-class TestCryptocurrencyAction(unittest.TestCase):
-
-    @patch("app.main.get_exchange_rate_prediction")
-    def test_buy_more_cryptocurrency(self, mock_prediction: int) -> None:
-        mock_prediction.return_value = 110
-        self.assertEqual(cryptocurrency_action(100), "Buy more cryptocurrency")
-
-    @patch("app.main.get_exchange_rate_prediction")
-    def test_sell_all_cryptocurrency(self, mock_prediction: int) -> None:
-        mock_prediction.return_value = 90
-        self.assertEqual(cryptocurrency_action(100),
-                         "Sell all your cryptocurrency")
-
-    @patch("app.main.get_exchange_rate_prediction")
-    def test_do_nothing(self, mock_prediction: int) -> None:
-        mock_prediction.return_value = 104
-        self.assertEqual(cryptocurrency_action(100), "Do nothing")
+@pytest.mark.parametrize(
+    "current_rate,prediction_rate,advice",
+    [
+        (1.0, 1.15, "Buy more cryptocurrency"),
+        (1.0, 0.69, "Sell all your cryptocurrency"),
+        (1.0, 1.01, "Do nothing"),
+        (1.0, 1.05, "Do nothing"),
+        (1.0, 0.95, "Do nothing")
+    ]
+)
+@mock.patch("app.main.get_exchange_rate_prediction")
+def test_cryptocurrency_prediction(
+    mocked_get_exchange_rate_prediction: mock,
+    current_rate: int | float,
+    prediction_rate: int | float,
+    advice: str
+) -> None:
+    mocked_get_exchange_rate_prediction.return_value = prediction_rate
+    assert cryptocurrency_action(current_rate) == advice
