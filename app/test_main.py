@@ -5,8 +5,8 @@ from app.main import cryptocurrency_action
 
 @mock.patch("app.main.get_exchange_rate_prediction")
 def test_cryptocurrency_action_is_calling_get_exchange_rate_prediction(
-    get_exchange_rate_prediction: mock.MagicMock) -> None:
-    
+        get_exchange_rate_prediction: mock.MagicMock) -> None:
+
     get_exchange_rate_prediction.return_value = 1
     cryptocurrency_action(1)
     get_exchange_rate_prediction.assert_called_once_with(1)
@@ -39,9 +39,9 @@ def test_cryptocurrency_action_is_calling_get_exchange_rate_prediction(
 )
 @mock.patch("app.main.get_exchange_rate_prediction")
 def test_cryptocurrency_action_rate_changes(
-    get_exchange_rate_prediction: mock.MagicMock,
-    exchange_rate_prediction: float | int,
-    result: str) -> None:
+        get_exchange_rate_prediction: mock.MagicMock,
+        exchange_rate_prediction: float | int,
+        result: str) -> None:
 
     get_exchange_rate_prediction.return_value = exchange_rate_prediction
     assert cryptocurrency_action(1) == result
