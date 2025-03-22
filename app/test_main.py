@@ -16,8 +16,9 @@ def test_check_when_we_buy_more(
     assert current_prediction == "Buy more cryptocurrency"
 
 
-@mock.patch("app.main.get_exchange_rate_prediction", return_value=3999)
-def test_check_when_we_sell(mocked_rate_prediction: mock.MagicMock) -> None:
+@mock.patch("app.main.get_exchange_rate_prediction", return_value=3760)  # 3760 / 4000 = 0.94 (< 0.95)
+def test_check_when_we_sell(
+        mocked_rate_prediction: mock.MagicMock) -> None:
     current_prediction = cryptocurrency_action(4000)
     assert current_prediction == "Sell all your cryptocurrency"
 
