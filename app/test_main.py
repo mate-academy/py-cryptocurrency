@@ -9,7 +9,7 @@ from app.main import cryptocurrency_action
         (0.5, 0.5, "Do nothing"),
         (1, 1, "Do nothing"),
         (0.2, 0.19, "Do nothing"),
-        (0.2, 0.21, "Do nothing"),
+        (1, 1.05, "Do nothing"),
         (0.4, 0.7, "Buy more cryptocurrency"),
         (0.25, 0.6, "Buy more cryptocurrency"),
         (0.8, 0.3, "Sell all your cryptocurrency"),
