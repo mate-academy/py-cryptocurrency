@@ -28,5 +28,6 @@ def test_exact_5_percent_changes() -> None:
         assert cryptocurrency_action(100) == "Do nothing"
 
     with patch("app.main.get_exchange_rate_prediction") as mock_pred:
+
         mock_pred.return_value = 95
         assert cryptocurrency_action(100) == "Do nothing"
