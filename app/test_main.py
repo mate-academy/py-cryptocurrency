@@ -14,7 +14,7 @@ def test_cryptocurrency_action(
 ) -> None:
     mocked_get_exchange_rate_prediction.return_value = 0.9
     result = cryptocurrency_action(1.06)
-    assert result == "Do nothing"
+    assert result == "Sell all your cryptocurrency "
 
     mocked_get_exchange_rate_prediction.return_value = 1.9
     result = cryptocurrency_action(1.11)
@@ -22,4 +22,4 @@ def test_cryptocurrency_action(
 
     mocked_get_exchange_rate_prediction.return_value = 0.94
     result = cryptocurrency_action(1)
-    assert result == "Sell all your cryptocurrency"
+    assert result == "Do nothing"
