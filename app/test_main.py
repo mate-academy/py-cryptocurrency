@@ -23,7 +23,7 @@ def test_cryptocurrency_action(
         mock_get_exchange_rate_prediction: mock.Mock
 ) -> None:
     mock_get_exchange_rate_prediction.return_value = predicted_rate
-    assert cryptocurrency_action(current_rate) == expected_action, (
-        f"Expected action: '{expected_action}', "
-        f"but got: '{cryptocurrency_action(current_rate)}'"
+    result = cryptocurrency_action(current_rate)
+    assert result == expected_action, (
+        f"Expected action: '{expected_action}', but got: '{result}'"
     )
