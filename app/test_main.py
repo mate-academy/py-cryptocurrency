@@ -12,6 +12,9 @@ from app.main import cryptocurrency_action
     (95.0, "Do nothing"),
     (105.0, "Do nothing"),
 ])
-def test_cryptocurrency_action(mock_prediction, expected):
-    with patch("app.main.get_exchange_rate_prediction", return_value=mock_prediction):
+def test_cryptocurrency_action(mock_prediction: float, expected: str) -> None:
+    with patch(
+        "app.main.get_exchange_rate_prediction",
+        return_value=mock_prediction
+    ):
         assert cryptocurrency_action(100) == expected
