@@ -1,14 +1,35 @@
-from app.main import cryptocurrency_action
 from unittest import mock
 
-
-@mock.patch("app.main.get_exchange_rate_prediction")
-def test_rate_95_do_nothing(mock_prediction: any) -> None:
-    mock_prediction.return_value = 15000
-    assert cryptocurrency_action(14285.71) == "Do nothing"
+from app.main import cryptocurrency_action
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_rate_105_do_nothing(mock_prediction: any) -> None:
-    mock_prediction.return_value = 200
-    assert cryptocurrency_action(190.48) == "Do nothing"
+def test_should_return_buy_when_rate_higher_5(
+        mock_rate_prediction: mock
+) -> None:
+    mock_rate_prediction.return_value = 120
+    assert cryptocurrency_action(100) == "Buy more cryptocurrency"
+
+
+@mock.patch("app.main.get_exchange_rate_prediction")
+def test_should_return_sell_all_when_rate_higher_5(
+        mock_rate_prediction: mock
+) -> None:
+    mock_rate_prediction.return_value = 90
+    assert cryptocurrency_action(100) == "Sell all your cryptocurrency"
+
+
+@mock.patch("app.main.get_exchange_rate_prediction")
+def test_should_do_nothing_when_rate_more(
+        mock_rate_prediction: mock
+) -> None:
+    mock_rate_prediction.return_value = 95
+    assert cryptocurrency_action(100) == "Do nothing"
+
+
+@mock.patch("app.main.get_exchange_rate_prediction")
+def test_should_do_nothing_when_rate_less(
+        mock_rate_prediction: mock
+) -> None:
+    mock_rate_prediction.return_value = 105
+    assert cryptocurrency_action(100) == "Do nothing"
