@@ -27,7 +27,7 @@ def test_do_nothing(mock_prediction: int) -> None:
 
 
 @patch("app.main.get_exchange_rate_prediction")
-def test_exactly_5_percent_increase(mock_prediction) -> None:
+def test_exactly_5_percent_increase(mock_prediction: int) -> None:
     current_rate = 100.0
     mock_prediction.return_value = 105.0  # exactly 5% increase
     result = cryptocurrency_action(current_rate)
@@ -35,7 +35,7 @@ def test_exactly_5_percent_increase(mock_prediction) -> None:
 
 
 @patch("app.main.get_exchange_rate_prediction")
-def test_exactly_5_percent_decrease(mock_prediction) -> None:
+def test_exactly_5_percent_decrease(mock_prediction: int) -> None:
     current_rate = 100.0
     mock_prediction.return_value = 95.0  # exactly 5% decrease
     result = cryptocurrency_action(current_rate)
