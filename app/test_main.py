@@ -17,9 +17,9 @@ from app.main import cryptocurrency_action
     ])
 @mock.patch("app.main.get_exchange_rate_prediction")
 def test_cryptocurrency_action(mock_rate: object,
-                             current_rate: int | float,
-                             rate_prediction_return: int | float,
-                             result: str) -> None:
+                               current_rate: int | float,
+                               rate_prediction_return: int | float,
+                               result: str) -> None:
     mock_rate.return_value = rate_prediction_return
 
     assert cryptocurrency_action(current_rate) == result
