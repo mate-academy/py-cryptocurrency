@@ -13,7 +13,8 @@ from app.main import cryptocurrency_action
         pytest.param(105, 100, "Do nothing",
                      id="test_rate_105_percent_do_nothing"),
         pytest.param(95, 105, "Sell all your cryptocurrency",
-                     id="test_rate_more_105_percent_sell_all_your_cryptocurrency"),
+                     id="test_rate_more_105_percent_"
+                        "sell_all_your_cryptocurrency"),
         pytest.param(105, 95, "Buy more cryptocurrency",
                      id="test_rate_less_95_percent_buy_more_cryptocurrency"),
     ])
