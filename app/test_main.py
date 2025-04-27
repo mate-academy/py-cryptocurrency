@@ -6,13 +6,15 @@ from app.main import cryptocurrency_action
 
 
 @pytest.mark.parametrize(
-    "current_rate,rate_prediction_return,result",
+    "rate_prediction_return,current_rate,result",
     [
-        pytest.param(105, 95, "Do nothing",
+        pytest.param(95, 100, "Do nothing",
                      id="test_rate_95_percent_do_nothing"),
-        pytest.param(8, 7, "Sell all your cryptocurrency",
-                     id="test_rate_105_percent_sell_all_your_cryptocurrency"),
-        pytest.param(7.7, 8.2, "Buy more cryptocurrency",
+        pytest.param(105, 100, "Do nothing",
+                     id="test_rate_105_percent_do_nothing"),
+        pytest.param(95, 105, "Sell all your cryptocurrency",
+                     id="test_rate_more_105_percent_sell_all_your_cryptocurrency"),
+        pytest.param(105, 95, "Buy more cryptocurrency",
                      id="test_rate_less_95_percent_buy_more_cryptocurrency"),
     ])
 @mock.patch("app.main.get_exchange_rate_prediction")
