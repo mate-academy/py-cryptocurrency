@@ -4,6 +4,7 @@ from unittest.mock import patch, Mock
 
 from unittest import mock
 
+
 # Сильне зростання: prediction / current_rate > 1.05
 @patch("app.main.random.random", return_value=0.1)
 @patch("app.main.random.choice", return_value="increase")
