@@ -8,7 +8,9 @@ from app.main import cryptocurrency_action
     [
         (110, "Buy more cryptocurrency"),
         (80, "Sell all your cryptocurrency"),
-        (99, "Do nothing")
+        (99, "Do nothing"),
+        (100, "Do nothing"),
+        (95, "Do nothing")
     ]
 )
 def test_cryptocurrency_action(mocked_value: int,
