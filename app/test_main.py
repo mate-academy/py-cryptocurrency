@@ -24,7 +24,7 @@ def test_sell_all(mock_choice: Mock, mock_random: Mock) -> None:
 
 
 # Невелика зміна курсу: між -5% і +5%
-@patch("app.main.random.random", return_value=0.95)
+@patch("app.main.random.random", return_value=0.951)
 @patch("app.main.random.choice", return_value="decrease")
 def test_rate_95_percent_do_nothing(mock_choice: Mock,
                                     mock_random: Mock) -> None:
@@ -34,7 +34,7 @@ def test_rate_95_percent_do_nothing(mock_choice: Mock,
     mock_random.assert_called_once()
 
 
-@patch("app.main.random.random", return_value=1.05)
+@patch("app.main.random.random", return_value=1.049)
 @patch("app.main.random.choice", return_value="increase")
 def test_rate_105_percent_do_nothing(mock_choice: Mock,
                                      mock_random: Mock) -> None:
