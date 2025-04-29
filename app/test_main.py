@@ -2,6 +2,7 @@ import pytest
 from unittest.mock import patch, Mock
 from app.main import cryptocurrency_action
 
+
 @pytest.mark.parametrize(
     "random_value, choice_value, expected_result",
     [
