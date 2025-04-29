@@ -4,12 +4,12 @@ from app.main import cryptocurrency_action
 
 
 @pytest.mark.parametrize(
-    "random_value, choice_value, expected_result",
+    "choice_value, random_value, expected_result",
     [
-        (0.2, "increase", "Buy more cryptocurrency"),       # > 1.05
-        (0.9, "decrease", "Sell all your cryptocurrency"),  # < 0.95
-        (0.951, "decrease", "Do nothing"),                  # ≈ 0.95
-        (1.049, "increase", "Do nothing"),                  # ≈ 1.05
+        ("increase", 0.8, "Buy more cryptocurrency"),
+        ("decrease", 0.9, "Sell all your cryptocurrency"),
+        ("decrease", 0.95, "Do nothing"),
+        ("increase", 0.9523809523809523, "Do nothing"),
     ]
 )
 @patch("app.main.random.random")
