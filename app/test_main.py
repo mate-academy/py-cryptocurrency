@@ -1,44 +1,28 @@
+import pytest
+from unittest.mock import patch, Mock
 from app.main import cryptocurrency_action
 
-from unittest.mock import patch, Mock
+@pytest.mark.parametrize(
+    "random_value, choice_value, expected_result",
+    [
+        (0.2, "increase", "Buy more cryptocurrency"),       # > 1.05
+        (0.9, "decrease", "Sell all your cryptocurrency"),  # < 0.95
+        (0.951, "decrease", "Do nothing"),                  # ≈ 0.95
+        (1.049, "increase", "Do nothing"),                  # ≈ 1.05
+    ]
+)
+@patch("app.main.random.random")
+@patch("app.main.random.choice")
+def test_cryptocurrency_action(mock_choice: Mock,
+                               mock_random: Mock,
+                               random_value: float,
+                               choice_value: str,
+                               expected_result: str) -> None:
+    mock_random.return_value = random_value
+    mock_choice.return_value = choice_value
 
-
-# Сильне зростання: prediction / current_rate > 1.05
-@patch("app.main.random.random", return_value=0.2)
-@patch("app.main.random.choice", return_value="increase")
-def test_buy_more(mock_choice: Mock, mock_random: Mock) -> None:
     result = cryptocurrency_action(100)
-    assert result == "Buy more cryptocurrency"
-    mock_choice.assert_called_once()
-    mock_random.assert_called_once()
+    assert result == expected_result
 
-
-# Сильне падіння: prediction / current_rate < 0.95
-@patch("app.main.random.random", return_value=0.9)
-@patch("app.main.random.choice", return_value="decrease")
-def test_sell_all(mock_choice: Mock, mock_random: Mock) -> None:
-    result = cryptocurrency_action(100)
-    assert result == "Sell all your cryptocurrency"
-    mock_choice.assert_called_once()
-    mock_random.assert_called_once()
-
-
-# Невелика зміна курсу: між -5% і +5%
-@patch("app.main.random.random", return_value=0.951)
-@patch("app.main.random.choice", return_value="decrease")
-def test_rate_95_percent_do_nothing(mock_choice: Mock,
-                                    mock_random: Mock) -> None:
-    result = cryptocurrency_action(100)
-    assert result == "Do nothing"
-    mock_choice.assert_called_once()
-    mock_random.assert_called_once()
-
-
-@patch("app.main.random.random", return_value=1.049)
-@patch("app.main.random.choice", return_value="increase")
-def test_rate_105_percent_do_nothing(mock_choice: Mock,
-                                     mock_random: Mock) -> None:
-    result = cryptocurrency_action(100)
-    assert result == "Do nothing"
     mock_choice.assert_called_once()
     mock_random.assert_called_once()
