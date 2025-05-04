@@ -30,3 +30,23 @@ def test_should_do_nothing_if_rate_change_is_within_5_percent(
     mock_predict.return_value = 102
     result = cryptocurrency_action(current_rate)
     assert result == "Do nothing"
+
+
+@patch("app.main.get_exchange_rate_prediction")
+def test_should_do_nothing_when_increase_is_exactly_5_percent(
+    mock_predict: MagicMock
+) -> None:
+    current_rate = 100
+    mock_predict.return_value = 105.0
+    result = cryptocurrency_action(current_rate)
+    assert result == "Do nothing"
+
+
+@patch("app.main.get_exchange_rate_prediction")
+def test_should_do_nothing_when_decrease_is_exactly_5_percent(
+    mock_predict: MagicMock
+) -> None:
+    current_rate = 100
+    mock_predict.return_value = 95.0
+    result = cryptocurrency_action(current_rate)
+    assert result == "Do nothing"
