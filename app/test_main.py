@@ -31,7 +31,8 @@ def test_cryptocurrency_action_exactly_5_percent_up(mocked_rate: int) -> None:
 
 
 @patch("app.main.get_exchange_rate_prediction")
-def test_cryptocurrency_action_exactly_5_percent_down(mocked_rate: int) -> None:
+def test_cryptocurrency_action_exactly_5_percent_down(
+        mocked_rate: int) -> None:
     mocked_rate.return_value = 95
     result = cryptocurrency_action(100)
     assert result == "Do nothing"
