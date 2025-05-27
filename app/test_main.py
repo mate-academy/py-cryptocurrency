@@ -15,4 +15,5 @@ def test_cryptocurrency_action(
     mock_get_exchange_rate_prediction.return_value = 0.95
     assert cryptocurrency_action(current_rate) == "Do nothing"
     mock_get_exchange_rate_prediction.return_value = 0.94
-    assert cryptocurrency_action(current_rate) == "Sell all your cryptocurrency"
+    assert (cryptocurrency_action(current_rate) ==
+            "Sell all your cryptocurrency")
