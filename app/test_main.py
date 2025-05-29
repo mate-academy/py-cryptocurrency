@@ -1,3 +1,5 @@
+from _pytest.monkeypatch import MonkeyPatch
+from app import main
 from unittest.mock import patch
 from app.main import cryptocurrency_action
 
@@ -24,3 +26,19 @@ def test_do_nothing_when_small_increase(mock_prediction: int) -> None:
 def test_do_nothing_when_small_decrease(mock_prediction: int) -> None:
     mock_prediction.return_value = 95.1  # > 95% of 100
     assert cryptocurrency_action(100) == "Do nothing"
+
+
+def test_prediction_rate_equal_105(monkeypatch: MonkeyPatch) -> None:
+    monkeypatch.setattr(
+        main, "get_exchange_rate_prediction",
+        lambda rate: round(rate * 1.05, 2)
+    )
+    assert main.cryptocurrency_action(100) == "Do nothing"
+
+
+def test_prediction_rate_equal_095(monkeypatch: MonkeyPatch) -> None:
+    monkeypatch.setattr(
+        main, "get_exchange_rate_prediction",
+        lambda rate: round(rate * 0.95, 2)
+    )
+    assert main.cryptocurrency_action(100) == "Do nothing"
