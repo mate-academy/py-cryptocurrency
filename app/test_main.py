@@ -1,5 +1,7 @@
 import pytest
 from app.main import cryptocurrency_action
+from _pytest.monkeypatch import MonkeyPatch
+
 
 @pytest.mark.parametrize(
     "current_rate, predicted_rate, expected_action",
@@ -13,11 +15,16 @@ from app.main import cryptocurrency_action
         (100, 100, "Do nothing"),
     ]
 )
-def test_cryptocurrency_action(monkeypatch, current_rate, predicted_rate, expected_action):
-    def fake_prediction(rate):
+def test_cryptocurrency_action(
+        monkeypatch: MonkeyPatch,
+        current_rate: float,
+        predicted_rate: float,
+        expected_action: str
+) -> None:
+    def fake_prediction(rate: float) -> float:
         return predicted_rate
 
-    monkeypatch.setattr("app.main.get_exchange_rate_prediction", fake_prediction)
+    monkeypatch.setattr(
+        "app.main.get_exchange_rate_prediction", fake_prediction)
 
     assert cryptocurrency_action(current_rate) == expected_action
-
