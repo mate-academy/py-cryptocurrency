@@ -9,6 +9,7 @@ from app.main import cryptocurrency_action
     "exchange_rate, current_rate, expected",
     [
         (0.95, 1, "Do nothing"),
+        (1.05, 1, "Do nothing"),
         (1.06, 1, "Buy more cryptocurrency"),
         (0.90, 1, "Sell all your cryptocurrency")
     ]
