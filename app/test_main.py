@@ -38,4 +38,4 @@ def test_do_nothing_on_exactly_5_percent_decrease() -> None:
             "app.main.get_exchange_rate_prediction",
             return_value=95.0
     ):
-        assert cryptocurrency_action(100) == "Do nothing"
+        assert cryptocurrency_action(100) == "Do nothing"  #
