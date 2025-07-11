@@ -6,15 +6,17 @@ from app.main import cryptocurrency_action
     "current_rate, mock_rate, result",
     [
         (100, 106, "Buy more cryptocurrency"),
-        (106, 100, "Sell all your cryptocurrency"),
+        (100, 94, "Sell all your cryptocurrency"),
+        (100, 104.9, "Do nothing"),
+        (100, 95, "Do nothing"),
         (100, 105, "Do nothing"),
-        (105, 100, "Do nothing")
     ],
     ids=[
         "buy",
         "sell",
         "not buy and sell",
-        "not sell and buy"
+        "not buy and sell",
+        "not buy and sell"
     ]
 )
 def test_for_cryptocurrency_action(current_rate: int,
