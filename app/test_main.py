@@ -15,7 +15,7 @@ def test_cryptocurrency_action_to_buy_more(
 
 
 @patch("app.main.get_exchange_rate_prediction")
-def test_cryptocurrency_action_to_sell_all(
+def test_cryptocurrency_action_to_return_sell_all(
         mock_get_exchange_rate_prediction: Callable
 ) -> None:
     mock_get_exchange_rate_prediction.return_value = 1
