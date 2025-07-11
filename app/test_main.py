@@ -5,9 +5,9 @@ from app.main import cryptocurrency_action
 @pytest.mark.parametrize(
     "current_rate, mock_rate, result",
     [
-        (100.0, 105.01, "Buy more cryptocurrency"),
-        (105.01, 99.75, "Sell all your cryptocurrency"),
-        (100.1, 100.1, "Do nothing")
+        (100, 106, "Buy more cryptocurrency"),
+        (106, 100, "Sell all your cryptocurrency"),
+        (100, 95, "Do nothing")
     ],
     ids=[
         "buy",
@@ -15,8 +15,8 @@ from app.main import cryptocurrency_action
         "not buy and sell"
     ]
 )
-def test_for_cryptocurrency_action(current_rate: int | float,
-                                   mock_rate: int | float,
+def test_for_cryptocurrency_action(current_rate: int,
+                                   mock_rate: int,
                                    result: str,
                                    monkeypatch: pytest.MonkeyPatch
                                    ) -> None:
@@ -29,8 +29,8 @@ def test_for_cryptocurrency_action(current_rate: int | float,
 
 """Also method with mock.patch"""
 # from unittest import mock
-# def test_for_cryptocurrency_action(current_rate: int | float,
-#                                    mock_rate: int | float,
+# def test_for_cryptocurrency_action(current_rate: int,
+#                                    mock_rate: int,
 #                                    result: str
 #                                    ) -> None:
 #     with (mock.patch("app.main.get_exchange_rate_prediction")
