@@ -7,12 +7,14 @@ from app.main import cryptocurrency_action
     [
         (100, 106, "Buy more cryptocurrency"),
         (106, 100, "Sell all your cryptocurrency"),
-        (100, 95, "Do nothing")
+        (100, 105, "Do nothing"),
+        (105, 100, "Do nothing")
     ],
     ids=[
         "buy",
         "sell",
-        "not buy and sell"
+        "not buy and sell",
+        "not sell and buy"
     ]
 )
 def test_for_cryptocurrency_action(current_rate: int,
