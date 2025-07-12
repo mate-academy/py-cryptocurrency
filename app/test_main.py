@@ -11,11 +11,15 @@ from app.main import cryptocurrency_action
         (20, 10, "Sell all your cryptocurrency"),
         (30, 29, "Do nothing"),
         (30, 31, "Do nothing"),
-        (30, 30.9, "Do nothing")
+        (30, 30.9, "Do nothing"),
+        (100, 105, "Do nothing"),
+        (100, 95, "Do nothing")
     ],
     ids=[
         "buy if predicted exchange rate `5%` higher",
         "sell if predicted exchange rate `5%` lower",
+        "do nothing if difference is not that much",
+        "do nothing if difference is not that much",
         "do nothing if difference is not that much",
         "do nothing if difference is not that much",
         "do nothing if difference is not that much"
