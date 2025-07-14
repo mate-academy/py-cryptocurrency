@@ -11,7 +11,7 @@ def test_get_buy(mock_predict: MagicMock) -> None:
 
 
 @patch("app.main.get_exchange_rate_prediction")
-def test_get_sell(mock_predict: MagicMock) -> None:
+def test_get_sell_s(mock_predict: MagicMock) -> None:
     mock_predict.return_value = 10.6
     result = cryptocurrency_action(10)
     assert result == "Buy more cryptocurrency"
