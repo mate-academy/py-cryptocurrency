@@ -18,7 +18,10 @@ from app.main import cryptocurrency_action
 )
 @mock.patch("app.main.get_exchange_rate_prediction")
 def test_main(
-        mocked_func: MagicMock, predict_rate: int, current_rate: int, result: str
+        mocked_func: MagicMock,
+        predict_rate: int,
+        current_rate: int,
+        result: str
 ) -> None:
     mocked_func.return_value = predict_rate
 
