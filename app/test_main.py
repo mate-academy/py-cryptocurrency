@@ -27,3 +27,21 @@ def test_cryptocurrency_action_stay(
     cryptocurrency_action(1.00)
     mocked_get_exchange_rate_prediction.assert_called_with(1.00)
     assert cryptocurrency_action(1.00) == "Do nothing"
+
+
+@patch("app.main.get_exchange_rate_prediction")
+def test_cryptocurrency_action_max(
+        mocked_get_exchange_rate_prediction: MagicMock) -> None:
+    mocked_get_exchange_rate_prediction.return_value = 0.95
+    cryptocurrency_action(1.00)
+    mocked_get_exchange_rate_prediction.assert_called_with(1.00)
+    assert cryptocurrency_action(1.00) == "Do nothing"
+
+
+@patch("app.main.get_exchange_rate_prediction")
+def test_cryptocurrency_action_min(
+        mocked_get_exchange_rate_prediction: MagicMock) -> None:
+    mocked_get_exchange_rate_prediction.return_value = 1.05
+    cryptocurrency_action(1.00)
+    mocked_get_exchange_rate_prediction.assert_called_with(1.00)
+    assert cryptocurrency_action(1.00) == "Do nothing"
