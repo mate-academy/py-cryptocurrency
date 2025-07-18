@@ -15,19 +15,33 @@ def mock_get_exchange_rate_prediction() -> MagicMock:
 def test_buy_cryptocurrency_action(
         mock_get_exchange_rate_prediction: MagicMock
 ) -> None:
-    mock_get_exchange_rate_prediction.return_value = 10
-    assert cryptocurrency_action(1) == "Buy more cryptocurrency"
+    mock_get_exchange_rate_prediction.return_value = 106
+    assert cryptocurrency_action(100) == "Buy more cryptocurrency"
 
 
 def test_sell_cryptocurrency_action(
         mock_get_exchange_rate_prediction: MagicMock
 ) -> None:
-    mock_get_exchange_rate_prediction.return_value = 1
-    assert cryptocurrency_action(2) == "Sell all your cryptocurrency"
+    mock_get_exchange_rate_prediction.return_value = 94
+    assert cryptocurrency_action(100) == "Sell all your cryptocurrency"
 
 
 def test_do_nothing_cryptocurrency_action(
         mock_get_exchange_rate_prediction: MagicMock
 ) -> None:
-    mock_get_exchange_rate_prediction.return_value = 1
-    assert cryptocurrency_action(1) == "Do nothing"
+    mock_get_exchange_rate_prediction.return_value = 102
+    assert cryptocurrency_action(100) == "Do nothing"
+
+
+def test_do_nothing_2_cryptocurrency_action(
+        mock_get_exchange_rate_prediction: MagicMock
+) -> None:
+    mock_get_exchange_rate_prediction.return_value = 105
+    assert cryptocurrency_action(100) == "Do nothing"
+
+
+def test_do_nothing_3_cryptocurrency_action(
+        mock_get_exchange_rate_prediction: MagicMock
+) -> None:
+    mock_get_exchange_rate_prediction.return_value = 95
+    assert cryptocurrency_action(100) == "Do nothing"
