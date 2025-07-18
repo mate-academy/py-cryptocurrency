@@ -12,35 +12,35 @@ def mock_get_exchange_rate_prediction() -> MagicMock:
         yield mocked_pred
 
 
-def test_buy_cryptocurrency_action(
+def test_buy_more_when_prediction_above_5_percent(
         mock_get_exchange_rate_prediction: MagicMock
 ) -> None:
     mock_get_exchange_rate_prediction.return_value = 106
     assert cryptocurrency_action(100) == "Buy more cryptocurrency"
 
 
-def test_sell_cryptocurrency_action(
+def test_sell_all_when_prediction_below_5_percent(
         mock_get_exchange_rate_prediction: MagicMock
 ) -> None:
     mock_get_exchange_rate_prediction.return_value = 94
     assert cryptocurrency_action(100) == "Sell all your cryptocurrency"
 
 
-def test_do_nothing_cryptocurrency_action(
+def test_do_nothing_when_prediction_within_5_percent(
         mock_get_exchange_rate_prediction: MagicMock
 ) -> None:
     mock_get_exchange_rate_prediction.return_value = 102
     assert cryptocurrency_action(100) == "Do nothing"
 
 
-def test_do_nothing_2_cryptocurrency_action(
+def test_do_nothing_when_prediction_exactly_5_percent(
         mock_get_exchange_rate_prediction: MagicMock
 ) -> None:
     mock_get_exchange_rate_prediction.return_value = 105
     assert cryptocurrency_action(100) == "Do nothing"
 
 
-def test_do_nothing_3_cryptocurrency_action(
+def test_do_nothing_when_prediction_exactly_minus_5_percent(
         mock_get_exchange_rate_prediction: MagicMock
 ) -> None:
     mock_get_exchange_rate_prediction.return_value = 95
