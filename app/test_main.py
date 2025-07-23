@@ -4,7 +4,7 @@ from app.main import cryptocurrency_action
 
 @mock.patch("app.main.get_exchange_rate_prediction")
 def test_get_exchange_rate_higher_than_five_percent(
-        mock_get_exchange_rate_prediction: int) -> None:
+        mock_get_exchange_rate_prediction: mock.Mock) -> None:
     current_rate = 100
     mock_get_exchange_rate_prediction.return_value = 106
     result = cryptocurrency_action(current_rate)
@@ -14,7 +14,7 @@ def test_get_exchange_rate_higher_than_five_percent(
 
 @mock.patch("app.main.get_exchange_rate_prediction")
 def test_get_exchange_rate_lower_than_five_percent(
-        mock_get_exchange_rate_prediction: int) -> None:
+        mock_get_exchange_rate_prediction: mock.Mock) -> None:
     current_rate = 100
     mock_get_exchange_rate_prediction.return_value = 94
     result = cryptocurrency_action(current_rate)
@@ -23,7 +23,7 @@ def test_get_exchange_rate_lower_than_five_percent(
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_get_exchange_rate(mock_get_exchange_rate_prediction: int) -> None:
+def test_get_exchange_rate_within_five_percent(mock_get_exchange_rate_prediction: mock.Mock) -> None:
     current_rate = 100
     mock_get_exchange_rate_prediction.return_value = 105
     result = cryptocurrency_action(current_rate)

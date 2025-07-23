@@ -10,6 +10,8 @@ def get_exchange_rate_prediction(exchange_rate: Union[int, float]) -> float:
 
 def cryptocurrency_action(current_rate: Union[int, float]) -> str:
     prediction_rate = get_exchange_rate_prediction(current_rate)
+    ratio = prediction_rate / current_rate
+    print(f"DEBUG: current={current_rate}, predicted={prediction_rate}, ratio={ratio}")
     if prediction_rate / current_rate > 1.05:
         return "Buy more cryptocurrency"
     if prediction_rate / current_rate < 0.95:
