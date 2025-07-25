@@ -1,22 +1,22 @@
-from unittest.mock import patch
-from app.main import cryptocurrency_action
+import pytest
+from app import main
 
 
-def test_buy_more_cryptocurrency() -> None:
-    with patch("app.main.get_exchange_rate_prediction", return_value=1.06):
-        assert cryptocurrency_action(1.0) == "Buy more cryptocurrency"
+def test_should_buy(monkeypatch):
+    monkeypatch.setattr(main, "get_exchange_rate_prediction", lambda _: 110.0)
+    assert main.cryptocurrency_action(100.0) == "Buy more cryptocurrency"
 
 
-def test_sell_all_your_cryptocurrency() -> None:
-    with patch("app.main.get_exchange_rate_prediction", return_value=0.94):
-        assert cryptocurrency_action(1.0) == "Sell all your cryptocurrency"
+def test_should_sell(monkeypatch):
+    monkeypatch.setattr(main, "get_exchange_rate_prediction", lambda _: 90.0)
+    assert main.cryptocurrency_action(100.0) == "Sell all your cryptocurrency"
 
 
-def test_do_nothing_when_difference_is_small() -> None:
-    with patch("app.main.get_exchange_rate_prediction", return_value=1.04):
-        assert cryptocurrency_action(1.0) == "Do nothing"
+def test_should_do_nothing_when_close_to_rate(monkeypatch):
+    monkeypatch.setattr(main, "get_exchange_rate_prediction", lambda _: 97.0)
+    assert main.cryptocurrency_action(100.0) == "Do nothing"
 
 
-def test_do_nothing_when_difference_is_small_lower() -> None:
-    with patch("app.main.get_exchange_rate_prediction", return_value=0.96):
-        assert cryptocurrency_action(1.0) == "Do nothing"
+def test_should_do_nothing_when_exactly_same(monkeypatch):
+    monkeypatch.setattr(main, "get_exchange_rate_prediction", lambda _: 100.0)
+    assert main.cryptocurrency_action(100.0) == "Do nothing"
