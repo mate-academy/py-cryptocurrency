@@ -12,7 +12,8 @@ def test_should_sell(monkeypatch: MonkeyPatch) -> None:
     assert main.cryptocurrency_action(100.0) == "Sell all your cryptocurrency"
 
 
-def test_should_do_nothing_when_close_to_rate(monkeypatch: MonkeyPatch) -> None:
+def test_should_do_nothing_when_close_to_rate(monkeypatch: MonkeyPatch)\
+    -> None:
     monkeypatch.setattr(main, "get_exchange_rate_prediction", lambda _: 97.0)
     result = main.cryptocurrency_action(100.0)
     assert result == "Do nothing"
