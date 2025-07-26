@@ -4,7 +4,7 @@ from typing import Any
 from app.main import cryptocurrency_action
 
 
-@mock.patch('app.main.get_exchange_rate_prediction')
+@mock.patch("app.main.get_exchange_rate_prediction")
 def test_get_exchange_rate_prediction_do_nothing_upper(
         mock_get_exchange_rate_prediction: Any
 ) -> None:
@@ -14,7 +14,7 @@ def test_get_exchange_rate_prediction_do_nothing_upper(
     assert result == "Do nothing"
 
 
-@mock.patch('app.main.get_exchange_rate_prediction')
+@mock.patch("app.main.get_exchange_rate_prediction")
 def test_get_exchange_rate_prediction_do_nothing_lower(
         mock_get_exchange_rate_prediction: Any
 ) -> None:
@@ -24,7 +24,7 @@ def test_get_exchange_rate_prediction_do_nothing_lower(
     assert result == "Do nothing"
 
 
-@mock.patch('app.main.get_exchange_rate_prediction')
+@mock.patch("app.main.get_exchange_rate_prediction")
 def test_get_exchange_rate_prediction_sell(
         mock_get_exchange_rate_prediction: Any
 ) -> None:
@@ -34,7 +34,7 @@ def test_get_exchange_rate_prediction_sell(
     assert result == "Sell all your cryptocurrency"
 
 
-@mock.patch('app.main.get_exchange_rate_prediction')
+@mock.patch("app.main.get_exchange_rate_prediction")
 def test_get_exchange_rate_prediction_buy(
         mock_get_exchange_rate_prediction: Any
 ) -> None:
