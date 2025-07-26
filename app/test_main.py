@@ -24,4 +24,4 @@ def test_cryptocurrency_action_if_nothing_changed(
 ) -> None:
     mock_get_exchange_rate_prediction.return_value = 100
     assert cryptocurrency_action(105) == "Do nothing"
-    assert cryptocurrency_action(96) == "Do nothing"
+    assert cryptocurrency_action(95) == "Do nothing"
