@@ -17,6 +17,7 @@ test_action_data = [
     param(10.5, "Do nothing", id="neutral_course_1,05")
 ]
 
+
 @mark.parametrize(
     ("setted_choise,setted_random,expected_res"),
     test_prediction_data
