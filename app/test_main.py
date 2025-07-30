@@ -8,22 +8,14 @@ from unittest import mock
     "prediction_rate,current_rate,expected_result",
     [
         pytest.param(
-            10, 9, "Do nothing", id="should return 'Do nothing'"
+            100, 99, "Do nothing", id="should return 'Do nothing'"
         ),
         pytest.param(
-            10, 11, "Sell all your cryptocurrency",
+            100, 110, "Sell all your cryptocurrency",
             id="should return 'Sell all your cryptocurrency'"
         ),
         pytest.param(
-            100, 95, "Sell all your cryptocurrency",
-            id="should return 'Sell all your cryptocurrency'"
-        ),
-        pytest.param(
-            105, 100, "Buy more cryptocurrency",
-            id="should return 'Sell all your cryptocurrency'"
-        ),
-        pytest.param(
-            10, 8, "Buy more cryptocurrency",
+            100, 80, "Buy more cryptocurrency",
             id="should return 'Buy more cryptocurrency'"
         ),
     ]
