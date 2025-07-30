@@ -15,6 +15,14 @@ from unittest import mock
             id="should return 'Sell all your cryptocurrency'"
         ),
         pytest.param(
+            100, 95, "Sell all your cryptocurrency",
+            id="should return 'Sell all your cryptocurrency'"
+        ),
+        pytest.param(
+            105, 100, "Buy more cryptocurrency",
+            id="should return 'Sell all your cryptocurrency'"
+        ),
+        pytest.param(
             10, 8, "Buy more cryptocurrency",
             id="should return 'Buy more cryptocurrency'"
         ),
