@@ -15,12 +15,12 @@ from unittest import mock
             id="should return 'Sell all your cryptocurrency'"
         ),
         pytest.param(
-            100, 95, "Do nothing",
-            id="should return 'Do nothing'"
+            105, 100, "Do nothing",
+            id="should return 'Do nothing' if exactly +5%"
         ),
         pytest.param(
-            105, 100, "Do nothing",
-            id="should return 'Do nothing'"
+            95, 100, "Do nothing",
+            id="should return 'Do nothing' if exactly -5%"
         ),
         pytest.param(
             100, 80, "Buy more cryptocurrency",
