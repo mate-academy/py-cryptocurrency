@@ -11,7 +11,14 @@ from app.main import cryptocurrency_action
         (102, 100, "Do nothing"),
     ]
 )
-def test_cryptocurrency_action(predicted_rate, current_rate, expected):
-    with patch("app.main.get_exchange_rate_prediction", return_value=predicted_rate):
+def test_cryptocurrency_action(
+        predicted_rate: int | float,
+        current_rate: int | float,
+        expected: str
+) -> None:
+    with patch(
+            "app.main.get_exchange_rate_prediction",
+            return_value=predicted_rate
+    ):
         result = cryptocurrency_action(current_rate)
         assert result == expected
