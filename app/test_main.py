@@ -7,8 +7,10 @@ from app.main import cryptocurrency_action
     "predicted_rate,current_rate,expected",
     [
         (105.1, 100, "Buy more cryptocurrency"),
+        (105.0, 100, "Do nothing"),
         (94.9, 100, "Sell all your cryptocurrency"),
-        (102, 100, "Do nothing"),
+        (95.0, 100, "Do nothing"),
+        (100.0, 100, "Do nothing"),
     ]
 )
 def test_cryptocurrency_action(
