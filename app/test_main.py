@@ -23,9 +23,12 @@ from app.main import cryptocurrency_action
         (200, 198, "Do nothing"),
     ]
 )
-@patch('app.main.get_exchange_rate_prediction')
+@patch("app.main.get_exchange_rate_prediction")
 def test_cryptocurrency_action_boundary_conditions(
-    mock_get_rate: float, current_rate: float, predicted_rate: float, expected_action: float
+    mock_get_rate: float,
+    current_rate: float,
+    predicted_rate: float,
+    expected_action: float
 ) -> None:
     mock_get_rate.return_value = predicted_rate
 
