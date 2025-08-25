@@ -24,7 +24,7 @@ def test_cryptocurrency_action(
     monkeypatch.setattr(
         main,
         "get_exchange_rate_prediction",
-        lambda: predicted_rate
+        lambda rate: predicted_rate  # aceita o argumento
     )
 
     result = main.cryptocurrency_action(current_rate)
