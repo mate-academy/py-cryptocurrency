@@ -21,7 +21,11 @@ def test_cryptocurrency_action(
     expected: str,
 ) -> None:
     # simula a função de previsão
-    monkeypatch.setattr(main, "get_exchange_rate_prediction", lambda: predicted_rate)
+    monkeypatch.setattr(
+        main,
+        "get_exchange_rate_prediction",
+        lambda: predicted_rate
+    )
 
     result = main.cryptocurrency_action(current_rate)
 
