@@ -4,12 +4,13 @@ from app.main import cryptocurrency_action
 
 
 @pytest.mark.parametrize("current_rate, predicted_rate, expected_action", [
-    (100, 106, "Buy more cryptocurrency"),
+    (100, 120, "Buy more cryptocurrency"),
     (100, 105.1, "Buy more cryptocurrency"),
-    (100, 104.9, "Do nothing"),
-    (100, 95.1, "Do nothing"),
+    (100, 105, "Do nothing"),
+    (100, 100, "Do nothing"),
     (100, 95, "Do nothing"),
     (100, 94.9, "Sell all your cryptocurrency"),
+    (100, 80, "Sell all your cryptocurrency")
 ])
 def test_cryptocurrency_action_returns_correct_action(current_rate: int,
                                                       predicted_rate: int,
