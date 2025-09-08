@@ -1,10 +1,13 @@
-import pytest
+from typing import Union
 from unittest.mock import MagicMock
+import pytest
 import app.main as main
+from _pytest.monkeypatch import MonkeyPatch
+Rate = Union[int, float]
 
 
 @pytest.mark.parametrize(
-    "current_rate,predicted_rate,expected",
+    ("current_rate", "predicted_rate", "expected"),
     [
         (100, 106, "Buy more cryptocurrency"),
         (10.0, 10.7, "Buy more cryptocurrency"),
@@ -18,7 +21,12 @@ import app.main as main
         (200, 201, "Do nothing"),
     ],
 )
-def test_cryptocurrency_action_with_mock(monkeypatch, current_rate, predicted_rate, expected):
+def test_cryptocurrency_action_with_mock(
+    monkeypatch: MonkeyPatch,
+    current_rate: Rate,
+    predicted_rate: Rate,
+    expected: str,
+) -> None:
     mock = MagicMock(return_value=predicted_rate)
     monkeypatch.setattr(main, "get_exchange_rate_prediction", mock)
 
