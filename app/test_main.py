@@ -40,3 +40,19 @@ def test_do_nothing_small_decrease() -> None:
         result = cryptocurrency_action(100.0)
         assert result == "Do nothing"
         mock_pred.assert_called_once_with(100.0)
+
+
+def test_do_nothing_exact_upper_boundary() -> None:
+    with patch("app.main.get_exchange_rate_prediction",
+               return_value=105.0) as mock_pred:
+        result = cryptocurrency_action(100.0)
+        assert result == "Do nothing"
+        mock_pred.assert_called_once_with(100.0)
+
+
+def test_do_nothing_exact_lower_boundary() -> None:
+    with patch("app.main.get_exchange_rate_prediction",
+               return_value=95.0) as mock_pred:
+        result = cryptocurrency_action(100.0)
+        assert result == "Do nothing"
+        mock_pred.assert_called_once_with(100.0)
