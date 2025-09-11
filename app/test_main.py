@@ -21,7 +21,7 @@ from app.main import cryptocurrency_action
             10.5, "Do nothing", id="predicted rate is 5% higher"
         ),
         pytest.param(
-            9.5, "Do nothing", id="predicted rate is 5% lower"
+            9.5, "Do nothing", id="predicted rate is 5% lower "
         ),
     ]
 )
