@@ -11,7 +11,7 @@ def test_cryptocurrency_action_sell_all_cryptocurrency():
 
 def test_cryptocurrency_action_buy_cryptocurrency():
     with mock.patch("app.main.get_exchange_rate_prediction") as mock_prediction:
-        mock_prediction.return_value = 105
+        mock_prediction.return_value = 106
         assert cryptocurrency_action(100) == "Buy more cryptocurrency"
 
 
