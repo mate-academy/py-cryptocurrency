@@ -1,6 +1,6 @@
 from app.main import cryptocurrency_action
 
-from unitest import mock
+from unittest import mock
 
 
 def test_cryptocurrency_action_sell_all_cryptocurrency() -> None:
