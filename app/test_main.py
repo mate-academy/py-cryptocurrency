@@ -9,6 +9,9 @@ from unittest.mock import MagicMock, patch
     (4, 2, "Sell all your cryptocurrency"),
     (2, 5, "Buy more cryptocurrency"),
     (5, 5.2, "Do nothing"),
+    (5, 5, "Do nothing"),
+    (100, 95, "Do nothing"),
+    (100, 105, "Do nothing")
 ])
 @patch("app.main.get_exchange_rate_prediction")
 def test_cryptocurrency_acton_logic(
