@@ -1,1 +1,1 @@
-# write your code here
+import main
