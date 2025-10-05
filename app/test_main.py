@@ -15,18 +15,24 @@ def test_sell_all_cryptocurrency(mock_prediction: Mock) -> None:
 
 
 @patch("app.main.get_exchange_rate_prediction")
-def test_do_nothing_when_difference_is_small(mock_prediction: Mock) -> None:
+def test_do_nothing_when_difference_is_small(
+    mock_prediction: Mock
+) -> None:
     mock_prediction.return_value = 102  # dentro da faixa de ±5%
     assert cryptocurrency_action(100) == "Do nothing"
 
 
 @patch("app.main.get_exchange_rate_prediction")
-def test_do_nothing_when_rate_is_exactly_105_percent(mock_prediction: Mock) -> None:
+def test_do_nothing_when_rate_is_exactly_105_percent(
+    mock_prediction: Mock
+) -> None:
     mock_prediction.return_value = 105.0  # exatamente 5% acima
     assert cryptocurrency_action(100) == "Do nothing"
 
 
 @patch("app.main.get_exchange_rate_prediction")
-def test_do_nothing_when_rate_is_exactly_95_percent(mock_prediction: Mock) -> None:
+def test_do_nothing_when_rate_is_exactly_95_percent(
+    mock_prediction: Mock
+) -> None:
     mock_prediction.return_value = 95.0  # exatamente 5% abaixo
     assert cryptocurrency_action(100) == "Do nothing"
