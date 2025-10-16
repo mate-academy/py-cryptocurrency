@@ -23,29 +23,20 @@ def test_cryptocurrency_action_sell(
 
 
 @patch("app.main.get_exchange_rate_prediction")
-def test_cryptocurrency_do_nothing(
+def test_cryptocurrency_action_do_nothing(
         mock_get_exchange_rate_prediction: MagicMock
 ) -> None:
     current_rate = 100
-    mock_get_exchange_rate_prediction.side_effect = \
-        [current_rate * 0.96, current_rate * 1.04]
 
-    result1 = cryptocurrency_action(current_rate)
-    assert result1 == "Do nothing"
+    mock_get_exchange_rate_prediction.side_effect = [
+        current_rate * 0.96,
+        current_rate * 1.04,
+        current_rate * 0.95,
+        current_rate * 1.05 ,
+    ]
 
-    result2 = cryptocurrency_action(current_rate)
-    assert result2 == "Do nothing"
+    assert cryptocurrency_action(current_rate) == "Do nothing"
+    assert cryptocurrency_action(current_rate) == "Do nothing"
 
-
-@patch("app.main.get_exchange_rate_prediction")
-def test_cryptocurrency_boundary(
-        mock_get_exchange_rate_prediction: MagicMock
-) -> None:
-    current_rate = 100
-    mock_get_exchange_rate_prediction.side_effect = \
-        [current_rate * 0.96, current_rate * 1.04]
-
-    result1 = cryptocurrency_action(current_rate)
-    assert result1 == "Do nothing"
-    result2 = cryptocurrency_action(current_rate)
-    assert result2 == "Do nothing"
+    assert cryptocurrency_action(current_rate) == "Do nothing"
+    assert cryptocurrency_action(current_rate) == "Do nothing"
