@@ -9,7 +9,7 @@ current_rate = 100.0
 def test_cryptocurrency_action_buy(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(
         "app.main.get_exchange_rate_prediction",
-        lambda: 105.01
+        lambda rate: 105.01
     )
     result = cryptocurrency_action(current_rate)
     assert result == "Buy more cryptocurrency"
@@ -18,7 +18,7 @@ def test_cryptocurrency_action_buy(monkeypatch: pytest.MonkeyPatch) -> None:
 def test_cryptocurrency_action_sell(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(
         "app.main.get_exchange_rate_prediction",
-        lambda: 94.99
+        lambda rate: 94.99
     )
     result = cryptocurrency_action(current_rate)
     assert result == "Sell all your cryptocurrency"
@@ -40,7 +40,7 @@ def test_cryptocurrency_action_action_nothing(
 ) -> None:
     monkeypatch.setattr(
         "app.main.get_exchange_rate_prediction",
-        lambda: predicted_rate
+        lambda rat: predicted_rate
     )
     result = cryptocurrency_action(current_rate)
     assert result == expected_action
