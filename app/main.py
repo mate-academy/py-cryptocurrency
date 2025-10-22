@@ -7,6 +7,7 @@ def get_exchange_rate_prediction(exchange_rate: Union[int, float]) -> float:
         return round(exchange_rate / random.random(), 2)
     return round(exchange_rate * random.random(), 2)
 
+
 def cryptocurrency_action(current_rate: Union[int, float]) -> str:
     prediction_rate = get_exchange_rate_prediction(current_rate)
     rate_ratio = prediction_rate / current_rate
