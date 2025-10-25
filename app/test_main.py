@@ -24,4 +24,3 @@ def test_main(get_exchange_rate_prediction: mock.MagicMock,
 
     result = app.main.cryptocurrency_action(current_rate)
     assert result == expected
-
