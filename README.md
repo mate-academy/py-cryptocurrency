@@ -8,7 +8,7 @@ can predict the exchange rate of your cryptocurrency for the next day.
 
 Inside `app/test_main.py`, write tests for `cryptocurrency_action` function. This function 
 takes `current_rate` - current exchange rate of cryptocurrency. This
-function should return:
+fun[README.md](README.md)ction should return:
 - `"Buy more cryptocurrency"`, if predicted exchange rate is more than 
 5% higher from the current.
 - `"Sell all your cryptocurrency"`, if predicted exchange rate is more than 
