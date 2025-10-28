@@ -20,6 +20,6 @@ def test_cryptocurrency_prediction(
         predicted: float | int,
         expected: str
 ) -> None:
-    get_exchange_rate_prediction.return_value=predicted
+    get_exchange_rate_prediction.return_value = predicted
 
     assert cryptocurrency_action(current) == expected
