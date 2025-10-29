@@ -33,5 +33,5 @@ def test_for_do_nothing_with_cryptocurrency_float_number2() -> None:
 def test_for_do_nothing_with_cryptocurrency_float_number3() -> None:
     with (mock.patch("app.main.get_exchange_rate_prediction")
           as mock_prediction):
-        mock_prediction.return_value = 99.0
-        assert cryptocurrency_action(95.0) == "Do nothing"
+        mock_prediction.return_value = 95.0
+        assert cryptocurrency_action(100.0) == "Do nothing"
