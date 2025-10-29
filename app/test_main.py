@@ -2,8 +2,9 @@ import pytest
 from app import main
 from typing import Union
 
+
 def patch_prediction(
-        monkeypatch,
+        monkeypatch: pytest.MonkeyPatch,
         return_value: float
 ) -> None:
     monkeypatch.setattr(main, "get_exchange_rate_prediction",
