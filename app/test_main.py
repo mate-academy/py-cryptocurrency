@@ -2,7 +2,8 @@ from pytest import MonkeyPatch
 from app.main import cryptocurrency_action
 
 
-def test_returns_buy_more_when_rate_increases(monkeypatch: MonkeyPatch) -> None:
+def test_returns_buy_more_when_rate_increases(
+        monkeypatch: MonkeyPatch) -> None:
     current_rate = 100
     predicted_rate = 106
 
