@@ -23,6 +23,9 @@ def test_cryptocurrency_action_valid(
         predict_rate: int | float,
         expected: str
 ) -> None:
-    monkeypatch.setattr("app.main.get_exchange_rate_prediction", lambda rate: predict_rate)
+    monkeypatch.setattr(
+        "app.main.get_exchange_rate_prediction",
+        lambda rate: predict_rate
+    )
     result = cryptocurrency_action(current_rate)
     assert result == expected
