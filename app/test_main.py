@@ -40,7 +40,7 @@ def test_do_nothing_with_small_decrease(mock_prediction: MagicMock) -> None:
 
 @patch("app.main.get_exchange_rate_prediction")
 def test_boundary_exactly_five_percent_up(mock_prediction: MagicMock) -> None:
-    """Проверка: ровно +5% — всё ещё ничего не делаем."""
+    """Ровно +5% — ничего не делаем."""
     current_rate: float = 100.0
     mock_prediction.return_value = 105.0
     result: str = cryptocurrency_action(current_rate)
@@ -48,8 +48,8 @@ def test_boundary_exactly_five_percent_up(mock_prediction: MagicMock) -> None:
 
 
 @patch("app.main.get_exchange_rate_prediction")
-def test_boundary_exactly_five_percent_down(mock_prediction: MagicMock) -> None:
-    """Проверка: ровно -5% — всё ещё ничего не делаем."""
+def test_boundary_five_percent_down(mock_prediction: MagicMock) -> None:
+    """Ровно -5% — ничего не делаем."""
     current_rate: float = 100.0
     mock_prediction.return_value = 95.0
     result: str = cryptocurrency_action(current_rate)
