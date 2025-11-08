@@ -1,5 +1,6 @@
 import pytest
 from app.main import cryptocurrency_action
+from pytest import MonkeyPatch
 
 
 @pytest.mark.parametrize(
@@ -14,8 +15,8 @@ from app.main import cryptocurrency_action
     ],
 )
 def test_cryptocurrency_action(
-    monkeypatch, rate_multiplier, expected_action
-):
+    monkeypatch: MonkeyPatch, rate_multiplier: float, expected_action: str
+) -> None:
     """Tests cryptocurrency_action with various predicted rate changes."""
     monkeypatch.setattr(
         "app.main.get_exchange_rate_prediction",
