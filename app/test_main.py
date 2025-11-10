@@ -6,7 +6,7 @@ from app.main import cryptocurrency_action
 def test_cryptocurrency_action_buy(
         mock_get_exchange_rate_prediction: MagicMock
 ) -> None:
-    mock_get_exchange_rate_prediction.return_value = 300
+    mock_get_exchange_rate_prediction.return_value = 200
     result = cryptocurrency_action(current_rate=100)
     assert result == "Buy more cryptocurrency"
 
@@ -15,7 +15,7 @@ def test_cryptocurrency_action_buy(
 def test_cryptocurrency_action_sell(
         mock_get_exchange_rate_prediction: MagicMock
 ) -> None:
-    mock_get_exchange_rate_prediction.return_value = 10
+    mock_get_exchange_rate_prediction.return_value = 50
     result = cryptocurrency_action(current_rate=100)
     assert result == "Sell all your cryptocurrency"
 
