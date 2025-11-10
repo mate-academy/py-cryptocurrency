@@ -21,9 +21,18 @@ def test_cryptocurrency_action_sell(
 
 
 @patch("app.main.get_exchange_rate_prediction")
-def test_cryptocurrency_action_do_nothing(
+def test_cryptocurrency_action_do_nothing_105(
         mock_get_exchange_rate_prediction: MagicMock
 ) -> None:
-    mock_get_exchange_rate_prediction.return_value = 100
+    mock_get_exchange_rate_prediction.return_value = 105
+    result = cryptocurrency_action(current_rate=100)
+    assert result == "Do nothing"
+
+
+@patch("app.main.get_exchange_rate_prediction")
+def test_cryptocurrency_action_do_nothing_95(
+        mock_get_exchange_rate_prediction: MagicMock
+) -> None:
+    mock_get_exchange_rate_prediction.return_value = 95
     result = cryptocurrency_action(current_rate=100)
     assert result == "Do nothing"
