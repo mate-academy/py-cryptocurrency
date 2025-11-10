@@ -1,24 +1,28 @@
-from unittest.mock import patch, MagicMock
+from unittest import mock
 from app.main import cryptocurrency_action
 
 
-@patch("app.main.get_exchange_rate_prediction")
-def test_cryptocurrency_action(get_exchange_rate_prediction: MagicMock)\
-        -> None:
-    get_exchange_rate_prediction.return_value = 110
+@mock.patch("app.main.get_exchange_rate_prediction")
+def test_cryptocurrency_action_if_higher(
+        mock_get_exchange_rate_prediction: bool
+) -> None:
+    mock_get_exchange_rate_prediction.return_value = 106
     assert cryptocurrency_action(100) == "Buy more cryptocurrency"
-    get_exchange_rate_prediction.assert_called_once()
 
 
-@patch("app.main.get_exchange_rate_prediction")
-def test_cryptocurrency_upper(get_exchange_rate_prediction: MagicMock) -> None:
-    get_exchange_rate_prediction.return_value = 80
+@mock.patch("app.main.get_exchange_rate_prediction")
+def test_cryptocurrency_action_if_lower(
+        mock_get_exchange_rate_prediction: bool
+) -> None:
+    mock_get_exchange_rate_prediction.return_value = 94
     assert cryptocurrency_action(100) == "Sell all your cryptocurrency"
-    get_exchange_rate_prediction.assert_called_once()
 
 
-@patch("app.main.get_exchange_rate_prediction")
-def test_cryptocurrency_lower(get_exchange_rate_prediction: MagicMock) -> None:
-    get_exchange_rate_prediction.return_value = 103
+@mock.patch("app.main.get_exchange_rate_prediction")
+def test_cryptocurrency_action_if_nothing_changed(
+        mock_get_exchange_rate_prediction: bool
+) -> None:
+    mock_get_exchange_rate_prediction.return_value = 95
     assert cryptocurrency_action(100) == "Do nothing"
-    get_exchange_rate_prediction.assert_called_once()
+    mock_get_exchange_rate_prediction.return_value = 105
+    assert cryptocurrency_action(100) == "Do nothing"
