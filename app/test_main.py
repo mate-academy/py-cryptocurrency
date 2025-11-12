@@ -1,4 +1,4 @@
-from unittest.mock import patch
+from unittest.mock import patch, MagicMock
 import pytest
 from app.main import cryptocurrency_action
 
@@ -14,7 +14,10 @@ from app.main import cryptocurrency_action
     ]
 )
 @patch("app.main.get_exchange_rate_prediction")
-def test_buy_more_cryptocurrency(mock_prediction, current_rate, predicted_rate):
+def test_buy_more_cryptocurrency(
+        mock_prediction: MagicMock,
+        current_rate: float,
+        predicted_rate: float) -> None:
     """Test buying when predicted rate is more than 5% higher."""
     mock_prediction.return_value = predicted_rate
 
@@ -34,7 +37,10 @@ def test_buy_more_cryptocurrency(mock_prediction, current_rate, predicted_rate):
     ]
 )
 @patch("app.main.get_exchange_rate_prediction")
-def test_sell_all_cryptocurrency(mock_prediction, current_rate, predicted_rate):
+def test_sell_all_cryptocurrency(
+        mock_prediction: MagicMock,
+        current_rate: float,
+        predicted_rate: float) -> None:
     """Test selling when predicted rate is more than 5% lower."""
     mock_prediction.return_value = predicted_rate
 
@@ -54,7 +60,10 @@ def test_sell_all_cryptocurrency(mock_prediction, current_rate, predicted_rate):
     ]
 )
 @patch("app.main.get_exchange_rate_prediction")
-def test_do_nothing(mock_prediction, current_rate, predicted_rate):
+def test_do_nothing(
+        mock_prediction: MagicMock,
+        current_rate: float,
+        predicted_rate: float) -> None:
     """Test doing nothing when prediction is within 5% range."""
     mock_prediction.return_value = predicted_rate
 
@@ -73,7 +82,11 @@ def test_do_nothing(mock_prediction, current_rate, predicted_rate):
     ]
 )
 @patch("app.main.get_exchange_rate_prediction")
-def test_boundary_conditions(mock_prediction, current_rate, predicted_rate, expected_action):
+def test_boundary_conditions(
+        mock_prediction: MagicMock,
+        current_rate: float,
+        predicted_rate: float,
+        expected_action: str) -> None:
     """Test exact boundary conditions at 5% threshold."""
     mock_prediction.return_value = predicted_rate
 
