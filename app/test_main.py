@@ -1,20 +1,29 @@
-from unittest.mock import patch
+import pytest
+from unittest.mock import MagicMock, patch
 from app.main import cryptocurrency_action
 
 
-def test_buy_more_when_rate_increases_over_five_percent() -> None:
-    with patch("app.main.get_exchange_rate_prediction", return_value=106):
-        assert cryptocurrency_action(100) == "Buy more cryptocurrency"
+@pytest.fixture
+def mock_prediction() -> MagicMock:
+    with patch("app.main.get_exchange_rate_prediction") as mocked:
+        yield mocked
 
 
-def test_sell_all_when_rate_drops_over_five_percent() -> None:
-    with patch("app.main.get_exchange_rate_prediction", return_value=94):
-        assert cryptocurrency_action(100) == "Sell all your cryptocurrency"
-
-
-def test_do_nothing_when_rate_change_is_small() -> None:
-    with patch("app.main.get_exchange_rate_prediction", return_value=103):
-        assert cryptocurrency_action(100) == "Do nothing"
-
-    with patch("app.main.get_exchange_rate_prediction", return_value=97):
-        assert cryptocurrency_action(100) == "Do nothing"
+@pytest.mark.parametrize(
+    "prediction, expected",
+    [
+        (106, "Buy more cryptocurrency"),
+        (94, "Sell all your cryptocurrency"),
+        (103, "Do nothing"),
+        (97, "Do nothing"),
+        (105, "Do nothing"),
+        (95, "Do nothing"),
+    ]
+)
+def test_crypto_actions(
+    mock_prediction: MagicMock,
+    prediction: int,
+    expected: str
+) -> None:
+    mock_prediction.return_value = prediction
+    assert cryptocurrency_action(100) == expected
