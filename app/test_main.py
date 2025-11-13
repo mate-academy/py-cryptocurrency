@@ -4,6 +4,7 @@ from app.main import cryptocurrency_action
 
 def test_buy_more_cryptocurrency() -> None:
     with patch("app.main.get_exchange_rate_prediction", return_value=105.1):
+
         assert cryptocurrency_action(100) == "Buy more cryptocurrency"
 
 
