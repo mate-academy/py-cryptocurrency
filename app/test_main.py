@@ -21,3 +21,8 @@ def test_sell_all_cryptocurrency(mock_prediction: mock.MagicMock) -> None:
 @mock.patch("app.main.get_exchange_rate_prediction", return_value=105)
 def test_do_nothing_limit_value(mock_prediction: mock.MagicMock) -> None:
     assert cryptocurrency_action(100) == "Do nothing"
+
+
+@mock.patch("app.main.get_exchange_rate_prediction", return_value=95)
+def test_do_nothing_down_limit_value(mock_prediction: mock.MagicMock) -> None:
+    assert cryptocurrency_action(100) == "Do nothing"
