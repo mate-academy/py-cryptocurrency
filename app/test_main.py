@@ -1,41 +1,34 @@
-from unittest.mock import patch
-import pytest
 from app.main import cryptocurrency_action
+from unittest import mock
+import pytest
+from typing import Any
 
 
-@patch("app.main.get_exchange_rate_prediction")
-def test_buy_more(mock_prediction: pytest.Mock) -> None:
-    mock_prediction.return_value = 105
-    current_rate: float = 100
-    assert cryptocurrency_action(current_rate) == "Buy more cryptocurrency"
+@pytest.fixture()
+def mock_function() -> Any:
+    with mock.patch(
+        "app.main.get_exchange_rate_prediction"
+    ) as mock_prediction:
+        yield mock_prediction
 
 
-@patch("app.main.get_exchange_rate_prediction")
-def test_sell_all(mock_prediction: pytest.Mock) -> None:
-    mock_prediction.return_value = 90
-    current_rate: float = 100
-    assert (
-        cryptocurrency_action(current_rate)
-        == "Sell all your cryptocurrency"
-    )
-
-
-@patch("app.main.get_exchange_rate_prediction")
-def test_do_nothing(mock_prediction: pytest.Mock) -> None:
-    mock_prediction.return_value = 103
-    current_rate: float = 100
-    assert cryptocurrency_action(current_rate) == "Do nothing"
-
-
-@patch("app.main.get_exchange_rate_prediction")
-def test_boundary_upper(mock_prediction: pytest.Mock) -> None:
-    mock_prediction.return_value = 105
-    current_rate: float = 100
-    assert cryptocurrency_action(current_rate) == "Do nothing"
-
-
-@patch("app.main.get_exchange_rate_prediction")
-def test_boundary_lower(mock_prediction: pytest.Mock) -> None:
-    mock_prediction.return_value = 95
-    current_rate: float = 100
-    assert cryptocurrency_action(current_rate) == "Do nothing"
+@pytest.mark.parametrize(
+    "pred_rate, curr_rate, exp",
+    [
+        (110, 100, "Buy more cryptocurrency"),
+        (105.1, 100, "Buy more cryptocurrency"),
+        (105, 100, "Do nothing"),
+        (100, 100, "Do nothing"),
+        (95, 100, "Do nothing"),
+        (94.9, 100, "Sell all your cryptocurrency"),
+        (85, 100, "Sell all your cryptocurrency")
+    ]
+)
+def test_cryptocurrency_action(
+        mock_function: Any,
+        pred_rate: int | float,
+        curr_rate: int | float,
+        exp: str) -> None:
+    mock_function.return_value = pred_rate
+    result = cryptocurrency_action(curr_rate)
+    assert result == exp
