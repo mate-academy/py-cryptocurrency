@@ -30,21 +30,21 @@ def test_crypto_action_sell(
 def test_crypto_action_0_95(
         mock_exchange_rate: mock.MagicMock
 ) -> None:
-    mock_exchange_rate.return_value = 100
+    mock_exchange_rate.return_value = 95
 
-    result = cryptocurrency_action(95)
+    result = cryptocurrency_action(100)
 
     assert result == "Do nothing"
-    mock_exchange_rate.assert_called_once_with(95)
+    mock_exchange_rate.assert_called_once_with(100)
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
 def test_crypto_action_1_05(
         mock_exchange_rate: mock.MagicMock
 ) -> None:
-    mock_exchange_rate.return_value = 100
+    mock_exchange_rate.return_value = 105
 
-    result = cryptocurrency_action(105)
+    result = cryptocurrency_action(100)
 
     assert result == "Do nothing"
-    mock_exchange_rate.assert_called_once_with(105)
+    mock_exchange_rate.assert_called_once_with(100)
