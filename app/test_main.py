@@ -33,7 +33,7 @@ class TestCryptocurrency(TestCase):
 
         result = cryptocurrency_action(95)
 
-        assert result == "Sell all your cryptocurrency"
+        assert result == "Buy more cryptocurrency"
         mock_exchange_rate.assert_called_once_with(95)
 
     @mock.patch("app.main.get_exchange_rate_prediction")
