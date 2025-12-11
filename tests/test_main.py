@@ -9,13 +9,13 @@ from app.main import cryptocurrency_action
 @pytest.mark.parametrize(
     "current_rate, exchange_rate, action",
     [
-        (1.00, 1.10, "Buy more cryptocurrency"),
-        (1.00, 0.90, "Sell all your cryptocurrency"),
-        (1.00, 1.05, "Do nothing"),
-        (1.00, 0.95, "Do nothing"),
-        (1.00, 1.0501, "Buy more cryptocurrency"),
-        (1.00, 0.9499, "Sell all your cryptocurrency"),
-    ],
+        (100, 106, "Buy more cryptocurrency"),
+        (100, 94, "Sell all your cryptocurrency"),
+        (100, 101, "Do nothing"),
+        (101, 100, "Do nothing"),
+        (100, 105, "Do nothing"),
+        (100, 95, "Do nothing")
+    ]
 )
 @patch("app.main.get_exchange_rate_prediction")
 def test_cryptocurrency_action_parametrized(
@@ -25,5 +25,7 @@ def test_cryptocurrency_action_parametrized(
     action: str,
 ) -> None:
     mock_get_exchange_rate_prediction.return_value = exchange_rate
+
     result = cryptocurrency_action(current_rate)
+
     assert result == action
