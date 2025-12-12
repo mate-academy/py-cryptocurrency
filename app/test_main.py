@@ -20,5 +20,14 @@ def test_sell_all(mock_prediction: MagicMock) -> None:
 @mock.patch("app.main.get_exchange_rate_prediction")
 def test_do_nothing(mock_prediction: MagicMock) -> None:
     current = 100
+    mock_prediction.return_value = 105  # +5%
+    assert cryptocurrency_action(current) == "Do nothing"
+
+    mock_prediction.return_value = 95  # -5%
+    assert cryptocurrency_action(current) == "Do nothing"
+
     mock_prediction.return_value = 103  # +3%
+    assert cryptocurrency_action(current) == "Do nothing"
+
+    mock_prediction.return_value = 97  # -3%
     assert cryptocurrency_action(current) == "Do nothing"
