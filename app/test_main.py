@@ -2,6 +2,7 @@ from .main import cryptocurrency_action
 from unittest import mock
 from unittest.mock import MagicMock
 
+
 @mock.patch("app.main.get_exchange_rate_prediction")
 def test_buy_more(mock_prediction: MagicMock) -> None:
     current = 100
