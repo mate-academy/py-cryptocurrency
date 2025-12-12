@@ -1,9 +1,10 @@
 from unittest import mock
+from unittest.mock import MagicMock
 from app.main import cryptocurrency_action
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_buy_more(mocked_func):
+def test_buy_more(mocked_func: MagicMock) -> None:
     current_rate = 100
     mocked_func.return_value = 110
     result = cryptocurrency_action(current_rate)
@@ -11,7 +12,7 @@ def test_buy_more(mocked_func):
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_sell(mocked_func):
+def test_sell(mocked_func: MagicMock) -> None:
     current_rate = 75
     mocked_func.return_value = 70
     result = cryptocurrency_action(current_rate)
@@ -19,7 +20,7 @@ def test_sell(mocked_func):
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_do_nothing(mocked_func):
+def test_do_nothing(mocked_func: MagicMock) -> None:
     current_rate = 70
     mocked_func.return_value = 72
     result = cryptocurrency_action(current_rate)
@@ -27,7 +28,7 @@ def test_do_nothing(mocked_func):
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_do_nothing_95_rate(mocked_func):
+def test_do_nothing_95_rate(mocked_func: MagicMock) -> None:
     current_rate = 100
     mocked_func.return_value = 95
     result = cryptocurrency_action(current_rate)
@@ -35,9 +36,8 @@ def test_do_nothing_95_rate(mocked_func):
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_do_nothing_105_rate(mocked_func):
+def test_do_nothing_105_rate(mocked_func: MagicMock) -> None:
     current_rate = 100
     mocked_func.return_value = 105
     result = cryptocurrency_action(current_rate)
     assert result == "Do nothing"
-
