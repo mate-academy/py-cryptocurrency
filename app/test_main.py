@@ -21,10 +21,11 @@ def test_sell_cryptocurrency_prediction_lower_more_than_5_percent() -> None:
     "prediction_rate",
     [95, 105]  # boundary values included
 )
-def test_do_nothing(prediction_rate):
+def test_do_nothing(prediction_rate: int) -> None:
     current_rate = 100
 
-    with patch("app.main.get_exchange_rate_prediction", return_value=prediction_rate):
+    with patch("app.main.get_exchange_rate_prediction",
+               return_value=prediction_rate):
         result = cryptocurrency_action(current_rate)
 
     assert result == "Do nothing"
