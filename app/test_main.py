@@ -18,6 +18,6 @@ def test_sell_cryptocurrency_prediction_lower_more_than_5_percent() -> None:
 
 def do_nothing() -> None:
     current_rate = 100
-    with patch("app.main.get_exchange_rate_prediction", return_value=102):
-        result = cryptocurrency_action(current_rate)
-    assert result == "Do nothing"
+    for prediction_rate in (95, 105):
+        with patch("app.main.get_exchange_rate_prediction", prediction_rate):
+            assert cryptocurrency_action(current_rate) == "Do nothing"
