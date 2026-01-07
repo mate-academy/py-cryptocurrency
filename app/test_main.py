@@ -22,9 +22,18 @@ def test_should_sell_when_prediction_decrease(
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_should_do_nothing_when_prediction_stay_stable(
+def test_exact_upper_boundary(
         mocked_rate: Union[int, float]
 ) -> None:
-    mocked_rate.return_value = 102
+    mocked_rate.return_value = 105
+    result = cryptocurrency_action(100)
+    assert result == "Do nothing"
+
+
+@mock.patch("app.main.get_exchange_rate_prediction")
+def test_exact_lower_boundary(
+    mocked_rate: Union[int, float]
+) -> None:
+    mocked_rate.return_value = 95
     result = cryptocurrency_action(100)
     assert result == "Do nothing"
