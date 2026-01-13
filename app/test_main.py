@@ -12,11 +12,11 @@ def test_should_sell_when_prediction_more_than_5_percent_lower() -> None:
         assert cryptocurrency_action(100) == "Sell all your cryptocurrency"
 
 
-def test_should_do_nothing_when_difference_is_less_than_5_percent_higher() -> None:
+def test_should_do_nothing_when_difference_is() -> None:
     with patch("app.main.get_exchange_rate_prediction", return_value=105):
         assert cryptocurrency_action(100) == "Do nothing"
 
 
-def test_should_do_nothing_when_difference_is_less_than_5_percent_lower() -> None:
+def test_should_do_nothing_when_difference_is_less() -> None:
     with patch("app.main.get_exchange_rate_prediction", return_value=95):
         assert cryptocurrency_action(100) == "Do nothing"
