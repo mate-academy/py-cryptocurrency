@@ -8,7 +8,7 @@ def get_exchange_rate_prediction(exchange_rate: Union[int, float]) -> float:
     return round(exchange_rate * random.random(), 2)
 
 
-def cryptocurrency_action(current_rate):
+def cryptocurrency_action(current_rate: float) -> str:
     prediction_rate = get_exchange_rate_prediction(current_rate)
     ratio = round(prediction_rate / current_rate, 2)
 
@@ -17,4 +17,3 @@ def cryptocurrency_action(current_rate):
     if ratio < 0.95:
         return "Sell all your cryptocurrency"
     return "Do nothing"
-
