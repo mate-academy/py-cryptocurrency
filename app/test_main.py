@@ -14,9 +14,7 @@ def test_sell_all_crypto() -> None:
         assert result == "Sell all your cryptocurrency"
 
 
-
 def test_do_nothing() -> None:
     with mock.patch("app.main.get_market_change", return_value=35.0):
         result = cryptocurrency_action()
         assert result == "Do nothing"
-
