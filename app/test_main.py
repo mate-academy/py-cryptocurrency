@@ -2,28 +2,21 @@ from unittest import mock
 from .main import cryptocurrency_action
 
 
-def test_cryptocurrency_action_higher_5_percentage() -> None:
-    with mock.patch("app.main.cryptocurrency_action",
-                    return_value="Buy more cryptocurrency"):
-
-        result = cryptocurrency_action(71.51500000)
-
+def test_buy_more_crypto() -> None:
+    with mock.patch("app.main.get_market_change", return_value=71.5):
+        result = cryptocurrency_action()
         assert result == "Buy more cryptocurrency"
 
 
-def test_cryptocurrency_action_higher_5_lower_percentage() -> None:
-    with mock.patch("app.main.cryptocurrency_action",
-                    return_value="Sell all your cryptocurrency"):
-
-        result = cryptocurrency_action(41.51500000)
-
+def test_sell_all_crypto() -> None:
+    with mock.patch("app.main.get_market_change", return_value=11.5):
+        result = cryptocurrency_action()
         assert result == "Sell all your cryptocurrency"
 
 
-def test_cryptocurrency_action_no_difference() -> None:
-    with mock.patch("app.main.cryptocurrency_action",
-                    return_value="Do nothing"):
 
-        result = cryptocurrency_action(11.51500000)
-
+def test_do_nothing() -> None:
+    with mock.patch("app.main.get_market_change", return_value=35.0):
+        result = cryptocurrency_action()
         assert result == "Do nothing"
+
