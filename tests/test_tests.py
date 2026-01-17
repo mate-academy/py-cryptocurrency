@@ -1,6 +1,9 @@
 import pytest
 
 from app import main
+from pathlib import Path
+
+TEST_MAIN = Path(__file__).parent.parent / "app" / "test_main.py"
 
 
 def test_rate_95_percent_do_nothing(monkeypatch):
@@ -18,7 +21,8 @@ def test_rate_95_percent_do_nothing(monkeypatch):
         main, "cryptocurrency_action", rate_95_sell_cryptocurrency
     )
 
-    test_result = pytest.main(["app/test_main.py"])
+    test_result = pytest.main([str(TEST_MAIN)])
+
     assert test_result.value == 1, (
         "You should not sell cryptocurrency when "
         "prediction_rate / current_rate == 0.95"
@@ -40,7 +44,8 @@ def test_rate_105_percent_do_nothing(monkeypatch):
         main, "cryptocurrency_action", rate_105_buy_cryptocurrency
     )
 
-    test_result = pytest.main(["app/test_main.py"])
+    test_result = pytest.main([str(TEST_MAIN)])
+
     assert test_result.value == 1, (
         "You should not buy cryptocurrency when "
         "prediction_rate / current_rate == 1.05"
