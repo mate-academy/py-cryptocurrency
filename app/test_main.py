@@ -4,6 +4,7 @@ from app.main import cryptocurrency_action
 
 import pytest
 
+
 @pytest.mark.parametrize(
     "current_rate, prediction_rate, expected_result",
     [
@@ -21,6 +22,7 @@ def test_cryptocurrency_action(
         mocked_get_exchange_rate_prediction: Callable,
         current_rate: float,
         prediction_rate: float,
-        expected_result: str):
+        expected_result: str
+) -> None:
     mocked_get_exchange_rate_prediction.return_value = prediction_rate
     assert cryptocurrency_action(current_rate) == expected_result
