@@ -9,6 +9,12 @@ def get_exchange_rate_prediction(exchange_rate: Union[int, float]) -> float:
 
 
 def cryptocurrency_action(current_rate: Union[int, float]) -> str:
+    if not isinstance(current_rate, (int, float)):
+        raise TypeError("Current rate must be a number")
+
+    if current_rate <= 0:
+        raise ValueError("Current rate must be greater than zero")
+
     prediction_rate = get_exchange_rate_prediction(current_rate)
     if prediction_rate / current_rate > 1.05:
         return "Buy more cryptocurrency"
