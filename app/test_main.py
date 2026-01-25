@@ -5,7 +5,7 @@ from app.main import cryptocurrency_action
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_get_exchange_rate_prediction(rate_prediction: mock.MagicMock) -> None:
+def test_get_exchange_rate_prediction(rate_prediction) -> None:
     current_rate = [
         (105, "Buy more cryptocurrency"),
         (95, "Sell all your cryptocurrency"),
