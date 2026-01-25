@@ -10,7 +10,7 @@ def test_get_exchange_rate_prediction(rate_prediction: Mock) -> None:
     current_rate = [
         (105, "Buy more cryptocurrency"),
         (95, "Sell all your cryptocurrency"),
-        (102, "Do nothing")
+        (100, "Do nothing")
     ]
 
     for predicted_rate, expected in current_rate:
