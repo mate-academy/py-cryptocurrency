@@ -8,9 +8,11 @@ from app.main import cryptocurrency_action
 @mock.patch("app.main.get_exchange_rate_prediction")
 def test_get_exchange_rate_prediction(rate_prediction: Mock) -> None:
     current_rate = [
-        (105, "Buy more cryptocurrency"),
-        (95, "Sell all your cryptocurrency"),
-        (100, "Do nothing")
+        (106, "Buy more cryptocurrency"),
+        (105, "Do nothing"),
+        (100, "Do nothing"),
+        (95, "Do nothing"),
+        (94, "Sell all your cryptocurrency"),
     ]
 
     for predicted_rate, expected in current_rate:
