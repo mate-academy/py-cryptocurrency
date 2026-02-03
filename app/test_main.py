@@ -1,9 +1,24 @@
 # write your code here
-def cryptocurrency_action(current_rate: float) -> str:
-    predicted = get_exchange_rate_prediction(current_rate)
-    if predicted > current_rate * 1.05:
-        return "Buy more cryptocurrency"
-    elif predicted < current_rate * 0.95:
-        return "Sell all your cryptocurrency"
-    else:
-        return "Do nothing"
+from unittest.mock import patch
+from app.main import cryptocurrency_action, get_exchange_rate_prediction
+
+@patch("app.main.get_exchange_rate_prediction")
+def test_buy_more(mock_prediction):
+    current_rate = 100.0
+    mock_prediction.return_value = 106.0  # > 105, значит Buy
+    result = cryptocurrency_action(current_rate)
+    assert result == "Buy more cryptocurrency"
+
+@patch("app.main.get_exchange_rate_prediction")
+def test_sell_all(mock_prediction):
+    current_rate = 100.0
+    mock_prediction.return_value = 94.0  # < 95, значит Sell
+    result = cryptocurrency_action(current_rate)
+    assert result == "Sell all your cryptocurrency"
+
+@patch("app.main.get_exchange_rate_prediction")
+def test_do_nothing(mock_prediction):
+    current_rate = 100.0
+    mock_prediction.return_value = 102.0  # между 95 и 105, значит Do nothing
+    result = cryptocurrency_action(current_rate)
+    assert result == "Do nothing"
