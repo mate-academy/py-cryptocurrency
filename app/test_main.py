@@ -1,3 +1,4 @@
+
 def cryptocurrency_action(current_rate: float) -> str:
     predicted = get_exchange_rate_prediction(current_rate)
     if predicted > current_rate * 1.05:
