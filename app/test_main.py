@@ -1,7 +1,7 @@
 from app.main import cryptocurrency_action
 import pytest
 from typing import Union
-from pytest_mock import MockFixture
+from typing import Any
 
 
 @pytest.mark.parametrize(
@@ -15,7 +15,7 @@ from pytest_mock import MockFixture
         (100, 96, "Do nothing")
     ],
 )
-def test_cryptocurrency_action(mocker: MockFixture,
+def test_cryptocurrency_action(mocker: Any,
                                current_rate: Union[int, float],
                                prediction: Union[int, float],
                                expected: str) -> None:
