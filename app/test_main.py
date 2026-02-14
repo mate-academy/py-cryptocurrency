@@ -15,10 +15,10 @@ from typing import Any
         (100, 96, "Do nothing")
     ],
 )
-def test_cryptocurrency_action(mocker: Any,
+def test_cryptocurrency_action(monkeypatch: Any,
                                current_rate: Union[int, float],
                                prediction: Union[int, float],
                                expected: str) -> None:
-    mocker.patch("app.main.get_exchange_rate_prediction",
-                 return_value=prediction)
+    monkeypatch.setattr("app.main.get_exchange_rate_prediction",
+                        lambda _: prediction)
     assert cryptocurrency_action(current_rate) == expected
