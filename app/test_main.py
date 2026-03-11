@@ -36,3 +36,19 @@ def test_do_nothing_when_prediction_is_close(
         lambda rate: rate * 0.98,
     )
     assert cryptocurrency_action(100) == "Do nothing"
+
+
+def test_do_nothing_when_prediction_is_exactly_5_percent(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(
+        "app.main.get_exchange_rate_prediction",
+        lambda rate: rate * 1.05,
+    )
+    assert cryptocurrency_action(100) == "Do nothing"
+
+    monkeypatch.setattr(
+        "app.main.get_exchange_rate_prediction",
+        lambda rate: rate * 0.95,
+    )
+    assert cryptocurrency_action(100) == "Do nothing"
