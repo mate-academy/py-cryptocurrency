@@ -18,7 +18,7 @@ from app.main import cryptocurrency_action
 )
 @patch("app.main.get_exchange_rate_prediction")
 def test_cryptocurrency_action(
-    mock_prediction,
+    mock_prediction: any,
     current_rate: float,
     predicted_rate: float,
     expected_rate: str
