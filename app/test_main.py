@@ -17,7 +17,7 @@ def test_random_choice(
         mock_choice: MagicMock,
         m_choice: str,
         m_random: int,
-        result: float):
+        result: float) -> None:
     mock_choice.return_value = m_choice
     mock_random.return_value = m_random
     assert get_exchange_rate_prediction(100) == result
@@ -38,6 +38,6 @@ def test_print_cryptocurrency(
         mock_exchange_rate: MagicMock,
         prediction: int,
         current: int,
-        result: str):
+        result: str) -> None:
     mock_exchange_rate.return_value = prediction
     assert cryptocurrency_action(current) == result
