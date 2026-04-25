@@ -13,22 +13,23 @@ def mocked_get_exchange_rate_prediction() -> Any:
         yield mocked_get_exchange_rate_prediction
 
 
-def test_if_prediction_higher_than_current_rate(
-        mocked_get_exchange_rate_prediction: Any
-) -> None:
-    mocked_get_exchange_rate_prediction.return_value = 1.5
-    assert cryptocurrency_action(1) == "Buy more cryptocurrency"
+@pytest.mark.parametrize("rate_prediction_value, expected_value", [
+    pytest.param(1.5, "Buy more cryptocurrency",
+                 id="test if prediction higher than current rate"),
+    pytest.param(0.5, "Sell all your cryptocurrency",
+                 id="test if prediction lower than current rate"),
+    pytest.param(1, "Do nothing",
+                 id="test if prediction equal current rate"),
+    pytest.param(1.05, "Do nothing",
+                 id="test should not buy cryptocurrency"),
+    pytest.param(0.95, "Do nothing",
+                 id="test should not buy cryptocurrency"),
 
-
+])
 def test_if_prediction_lower_than_current_rate(
-        mocked_get_exchange_rate_prediction: Any
+        mocked_get_exchange_rate_prediction: Any,
+        rate_prediction_value: float | int,
+        expected_value: str,
 ) -> None:
-    mocked_get_exchange_rate_prediction.return_value = 0.5
-    assert cryptocurrency_action(1) == "Sell all your cryptocurrency"
-
-
-def test_if_prediction_equal_current_rate(
-        mocked_get_exchange_rate_prediction: Any
-) -> None:
-    mocked_get_exchange_rate_prediction.return_value = 1
-    assert cryptocurrency_action(1) == "Do nothing"
+    mocked_get_exchange_rate_prediction.return_value = rate_prediction_value
+    assert cryptocurrency_action(1) == expected_value
