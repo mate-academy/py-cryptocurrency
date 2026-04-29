@@ -20,4 +20,3 @@ def test_cryptocurrency_action(
         advice: str) -> None:
     mock_prediction.return_value = predict
     assert cryptocurrency_action(1) == advice
-
