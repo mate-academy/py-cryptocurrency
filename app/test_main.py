@@ -34,6 +34,7 @@ def test_crypto_do_nothing_upper_boundary(mock_prediction: MagicMock) -> None:
 
     assert result == "Do nothing"
 
+
 @patch("app.main.get_exchange_rate_prediction")
 def test_crypto_do_nothing_lower_boundary(mock_prediction: MagicMock) -> None:
     current_rate = 100
