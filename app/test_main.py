@@ -3,9 +3,15 @@ from unittest import mock
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_small_price_difference(price_prediction: mock.MagicMock) -> None:
+def test_slightly_bigger_price(price_prediction: mock.MagicMock) -> None:
     price_prediction.return_value = 3
-    assert cryptocurrency_action(3.13) == "Do nothing"
+    assert cryptocurrency_action(3.14) == "Do nothing"
+
+
+@mock.patch("app.main.get_exchange_rate_prediction")
+def test_slightly_lower_price(price_prediction: mock.MagicMock) -> None:
+    price_prediction.return_value = 3
+    assert cryptocurrency_action(2.86) == "Do nothing"
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
