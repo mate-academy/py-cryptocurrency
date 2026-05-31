@@ -15,9 +15,15 @@ def test_slightly_lower_price(price_prediction: mock.MagicMock) -> None:
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_same_price(price_prediction: mock.MagicMock) -> None:
+def test_rate_105_percent_do_nothing(price_prediction: mock.MagicMock) -> None:
     price_prediction.return_value = 3
-    assert cryptocurrency_action(3) == "Do nothing"
+    assert cryptocurrency_action(3 / 1.05) == "Do nothing"
+
+
+@mock.patch("app.main.get_exchange_rate_prediction")
+def test_rate_95_percent_do_nothing(price_prediction: mock.MagicMock) -> None:
+    price_prediction.return_value = 3
+    assert cryptocurrency_action(3 / 0.95) == "Do nothing"
 
 
 @mock.patch("app.main.get_exchange_rate_prediction")
