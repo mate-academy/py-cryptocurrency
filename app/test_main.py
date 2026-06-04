@@ -12,6 +12,7 @@ def test_buy_more_cryptocurrency(mock_prediction: Mock) -> None:
 
     assert result == "Buy more cryptocurrency"
 
+
 @patch("app.main.get_exchange_rate_prediction")
 def test_sell_more_cryptocurrency(mock_prediction: Mock) -> None:
     mock_prediction.return_value = 94
@@ -37,4 +38,3 @@ def test_do_nothing_cryptocurrency_105(mock_prediction: Mock) -> None:
     result = cryptocurrency_action(100)
 
     assert result == "Do nothing"
-
