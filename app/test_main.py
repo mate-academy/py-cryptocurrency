@@ -5,7 +5,7 @@ from app.main import cryptocurrency_action
 @patch("app.main.get_exchange_rate_prediction")
 def test_for_buy(get_exchange_rate_prediction: MagicMock) -> None:
 
-    get_exchange_rate_prediction.return_value = 105
+    get_exchange_rate_prediction.return_value = 106
 
     result = cryptocurrency_action(100)
     assert result == "Buy more cryptocurrency"
@@ -14,7 +14,7 @@ def test_for_buy(get_exchange_rate_prediction: MagicMock) -> None:
 @patch("app.main.get_exchange_rate_prediction")
 def test_for_sell(get_exchange_rate_prediction: MagicMock) -> None:
 
-    get_exchange_rate_prediction.return_value = 95
+    get_exchange_rate_prediction.return_value = 94
 
     result = cryptocurrency_action(100)
     assert result == "Sell all your cryptocurrency"
@@ -23,7 +23,16 @@ def test_for_sell(get_exchange_rate_prediction: MagicMock) -> None:
 @patch("app.main.get_exchange_rate_prediction")
 def test_for_do_nothing(get_exchange_rate_prediction: MagicMock) -> None:
 
-    get_exchange_rate_prediction.return_value = 96
+    get_exchange_rate_prediction.return_value = 95
+
+    result = cryptocurrency_action(100)
+    assert result == "Do nothing"
+
+
+@patch("app.main.get_exchange_rate_prediction")
+def test_for_do_nothing_95(get_exchange_rate_prediction: MagicMock) -> None:
+
+    get_exchange_rate_prediction.return_value = 105
 
     result = cryptocurrency_action(100)
     assert result == "Do nothing"
