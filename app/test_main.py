@@ -22,3 +22,17 @@ def test_cryptocurrency_do_nothing(mock_rate_prediction: MagicMock) -> None:
     mock_rate_prediction.return_value = 101
     result = cryptocurrency_action(100)
     assert result == "Do nothing"
+
+
+@mock.patch("app.main.get_exchange_rate_prediction")
+def test_cryptocurrency_do_nothing_high_limit(mock_rate_prediction: MagicMock) -> None:
+    mock_rate_prediction.return_value = 105
+    result = cryptocurrency_action(100)
+    assert result == "Do nothing"
+
+
+@mock.patch("app.main.get_exchange_rate_prediction")
+def test_cryptocurrency_do_nothing_lower_limit(mock_rate_prediction: MagicMock) -> None:
+    mock_rate_prediction.return_value = 95
+    result = cryptocurrency_action(100)
+    assert result == "Do nothing"
