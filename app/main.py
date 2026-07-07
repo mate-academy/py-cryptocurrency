@@ -1,5 +1,5 @@
-import random
 from typing import Union
+import random
 
 
 def get_exchange_rate_prediction(exchange_rate: Union[int, float]) -> float:
