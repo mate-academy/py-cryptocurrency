@@ -25,9 +25,18 @@ def test_return_sell_if_low(monkeypatch: Any) -> None:
     assert cryptocurrency_action(99999999) == "Sell all your cryptocurrency"
 
 
-def test_do_nothing_if_not_too_big(monkeypatch: Any) -> None:
+def test_do_nothing_if_105(monkeypatch: Any) -> None:
     def mock_rate(*args, **kwargs) -> float:
-        return 1
+        return 1.05
+
+    monkeypatch.setattr(app.main, "get_exchange_rate_prediction", mock_rate)
+
+    assert cryptocurrency_action(1) == "Do nothing"
+
+
+def test_do_nothing_if_095(monkeypatch: Any) -> None:
+    def mock_rate(*args, **kwargs) -> float:
+        return 0.95
 
     monkeypatch.setattr(app.main, "get_exchange_rate_prediction", mock_rate)
 
