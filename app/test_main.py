@@ -10,6 +10,7 @@ from app.main import cryptocurrency_action
         (1, 2, "Buy more cryptocurrency"),  # get 2
         (1, 0.94, "Sell all your cryptocurrency"),  # get 0.94
         (2, 1, "Sell all your cryptocurrency"),  # get 0.5
+        (-1, 1, "Sell all your cryptocurrency"),  # get -1
         (1, 1.05, "Do nothing"),  # get 1.05
         (1, 0.95, "Do nothing"),  # get 0.95
         (1, 1, "Do nothing")  # get 1
@@ -19,6 +20,7 @@ from app.main import cryptocurrency_action
         "Buy more test int params",
         "Sell all test float params and result 0.94",
         "Sell all test int params",
+        "Sell all with negative value",
         "Do nothing test float params and result 1.05",
         "Do nothing test float params and result 0.95",
         "Do nothing test int params"
