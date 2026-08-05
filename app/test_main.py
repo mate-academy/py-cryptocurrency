@@ -1,41 +1,53 @@
-from unittest.mock import MagicMock, patch
 import pytest
 
-from app.main import cryptocurrency_action
+from app import main
+
+
+def test_buy_more_cryptocurrency_when_prediction_is_more_than_5_percent_higher(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    def prediction(current_rate: float) -> float:
+        return current_rate * 1.06
+
+    monkeypatch.setattr(
+        main,
+        "get_exchange_rate_prediction",
+        prediction,
+    )
+
+    assert main.cryptocurrency_action(100) == "Buy more cryptocurrency"
+
+
+def test_sell_crypto_when_prediction_is_more_than_5_percent_lower(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    def prediction(current_rate: float) -> float:
+        return current_rate * 0.94
+
+    monkeypatch.setattr(
+        main,
+        "get_exchange_rate_prediction",
+        prediction,
+    )
+
+    assert main.cryptocurrency_action(100) == "Sell all your cryptocurrency"
 
 
 @pytest.mark.parametrize(
-    "current_rate, prediction_rate, expected_action",
-    [
-        pytest.param(
-            100, 105.1, "Buy more cryptocurrency", id="buy_when_above_5_percent"
-        ),
-        pytest.param(
-            100, 105.0, "Do nothing", id="do_nothing_when_exact_5_percent_increase"
-        ),
-        pytest.param(100, 100.0, "Do nothing", id="do_nothing_when_no_change"),
-        pytest.param(
-            100, 95.0, "Do nothing", id="do_nothing_when_exact_5_percent_decrease"
-        ),
-        pytest.param(
-            100, 94.9, "Sell all your cryptocurrency", id="sell_when_below_5_percent"
-        ),
-    ],
+    "prediction_factor",
+    [0.95, 1.0, 1.05],
 )
-@patch("app.main.get_exchange_rate_prediction")
-def test_cryptocurrency_action(
-    mock_prediction: MagicMock,
-    current_rate: float,
-    prediction_rate: float,
-    expected_action: str,
+def test_do_nothing_when_prediction_difference_is_not_more_than_5_percent(
+    monkeypatch: pytest.MonkeyPatch,
+    prediction_factor: float,
 ) -> None:
-    mock_prediction.return_value = prediction_rate
+    def prediction(current_rate: float) -> float:
+        return current_rate * prediction_factor
 
-    # Викликаємо основну функцію
-    result = cryptocurrency_action(current_rate)
+    monkeypatch.setattr(
+        main,
+        "get_exchange_rate_prediction",
+        prediction,
+    )
 
-    # Перевіряємо результат
-    assert result == expected_action
-
-    # Перевіряємо, чи викликався мок із правильним аргументом current_rate
-    mock_prediction.assert_called_once_with(current_rate)
+    assert main.cryptocurrency_action(100) == "Do nothing"
