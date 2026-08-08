@@ -1,1 +1,24 @@
-# write your code here
+from app.main import cryptocurrency_action
+import pytest
+from typing import Union
+from typing import Any
+
+
+@pytest.mark.parametrize(
+    "current_rate,prediction,expected",
+    [
+        (100, 106, "Buy more cryptocurrency"),
+        (100, 80, "Sell all your cryptocurrency"),
+        (100, 105, "Do nothing"),
+        (100, 95, "Do nothing"),
+        (100, 104, "Do nothing"),
+        (100, 96, "Do nothing")
+    ],
+)
+def test_cryptocurrency_action(monkeypatch: Any,
+                               current_rate: Union[int, float],
+                               prediction: Union[int, float],
+                               expected: str) -> None:
+    monkeypatch.setattr("app.main.get_exchange_rate_prediction",
+                        lambda _: prediction)
+    assert cryptocurrency_action(current_rate) == expected
