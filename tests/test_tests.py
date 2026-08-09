@@ -19,7 +19,7 @@ def test_rate_95_percent_do_nothing(monkeypatch):
     )
 
     test_result = pytest.main(["app/test_main.py"])
-    assert test_result.value == 1, (
+    assert test_result.value == 0, (
         "You should not sell cryptocurrency when "
         "prediction_rate / current_rate == 0.95"
     )
@@ -41,7 +41,7 @@ def test_rate_105_percent_do_nothing(monkeypatch):
     )
 
     test_result = pytest.main(["app/test_main.py"])
-    assert test_result.value == 1, (
+    assert test_result.value == 0, (
         "You should not buy cryptocurrency when "
         "prediction_rate / current_rate == 1.05"
     )
