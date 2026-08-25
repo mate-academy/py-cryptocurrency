@@ -3,6 +3,7 @@ from unittest import mock
 from unittest.mock import MagicMock
 from app.main import cryptocurrency_action
 
+
 @pytest.mark.parametrize(
     "current_rate,prediction_rate,result",
     [
@@ -21,6 +22,11 @@ from app.main import cryptocurrency_action
     ]
 )
 @mock.patch("app.main.get_exchange_rate_prediction")
-def test_cryptocurrency_action(exchange_rate_prediction: MagicMock, current_rate: int, prediction_rate: int, result: str) -> None:
+def test_cryptocurrency_action(
+        exchange_rate_prediction: MagicMock,
+        current_rate: int,
+        prediction_rate: int,
+        result: str
+) -> None:
     exchange_rate_prediction.return_value = prediction_rate
     assert cryptocurrency_action(current_rate) == result
