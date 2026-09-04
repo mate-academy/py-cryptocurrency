@@ -24,3 +24,15 @@ def test_should_do_nothing_when_rate_decrease_small() -> None:
     with patch("app.main.get_exchange_rate_prediction", return_value=96):
         result = cryptocurrency_action(100)
         assert result == "Do nothing"
+
+
+def test_should_do_nothing_when_rate_decrease_small_value() -> None:
+    with patch("app.main.get_exchange_rate_prediction", return_value=95):
+        result = cryptocurrency_action(100)
+        assert result == "Do nothing"
+
+
+def test_should_do_nothing_when_rate_increase_small_value() -> None:
+    with patch("app.main.get_exchange_rate_prediction", return_value=105):
+        result = cryptocurrency_action(100)
+        assert result == "Do nothing"
