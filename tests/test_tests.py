@@ -1,47 +1,48 @@
-import pytest
+from unittest import mock
+from unittest.mock import MagicMock
 
 from app import main
 
 
-def test_rate_95_percent_do_nothing(monkeypatch):
+@mock.patch("app.main.get_exchange_rate_prediction")
+def test_get_exchange_rate_prediction_to_buy(
+    mock_exchange: MagicMock,
+) -> None:
+    mock_exchange.return_value = 106
+    expected = "Buy more cryptocurrency"
+    result = main.cryptocurrency_action(100)
 
-    def rate_95_sell_cryptocurrency(current_rate):
-        from app.main import get_exchange_rate_prediction
-        prediction_rate = get_exchange_rate_prediction(current_rate)
-        if prediction_rate / current_rate > 1.05:
-            return "Buy more cryptocurrency"
-        if prediction_rate / current_rate <= 0.95:
-            return "Sell all your cryptocurrency"
-        return "Do nothing"
-
-    monkeypatch.setattr(
-        main, "cryptocurrency_action", rate_95_sell_cryptocurrency
-    )
-
-    test_result = pytest.main(["app/test_main.py"])
-    assert test_result.value == 1, (
-        "You should not sell cryptocurrency when "
-        "prediction_rate / current_rate == 0.95"
-    )
+    assert result == expected
 
 
-def test_rate_105_percent_do_nothing(monkeypatch):
+@mock.patch("app.main.get_exchange_rate_prediction")
+def test_get_exchange_rate_prediction_to_sell(
+    mock_exchange: MagicMock,
+) -> None:
+    mock_exchange.return_value = 94
+    expected = "Sell all your cryptocurrency"
+    result = main.cryptocurrency_action(100)
 
-    def rate_105_buy_cryptocurrency(current_rate):
-        from app.main import get_exchange_rate_prediction
-        prediction_rate = get_exchange_rate_prediction(current_rate)
-        if prediction_rate / current_rate >= 1.05:
-            return "Buy more cryptocurrency"
-        if prediction_rate / current_rate < 0.95:
-            return "Sell all your cryptocurrency"
-        return "Do nothing"
+    assert result == expected
 
-    monkeypatch.setattr(
-        main, "cryptocurrency_action", rate_105_buy_cryptocurrency
-    )
 
-    test_result = pytest.main(["app/test_main.py"])
-    assert test_result.value == 1, (
-        "You should not buy cryptocurrency when "
-        "prediction_rate / current_rate == 1.05"
-    )
+@mock.patch("app.main.get_exchange_rate_prediction")
+def test_get_exchange_rate_prediction_to_do_nothing(
+    mock_exchange: MagicMock,
+) -> None:
+    mock_exchange.return_value = 105
+    expected = "Do nothing"
+    result = main.cryptocurrency_action(100)
+
+    assert result == expected
+
+
+@mock.patch("app.main.get_exchange_rate_prediction")
+def test_get_exchange_rate_prediction_to_do_nothing_upper_limit(
+    mock_exchange: MagicMock,
+) -> None:
+    mock_exchange.return_value = 95
+    expected = "Do nothing"
+    result = main.cryptocurrency_action(100)
+
+    assert result == expected
