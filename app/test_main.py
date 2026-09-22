@@ -22,7 +22,7 @@ def test_cryptocurrency_action(
     monkeypatch.setattr(
         main,
         "get_exchange_rate_prediction",
-        lambda: predicted_rate,
+        lambda current_rate: predicted_rate,
     )
 
     assert main.cryptocurrency_action(current_rate) == expected
