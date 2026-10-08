@@ -25,3 +25,19 @@ def test_cryptocurrency_action_none(
 ) -> None:
     mock_get_exchange_rate_prediction.return_value = 3
     assert cryptocurrency_action(3) == "Do nothing"
+
+
+@mock.patch("app.main.get_exchange_rate_prediction")
+def test_cryptocurrency_action_none_1(
+    mock_get_exchange_rate_prediction: Mock
+) -> None:
+    mock_get_exchange_rate_prediction.return_value = 95
+    assert cryptocurrency_action(100) == "Do nothing"
+
+
+@mock.patch("app.main.get_exchange_rate_prediction")
+def test_cryptocurrency_action_none_2(
+    mock_get_exchange_rate_prediction: Mock
+) -> None:
+    mock_get_exchange_rate_prediction.return_value = 105
+    assert cryptocurrency_action(100) == "Do nothing"
