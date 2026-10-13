@@ -13,11 +13,20 @@ import app.main as main
     ]
 )
 def test_cryptocurrency_action(
-    monkeypatch, exchange_rate_prediction, current_rate, result
+    monkeypatch: pytest.MonkeyPatch,
+    exchange_rate_prediction: float,
+    current_rate: Union[int, float],
+    result: str
 ) -> None:
 
-    def monkey_get_exchange_rate_prediction(current_rate: Union [int, float]):
+    def monkey_get_exchange_rate_prediction(
+        current_rate: Union[int, float]
+    ) -> float:
         return exchange_rate_prediction
 
-    monkeypatch.setattr(main, "get_exchange_rate_prediction", monkey_get_exchange_rate_prediction)
+    monkeypatch.setattr(
+        main,
+        "get_exchange_rate_prediction",
+        monkey_get_exchange_rate_prediction
+    )
     assert main.cryptocurrency_action(current_rate) == result
