@@ -4,7 +4,6 @@ from app.main import cryptocurrency_action
 
 @patch("app.main.get_exchange_rate_prediction")
 def test_buy(mock_pred: MagicMock) -> None:
-    """Test buying cryptocurrency when the predicted rate increases."""
     mock_pred.return_value = 110
 
     result = cryptocurrency_action(100)
@@ -14,7 +13,6 @@ def test_buy(mock_pred: MagicMock) -> None:
 
 @patch("app.main.get_exchange_rate_prediction")
 def test_sell(mock_pred: MagicMock) -> None:
-    """Test selling cryptocurrency when the predicted rate decreases."""
     mock_pred.return_value = 0
 
     result = cryptocurrency_action(100)
@@ -23,10 +21,12 @@ def test_sell(mock_pred: MagicMock) -> None:
 
 
 @patch("app.main.get_exchange_rate_prediction")
-def test_do_nothing(mock_pred: MagicMock) -> None:
-    """Test doing nothing when the predicted rate changes slightly."""
-    mock_pred.return_value = 103
+def test_rate_105_percent_do_nothing(mock_pred: MagicMock) -> None:
+    mock_pred.return_value = 105
+    assert cryptocurrency_action(100) == "Do nothing"
 
-    result = cryptocurrency_action(100)
 
-    assert result == "Do nothing"
+@patch("app.main.get_exchange_rate_prediction")
+def test_rate_95_percent_do_nothing(mock_pred: MagicMock) -> None:
+    mock_pred.return_value = 95
+    assert cryptocurrency_action(100) == "Do nothing"
