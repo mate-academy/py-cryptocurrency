@@ -21,3 +21,17 @@ def test_do_nothing(mock_prediction: MagicMock) -> None:
     mock_prediction.return_value = 100
     result = cryptocurrency_action(103)
     assert result == "Do nothing"
+
+
+@patch("app.main.get_exchange_rate_prediction")
+def test_buy_boundary(mock_prediction: MagicMock) -> None:
+    mock_prediction.return_value = 105
+    result = cryptocurrency_action(100)
+    assert result == "Do nothing"
+
+
+@patch("app.main.get_exchange_rate_prediction")
+def test_sell_boundary(mock_prediction: MagicMock) -> None:
+    mock_prediction.return_value = 95
+    result = cryptocurrency_action(100)
+    assert result == "Do nothing"
