@@ -7,6 +7,7 @@ from app import main
     ("prediction_rate", "expected_action"),
     [
         (106, "Buy more cryptocurrency"),
+        (105, "Do nothing"),
         (100, "Do nothing"),
         (95, "Do nothing"),
         (94, "Sell all your cryptocurrency"),
