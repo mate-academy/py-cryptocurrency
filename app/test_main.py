@@ -1,10 +1,12 @@
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
 from app.main import cryptocurrency_action
 
 
 @patch("app.main.get_exchange_rate_prediction")
-def test_buy_more_cryptocurrency(mock_prediction):
+def test_buy_more_cryptocurrency(
+    mock_prediction: MagicMock,
+) -> None:
     mock_prediction.return_value = 106
 
     assert (
@@ -14,7 +16,9 @@ def test_buy_more_cryptocurrency(mock_prediction):
 
 
 @patch("app.main.get_exchange_rate_prediction")
-def test_sell_all_your_cryptocurrency(mock_prediction):
+def test_sell_all_your_cryptocurrency(
+    mock_prediction: MagicMock,
+) -> None:
     mock_prediction.return_value = 94
 
     assert (
@@ -25,8 +29,8 @@ def test_sell_all_your_cryptocurrency(mock_prediction):
 
 @patch("app.main.get_exchange_rate_prediction")
 def test_do_nothing_when_increase_is_exactly_5_percent(
-    mock_prediction,
-):
+    mock_prediction: MagicMock,
+) -> None:
     mock_prediction.return_value = 105
 
     assert cryptocurrency_action(100) == "Do nothing"
@@ -34,8 +38,8 @@ def test_do_nothing_when_increase_is_exactly_5_percent(
 
 @patch("app.main.get_exchange_rate_prediction")
 def test_do_nothing_when_decrease_is_exactly_5_percent(
-    mock_prediction,
-):
+    mock_prediction: MagicMock,
+) -> None:
     mock_prediction.return_value = 95
 
     assert cryptocurrency_action(100) == "Do nothing"
