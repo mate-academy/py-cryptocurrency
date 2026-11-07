@@ -2,6 +2,7 @@ from unittest import mock
 from app.main import cryptocurrency_action
 import pytest
 
+
 @pytest.mark.parametrize(
     "prediction_rate,expected",
     [
