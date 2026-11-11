@@ -1,5 +1,5 @@
+from unittest.mock import MagicMock, patch
 import pytest
-from pytest_mock import MockerFixture
 
 
 from app.main import cryptocurrency_action
@@ -14,15 +14,13 @@ from app.main import cryptocurrency_action
         (98.0, "Do nothing"),
     ],
 )
+@patch("app.main.get_exchange_rate_prediction")
 def test_cryptocurrency_action(
-    mocker: MockerFixture,
+    mock_prediction: MagicMock,
     prediction: float,
     expected_action: str,
 ) -> None:
-    mock_prediction = mocker.patch(
-        "app.main.get_exchange_rate_prediction",
-        return_value=prediction,
-    )
+    mock_prediction.return_value = prediction
 
     result = cryptocurrency_action(100.0)
 
