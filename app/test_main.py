@@ -1,4 +1,7 @@
 import pytest
+from pytest_mock import MockerFixture
+
+
 from app.main import cryptocurrency_action
 
 
@@ -12,7 +15,7 @@ from app.main import cryptocurrency_action
     ],
 )
 def test_cryptocurrency_action(
-    mocker,
+    mocker: MockerFixture,
     prediction: float,
     expected_action: str,
 ) -> None:
