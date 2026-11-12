@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
 import pytest
 
@@ -9,7 +9,7 @@ from app.main import cryptocurrency_action
 
 @patch("app.main.get_exchange_rate_prediction")
 def test_should_buy_more_cryptocurrency(
-    mocked_get_exchange_rate_prediction,
+    mocked_get_exchange_rate_prediction: MagicMock,
 ) -> None:
     mocked_get_exchange_rate_prediction.return_value = 106
 
@@ -18,7 +18,7 @@ def test_should_buy_more_cryptocurrency(
 
 @patch("app.main.get_exchange_rate_prediction")
 def test_should_sell_all_cryptocurrency(
-    mocked_get_exchange_rate_prediction,
+    mocked_get_exchange_rate_prediction: MagicMock,
 ) -> None:
     mocked_get_exchange_rate_prediction.return_value = 94
 
@@ -27,7 +27,7 @@ def test_should_sell_all_cryptocurrency(
 
 @patch("app.main.get_exchange_rate_prediction")
 def test_should_do_nothing_when_difference_is_small(
-    mocked_get_exchange_rate_prediction,
+    mocked_get_exchange_rate_prediction: MagicMock,
 ) -> None:
     mocked_get_exchange_rate_prediction.return_value = 105
 
@@ -36,7 +36,7 @@ def test_should_do_nothing_when_difference_is_small(
 
 @patch("app.main.get_exchange_rate_prediction")
 def test_should_do_nothing_when_difference_is_small_down(
-    mocked_get_exchange_rate_prediction,
+    mocked_get_exchange_rate_prediction: MagicMock,
 ) -> None:
     mocked_get_exchange_rate_prediction.return_value = 95
 
@@ -45,7 +45,7 @@ def test_should_do_nothing_when_difference_is_small_down(
 
 @patch("app.main.get_exchange_rate_prediction")
 def test_should_do_nothing_when_prediction_equals_current_rate(
-    mocked_get_exchange_rate_prediction,
+    mocked_get_exchange_rate_prediction: MagicMock,
 ) -> None:
     mocked_get_exchange_rate_prediction.return_value = 100
 
@@ -70,7 +70,7 @@ def test_should_do_nothing_when_prediction_equals_current_rate(
 )
 @patch("app.main.get_exchange_rate_prediction")
 def test_cryptocurrency_action_returns_expected_result(
-    mocked_get_exchange_rate_prediction,
+    mocked_get_exchange_rate_prediction: MagicMock,
     current_rate: int,
     predicted_rate: int,
     expected: str,
