@@ -14,9 +14,11 @@ from app import main
     ],
 )
 def test_cryptocurrency_action(
-    monkeypatch, predicted_rate, expected_action
-):
-    def mock_prediction(current_rate):
+    monkeypatch: pytest.MonkeyPatch,
+    predicted_rate: int,
+    expected_action: str,
+) -> None:
+    def mock_prediction(current_rate: int) -> int:
         assert current_rate == 100
         return predicted_rate
 
